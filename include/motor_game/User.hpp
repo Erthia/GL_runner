@@ -15,6 +15,8 @@ public:
     :m_name(inName),m_score(0)
   {}
 
+  ~User();
+
   inline
   std::string getName() const
   {
@@ -46,12 +48,11 @@ public:
     std::cout<<"Score :"<<m_score<<std::endl;
   }
 
-  ~Player();
+
 
 private:
   //attributs
   std::string m_name;
   int m_score;
-
 
 };
