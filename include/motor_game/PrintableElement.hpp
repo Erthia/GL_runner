@@ -24,6 +24,22 @@ class PrintableElement
     {
       return m_type;
     }
+     inline
+    float getX() const
+    {
+      return m_position.x;
+    }
+
+    float getY() const
+    {
+      return m_position.y;
+    }
+
+    float getZ() const
+    {
+      return m_position.z;
+    }
+
 
   virtual void printElement();
 

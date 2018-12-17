@@ -13,10 +13,12 @@ class Character : public PrintableElement
 
     Character(); /// default constructor
     Character(const glm::vec3 &position, const std::string &type, const unsigned int &speed); /// constructor with parameters
-    void jump();
+    void up();
+    void down();
     void moveLeft();
     void moveRight();
-    bool checkCollision();
+    bool checkCollision(const PrintableElement &b);
+    // méthode check mouvement
     
     virtual void printElement();
 
