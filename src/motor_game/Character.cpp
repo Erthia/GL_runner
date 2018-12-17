@@ -92,10 +92,21 @@ bool Character::checkCollisionMovement(const PrintableElement &b, const char &mo
 
 
 	}
-
-	
-			return false;
+		return false;
 }
+
+void Character::scanList(std::list<Element> &list, const char &movement){
+	std::list<Element>::iterator it;
+	for (std::list<Element>::iterator it = list.begin(); it != list.end(); ++it){
+	    if(checkCollisionMovement(*it, movement) == true || checkCollision(*it) == true){
+	    	//return &(*it); appelle collide(this, *it, movement) de *it
+	    	*it.collide(this);
+	    	std::cout << "ok" << std::endl;
+	    }
+	    	
+	}
+}
+
 
 
 

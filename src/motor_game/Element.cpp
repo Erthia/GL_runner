@@ -13,6 +13,7 @@ void Element::printElement()
 {
 	PrintableElement::printElement();
 }
+void Element::collide(User &hero){}
 
 
 Element::~Element()

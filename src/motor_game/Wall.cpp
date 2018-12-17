@@ -10,6 +10,7 @@ Wall::Wall(const glm::vec3 &position, const std::string &type)
 :Element(position, type)
 {}
 
+
 Wall::~Wall()
 {}
 
@@ -19,5 +20,8 @@ void Wall::printElement()
 	Element::printElement();
 }
 
+void Wall::collide(User &hero){
+	std::cout << "Can't walk through walls" << std::endl;
+}
 
 
