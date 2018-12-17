@@ -32,28 +32,27 @@ namespace motor_game{
                             case SDLK_ESCAPE:
                                 loop = 0;
                             case SDLK_q:
-                                if(m_hero.checkPossibleCollision('q')==false){
+                                if(m_hero.checkCollisionMovement('q')==false){
                                     m_hero.moveLeft();
                                     m_enemy.moveLeft();
                                 }
                             break;
                             case SDLK_d:
-                                if(m_hero.checkPossibleCollision('d')==false){
+                                if(m_hero.checkCollisionMovement('d')==false){
                                     m_hero.moveRight();
                                     m_enemy.moveRight();
                                 }
                             break;
                             case SDLK_z:
-                                if(m_hero.checkPossibleCollision('z')==false){
+                                if(m_hero.checkCollisionMovement('z')==false){
                                     m_hero.up();
                                     m_enemy.up();
                                 }
                             break;
+                        
                             case SDLK_s:
-                                if(m_hero.checkPossibleCollision('s')==false){
-                                    m_hero.down();
-                                    m_enemy.down();
-                                }
+                                m_hero.down();
+                                m_enemy.down();
                             break;
                         }
                     break;
