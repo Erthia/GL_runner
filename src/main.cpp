@@ -8,7 +8,8 @@
 #include <glimac/TrackballCamera.hpp>
 #include <glimac/FilePath.hpp>
 #include <glimac/Image.hpp>
-#include <glimac/utils.hpp>
+#include <glimac/Landmark.hpp>
+#include <glimac/Grid.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/random.hpp>
 #include <vector>
@@ -165,7 +166,7 @@ int main(int argc, char** argv) {
 
     // Landmark VBO
 
-    Landmark landmark;
+    Grid landmark;
     glGenBuffers(1,&vbo[1]);
     glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
 
@@ -275,7 +276,12 @@ int main(int argc, char** argv) {
         glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
 
         glBindVertexArray(vao[0]);
-            glDrawArrays(GL_TRIANGLES,0,cube.getVertexCount());
+          glDrawArrays(GL_TRIANGLES,0,cube.getVertexCount());
+        glBindVertexArray(0);
+
+
+        glBindVertexArray(vao[1]);
+            glDrawArrays(GL_LINES,0,landmark.getVertexCount());
         glBindVertexArray(0);
 
 
