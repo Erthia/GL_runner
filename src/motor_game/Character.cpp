@@ -100,7 +100,7 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 	for (std::list<Element>::iterator it = list.begin(); it != list.end(); ++it){
 	    if(checkCollisionMovement(*it, movement) == true || checkCollision(*it) == true){
 	    	//return &(*it); appelle collide(this, *it, movement) de *it
-	    	*it.collide(this);
+	    	//(*it).collide(this); /// \problem : parameter must be a user and not a character 
 	    	std::cout << "ok" << std::endl;
 	    }
 	    	

@@ -22,7 +22,7 @@ class Coin : public Element
     ~Coin(); /// default destructor
 
 	void printElement();
-	void collide(User &hero);
+	void collide(User *hero);
 
 
   protected:

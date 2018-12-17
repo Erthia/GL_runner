@@ -17,7 +17,7 @@ class Element : public PrintableElement
     Element(); /// default constructor
     Element(const glm::vec3 &position, const std::string &type); /// constructor with parameters
     virtual void printElement();
-    virtual void collide(User &hero);
+    virtual void collide(User *hero);
     ~Element(); /// default destructor
 
 
