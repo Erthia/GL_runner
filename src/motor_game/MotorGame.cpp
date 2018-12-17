@@ -1,4 +1,4 @@
-#include "../../include/motor_game/MotorGame.hpp"
+/*#include "../../include/motor_game/MotorGame.hpp"
 #include "include/glimac/SDLWindowManager.hpp"
 #include <SDL/SDL.h>
 
@@ -77,4 +77,4 @@ namespace motor_game{
     }
 
 }
-
+*/
