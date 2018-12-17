@@ -9,6 +9,7 @@
 #include "Wall.hpp"
 #include "Floor.hpp"
 #include "Obstacle.hpp"
+#include <list>
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
   	Enemy singe(glm::vec3(0, 3, 5), "Enemy", 5);
   	singe.printElement();
 
-  	Coin coin1(glm::vec3(0, 0, 1), "Coin", 100);
+  	Coin coin1(glm::vec3(0, 1, 1), "Coin", 100);
   	coin1.printElement();
 
   	Wall wall1(glm::vec3(0,1,1), "Wall");
@@ -44,12 +45,32 @@ int main()
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
 
-
 	if(emilie.checkCollisionMovement(wall1, 's') == 1)
  		std::cout << "collision" << std::endl;
  	else 
  		std::cout << "pas collision" << std::endl;
 
+ 	std::list<Element> myList;
+ 	myList.push_back(coin1);
+ 	myList.push_back(wall1);
+
+ 	//const Element* resultTest = emilie.scanList(myList, 'q');
+
+/// cannot use switch case with string types so here's some ugly ifs
+ 	/*if( resultTest !=NULL)
+ 	{
+ 		if(resultTest->getType() == "Coin")
+ 		{
+ 				std::cout << "Olala emilie a attrapé une pièce" << std::endl;
+ 				//collide(player1, resultTest);
+ 		}
+ 				
+ 		
+ 			std::cout << "Olala emilie a touché quelque chose" << std::endl;
+ 		
+ 		
+ 	}*/
+ 	// à faire en fonction de l'objet renvoyé
 
 
   	return 0;

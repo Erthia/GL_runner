@@ -38,7 +38,7 @@ public:
   inline
   void setScore(int const &inScore)
   {
-    m_score = inScore;
+    m_score += inScore;
   }
 
   inline

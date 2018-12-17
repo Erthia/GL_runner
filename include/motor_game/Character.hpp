@@ -2,10 +2,12 @@
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <list>
 
 #pragma once
 
 #include "PrintableElement.hpp"
+#include "Element.hpp"
 
 class Character : public PrintableElement
 {
@@ -20,7 +22,8 @@ class Character : public PrintableElement
     void moveRight();
     bool checkCollisionMovement(const PrintableElement &b, const char &movement);
     bool checkCollision(const PrintableElement &b);
-    // checkpossiblecollision() méthode check mouvement
+    //const Element* scanList(const std::list<Element> &list, const char &movement);
+    void scanList(std::list<Element> &list, const char &movement);
     
     virtual void printElement();
 

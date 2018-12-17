@@ -16,7 +16,8 @@ class Wall : public Element
 
     ~Wall(); /// default destructor
 
-    virtual void printElement();
+    void printElement();
+    void collide(User *hero);
 
 
 };
