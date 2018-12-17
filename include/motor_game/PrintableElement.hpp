@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <GL/glew.h>
-
-
+#include <glm/glm.hpp>
+#include "common.hpp"
 
 #pragma once
 
@@ -24,9 +24,7 @@ class PrintableElement
       return m_type;
     }
 
-
-
-  virtual void printElement(),
+  virtual void printElement();
 
 
 
