@@ -18,6 +18,11 @@ void Character::printElement()
 	std::cout << "Speed : " << m_speed << std::endl;
 }
 
+void Character::run()
+{
+	std::cout << m_type << " ran." << std::endl;
+	m_position.z += m_speed; /// ???????
+}
 
 void Character::moveLeft()
 {
@@ -45,12 +50,51 @@ void Character::down()
 }
 
 
-bool Character::checkCollision(const PrintableElement &b){
+bool Character::checkCollision(const PrintableElement &b)
+{
 	if(abs(this->getX()- b.getX()) < 1) 
 		if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
-			if(abs(this->getZ()- b.getZ()) < 1)
+			if(abs((this->getZ()+1)- b.getZ()) < 1)
 				return true;
 	return false;
+}
+
+bool Character::checkCollisionMovement(const PrintableElement &b, const char &movement){
+	switch(movement) {
+		case 'q' : 
+			if(abs((this->getX()-1) - b.getX()) < 1) 
+				if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
+					if(abs((this->getZ()+1)- b.getZ()) < 1)
+						return true;
+			return false;
+			break;
+		case 'd' : 
+			if(abs((this->getX()+1) - b.getX()) < 1) 
+				if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
+					if(abs((this->getZ()+1)- b.getZ()) < 1)
+						return true;
+			return false;
+			break;
+		case 'z' :
+			if(abs(this->getX() - b.getX()) < 1) 
+				if(abs((this->getY()+1)- b.getY()) < 2) /// \our character's heighth is two
+					if(abs((this->getZ()+1)- b.getZ()) < 1)
+						return true;
+			return false;
+
+		case 's' :
+			if(abs(this->getX() - b.getX()) < 1) 
+				if(abs(this->getY()- b.getY()) < 1) /// \our character's heighth is two
+					if(abs((this->getZ()+1)- b.getZ()) < 1)
+						return true;
+			return false;
+			break;
+
+
+	}
+
+	
+			return false;
 }
 
 

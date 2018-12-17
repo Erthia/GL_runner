@@ -21,21 +21,16 @@ int main()
   	Element e1(glm::vec3(5, 5, 5), "Element");
   	e1.printElement();
 
-  	Character emilie(glm::vec3(0, 2, 5), "Humaine", 0.000001);
+  	Character emilie(glm::vec3(0, 0, 0), "Humaine", 0.000001);
   	emilie.printElement();
 
   	Enemy singe(glm::vec3(0, 3, 5), "Enemy", 5);
   	singe.printElement();
 
-	if(emilie.checkCollision(singe) == 1)
- 		std::cout << "collision" << std::endl;
- 	else 
- 		std::cout << "pas collision" << std::endl;
-
-  	Coin coin1(glm::vec3(5), "Coin", 100);
+  	Coin coin1(glm::vec3(0, 0, 1), "Coin", 100);
   	coin1.printElement();
 
-  	Wall wall1(glm::vec3(5), "Wall");
+  	Wall wall1(glm::vec3(0,1,1), "Wall");
   	wall1.printElement();
 
   	Floor floor1(glm::vec3(5), "Floor");
@@ -43,6 +38,19 @@ int main()
 
   	Obstacle obs(glm::vec3(10), "Obstacle");
   	obs.printElement();
+
+  	if(emilie.checkCollision(coin1) == 1)
+ 		std::cout << "récupération coin" << std::endl;
+ 	else 
+ 		std::cout << "pas de coin récupéré" << std::endl;
+
+
+	if(emilie.checkCollisionMovement(wall1, 's') == 1)
+ 		std::cout << "collision" << std::endl;
+ 	else 
+ 		std::cout << "pas collision" << std::endl;
+
+
 
   	return 0;
 }
