@@ -3,8 +3,11 @@
 #include <SDL/SDL.h>
 
 namespace motor_game{
-   /* MotorGame::initGame(const PPM &ppm, SDLWindowManager window){
-        // on remplit m_elements grace à une méthode de ppm
+   MotorGame::MotorGame{
+       // on remplit m_elements, m_hero et m_ennely grace à une méthode de ppm
+   }
+    
+   MotorGame::initGame(const PPM &ppm, SDLWindowManager window){
         // on demande le nom au joueur
         User player(name);
     }
@@ -17,7 +20,25 @@ namespace motor_game{
             // Events
             
             SDL_Event e;
-            windowManager.isKeyPressed(
+            while(windowManager.pollEvent(e)){
+                switch(e.button.button){
+                    // keyboard action
+                    case SDL_KEYDOWN:
+                        switch(e.key.keysym.sym){
+                            case SDLK_q:
+                                
+                            case SDLK_d:
+                            
+                            case SDLK_z:
+                            
+                            case SDLK_s:
+                        }
+                    break;
+                    
+                    default:
+                    break;
+                }
+            }
         }
         //verify inputs and act
         //delete passed elements

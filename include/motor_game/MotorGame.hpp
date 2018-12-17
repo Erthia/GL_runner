@@ -2,7 +2,7 @@
 #define MOTOR_GAME_HPP
 
 #pragma once
-/*
+
 namespace motor_game
 {
     /// \class MotorGame
@@ -11,7 +11,7 @@ namespace motor_game
         public :
             // CONSTRUCTOR - DESTRUCTOR
             /// \brief constructor
-            MotorGame() = default;
+            MotorGame();
             ~MotorGame = default;
             
             /// \brief initialize the non-graphic game
@@ -21,7 +21,9 @@ namespace motor_game
         
         private :
             // ATTRIBUTE
-            std::list<Element> m_elements; /*!< contains all the Element.s */ /*
+            std::list<Element> m_elements; /*!< contains all the Element.s */
+            Hero m_hero;
+            Ennemy m_ennemy;
     };
-} */
+}
 #endif
