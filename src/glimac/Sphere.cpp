@@ -1,13 +1,13 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
-#include "glimac/common.hpp"
-#include "glimac/Sphere.hpp"
+#include "common.hpp"
+#include "Sphere.hpp"
 
 namespace glimac {
 
 void Sphere::build(GLfloat r, GLsizei discLat, GLsizei discLong) {
-    // Equation paramétrique en (r, phi, theta) de la sphère 
+    // Equation paramétrique en (r, phi, theta) de la sphère
     // avec r >= 0, -PI / 2 <= theta <= PI / 2, 0 <= phi <= 2PI
     //
     // x(r, phi, theta) = r sin(phi) cos(theta)
@@ -23,32 +23,32 @@ void Sphere::build(GLfloat r, GLsizei discLat, GLsizei discLong) {
 
     GLfloat rcpLat = 1.f / discLat, rcpLong = 1.f / discLong;
     GLfloat dPhi = 2 * glm::pi<float>() * rcpLat, dTheta = glm::pi<float>() * rcpLong;
-    
+
     std::vector<ShapeVertex> data;
-    
+
     // Construit l'ensemble des vertex
     for(GLsizei j = 0; j <= discLong; ++j) {
         GLfloat cosTheta = cos(-glm::pi<float>() / 2 + j * dTheta);
         GLfloat sinTheta = sin(-glm::pi<float>() / 2 + j * dTheta);
-        
+
         for(GLsizei i = 0; i <= discLat; ++i) {
             ShapeVertex vertex;
-            
+
             vertex.texCoords.x = i * rcpLat;
             vertex.texCoords.y = 1.f - j * rcpLong;
 
             vertex.normal.x = sin(i * dPhi) * cosTheta;
             vertex.normal.y = sinTheta;
             vertex.normal.z = cos(i * dPhi) * cosTheta;
-            
+
             vertex.position = r * vertex.normal;
-            
+
             data.push_back(vertex);
         }
     }
 
     m_nVertexCount = discLat * discLong * 6;
-    
+
     GLuint idx = 0;
     // Construit les vertex finaux en regroupant les données en triangles:
     // Pour une longitude donnée, les deux triangles formant une face sont de la forme:
@@ -65,7 +65,7 @@ void Sphere::build(GLfloat r, GLsizei discLat, GLsizei discLong) {
             m_Vertices.push_back(data[offset + i + discLat + 1]);
         }
     }
-    
+
     // Attention ! dans cette implantation on duplique beaucoup de sommets. Une meilleur stratégie est de passer
     // par un Index Buffer Object, que nous verrons dans les prochains TDs
 }
