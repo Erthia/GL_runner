@@ -6,6 +6,7 @@
 
 #pragma once
 
+class Element; 
 class PrintableElement
 {
   public:
@@ -32,7 +33,7 @@ class PrintableElement
 
 
   protected:
-
-  std::string m_type;
   glm::vec3 m_position;
+  std::string m_type;
+
 };
