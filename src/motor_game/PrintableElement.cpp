@@ -13,6 +13,7 @@ PrintableElement::PrintableElement(const glm::vec3 &position, const std::string 
 PrintableElement::~PrintableElement()
 {}
 
+
 void PrintableElement::printElement()
   {
     std::cout << "Position :" << getPosition() <<std::endl;
