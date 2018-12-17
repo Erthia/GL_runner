@@ -1,7 +1,7 @@
-#include "include/motor_game/MotorGame.hpp"
+#include "../../include/motor_game/MotorGame.hpp"
 #include "include/glimac/SDLWindowManager.hpp"
 #include <SDL/SDL.h>
-/*
+
 namespace motor_game{
     MotorGame::MotorGame(const PPM &ppm){
        m_elements=ppm.elements();
@@ -62,16 +62,11 @@ namespace motor_game{
                     break;
                 }
             }
-            //delete passed elements
-            deletePassedElts();
             m_hero.run();
             m_enemy.run();
         }
         
-        // move all elements to be moved
-        
         windowManager.swapBuffers();
-        
         
         // spent time
 		unsigned int elapsedTime = SDL_GetTicks() - startTime;
@@ -82,4 +77,4 @@ namespace motor_game{
     }
 
 }
-*/
+
