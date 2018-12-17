@@ -6,7 +6,7 @@
 #include <glimac/cube.hpp>
 #include <glimac/Object.hpp>
 #include <glimac/Program.hpp>
-#include <glimac/TrackballCamera.hpp>
+#include "TrackballCamera.hpp"
 #include <glimac/FilePath.hpp>
 #include <glimac/Image.hpp>
 #include <glimac/Landmark.hpp>
@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <GLFW/glfw3.h>
 #include <fstream>
+
 
 //#include <utils.cpp>
 
@@ -138,7 +139,7 @@ int main(int argc, char** argv) {
     GLint uModelMVMatrix = glGetUniformLocation(program.getGLId(), "uMVMatrix");
     GLint uModelMVPMatrix = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
     GLint uNormalMatrix = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
-    
+
     glEnable(GL_DEPTH_TEST);
 
     GLuint vbo[3];
@@ -169,38 +170,22 @@ int main(int argc, char** argv) {
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
 
-            if (e.button.button == SDL_BUTTON_WHEELUP)
-            {
-                camera.moveFront(-0.01);
-            }
+          if (e.type == SDL_KEYDOWN)
+            camera.onKeyboardEvent(e);
 
-            if (e.button.button == SDL_BUTTON_WHEELDOWN)
-            {
-                camera.moveFront(0.01);
-            }
-
-            if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT))
-            {
-                glm::ivec2 mousePosition = windowManager.getMousePosition();
-                //std::cout<<mousePosition<<std::endl;
-
-                if (mousePosition.x>width/2)
-
-                    camera.rotateLeft(1);
-                if (mousePosition.x<width/2)
-
-                    camera.rotateLeft(-1);
-                if (mousePosition.y>height/2)
-                    camera.rotateUp(-1);
-                if (mousePosition.y<height/2)
-                    camera.rotateUp(1);
-
-            }
+          if (e.button.button == SDL_BUTTON_WHEELUP || e.button.button == SDL_BUTTON_WHEELDOWN )
+            camera.onMouseWheelEvent(e);
 
 
-            if(e.type == SDL_QUIT) {
-                done = true; // Leave the loop after this iteration
-            }
+          if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT))
+          {
+            camera.onMouseEvent(e);
+          }
+
+
+          if(e.type == SDL_QUIT) {
+              done = true; // Leave the loop after this iteration
+          }
         }
 
         /*********************************

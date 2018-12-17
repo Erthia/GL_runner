@@ -13,7 +13,7 @@ namespace glimac {
 
 		// face 1
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,1);
+		vertex.normal = glm::vec3(0,1,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
@@ -23,59 +23,59 @@ namespace glimac {
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,1);
+		vertex.normal = glm::vec3(0,1,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,1);
+		vertex.normal = glm::vec3(0,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		// face 2
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,1,-1);
+		vertex.normal = glm::vec3(1,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,-1);
+		vertex.normal = glm::vec3(1,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,-1);
+		vertex.normal = glm::vec3(0,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,-1);
+		vertex.normal = glm::vec3(1,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		// face 3
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,1);
+		vertex.normal = glm::vec3(0,1,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
@@ -85,7 +85,7 @@ namespace glimac {
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
@@ -95,67 +95,67 @@ namespace glimac {
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,1,-1);
+		vertex.normal = glm::vec3(1,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		//face4
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,1);
+		vertex.normal = glm::vec3(0,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,-1);
+		vertex.normal = glm::vec3(0,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,-1);
+		vertex.normal = glm::vec3(0,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,-1);
+		vertex.normal = glm::vec3(1,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		//face5
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,1,-1);
+		vertex.normal = glm::vec3(1,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,-1);
+		vertex.normal = glm::vec3(1,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,1,-1);
+		vertex.normal = glm::vec3(1,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
@@ -165,41 +165,43 @@ namespace glimac {
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(1,-1,1);
+		vertex.normal = glm::vec3(1,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		//face5
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,-1);
+		vertex.normal = glm::vec3(0,0,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,1);
+		vertex.normal = glm::vec3(0,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,-1);
+		vertex.normal = glm::vec3(0,1,0);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,1,1);
+		vertex.normal = glm::vec3(0,1,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
 		vertex.texCoords = glm::vec2(0,0);
-		vertex.normal = glm::vec3(-1,-1,1);
+		vertex.normal = glm::vec3(0,0,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
+
+
 	}
 
 	void Cube::vboManager(GLuint &vbo)
