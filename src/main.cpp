@@ -120,15 +120,16 @@ int main(int argc, char** argv) {
     }
 
     FilePath applicationPath(argv[0]);
-    Program program = loadProgram(applicationPath.dirPath() + "shaders/3d.vs.glsl",
-                                  applicationPath.dirPath() + "shaders/normals.fs.glsl" );
+    std::cout<<applicationPath.dirPath()<<std::endl;
+    Program program = loadProgram("./shaders/3d.vs.glsl",
+                                  "./shaders/normals.fs.glsl" );
     program.use();
 
      /********************************
     IF YOU'RE USING GLSL VERSION 130
     DELETE THIS PART IF YOU'RE VERSION 330
     ********************************/
-    
+
     /********************************
     END - IF YOU'RE USING GLSL VERSION 130
     ********************************/
