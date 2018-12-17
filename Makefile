@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -O2 -g
-LDFLAGS = -lSDL2 -lGLU -lglut -lGL -lm -lSDL2_image -lSDL_mixer
+LDFLAGS = -lSDL -lSDL2 -lGLU -lglut -lGL -lGLEW -lm -lSDL2_image -lSDL_mixer
 
 APP_BIN = glrunner
 SRC_PATH = src
