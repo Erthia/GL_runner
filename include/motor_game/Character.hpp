@@ -16,7 +16,7 @@ class Character : public PrintableElement
     void jump();
     void moveLeft();
     void moveRight();
-    bool checkCollision();
+    bool checkCollision(const PrintableElement &a, const PrintableElement &b);
     
     virtual void printElement();
 
