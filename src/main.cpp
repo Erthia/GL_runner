@@ -21,16 +21,13 @@ int main()
   	Element e1(glm::vec3(5, 5, 5), "Element");
   	e1.printElement();
 
-  	Character emilie(glm::vec3(0, 0, 5), "Humaine", 0.000001);
+  	Character emilie(glm::vec3(0, 2, 5), "Humaine", 0.000001);
   	emilie.printElement();
-  	emilie.jump();
-  	emilie.moveLeft();
- 	emilie.printElement();
 
-  	Enemy singe(glm::vec3(0, 0, 5), "Enemy", 5);
+  	Enemy singe(glm::vec3(0, 3, 5), "Enemy", 5);
   	singe.printElement();
 
-	if(emilie.checkCollision(singe, emilie) == 1)
+	if(emilie.checkCollision(singe) == 1)
  		std::cout << "collision" << std::endl;
  	else 
  		std::cout << "pas collision" << std::endl;

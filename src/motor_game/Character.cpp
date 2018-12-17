@@ -22,26 +22,33 @@ void Character::printElement()
 void Character::moveLeft()
 {
 	std::cout << m_type << " moved to the left." << std::endl;
-	m_position.y -= 1;
+	m_position.x -= 1;
 }
 
 void Character::moveRight()
 {
 	std::cout << m_type << " moved to the right." << std::endl;
-	m_position.y += 1;
+	m_position.x += 1;
 }
 
-void Character::jump()
+void Character::up()
 {
 	std::cout << m_type << " jumped." << std::endl;
-	m_position.z += 1; /// ???????
+	m_position.y += 1; /// ???????
+}
+
+/// à gérer avec le moteur de rendu et un scale particulier ??????? 
+void Character::down()
+{
+	std::cout << m_type << " crawled." << std::endl;
+	m_position.y -= 0.5; /// ???????
 }
 
 
-bool Character::checkCollision(const PrintableElement &a, const PrintableElement &b){
-	if(abs(a.getX()- b.getX()) < 2) /// \2 is for size(a) + size(b), here we have two cubes with size of 1*1
-		if(abs(a.getY()- b.getY()) < 2)
-			if(abs(a.getX()- b.getX()) < 2)
+bool Character::checkCollision(const PrintableElement &b){
+	if(abs(this->getX()- b.getX()) < 1) 
+		if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
+			if(abs(this->getZ()- b.getZ()) < 1)
 				return true;
 	return false;
 }
