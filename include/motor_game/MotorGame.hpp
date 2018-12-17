@@ -2,14 +2,14 @@
 #define MOTOR_GAME_HPP
 
 #pragma once
-
+/*
 namespace motor_game
 {
     /// \class MotorGame
     /// \brief manage the non-graphic game
     class MotorGame{
         public :
-            /* CONSTRUCTOR - DESTRUCTOR */
+            // CONSTRUCTOR - DESTRUCTOR
             /// \brief constructor
             MotorGame() = default;
             ~MotorGame = default;
@@ -20,8 +20,8 @@ namespace motor_game
             void playGame();
         
         private :
-            /* ATTRIBUTE */
-            std::list<Element> m_elements; /*!< contains all the Element.s */
+            // ATTRIBUTE
+            std::list<Element> m_elements; /*!< contains all the Element.s */ /*
     };
-}
+} */
 #endif

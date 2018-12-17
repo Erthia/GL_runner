@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 
 namespace motor_game{
-    MotorGame::initGame(const PPM &ppm, SDLWindowManager window){
+   /* MotorGame::initGame(const PPM &ppm, SDLWindowManager window){
         // on remplit m_elements grace à une méthode de ppm
         // on demande le nom au joueur
         User player(name);
@@ -26,11 +26,12 @@ namespace motor_game{
         windowManager.swapBuffers();
         
         
-        /* spent time */
+        // spent time
 		unsigned int elapsedTime = SDL_GetTicks() - startTime;
-		/* if not enough time spent, program paused */
+		// if not enough time spent, program paused
 		if(elapsedTime < FRAMERATE_MILLISECONDS)
             SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
         
     }
+    */
 }
