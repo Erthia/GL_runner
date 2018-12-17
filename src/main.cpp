@@ -128,8 +128,7 @@ int main(int argc, char** argv) {
     IF YOU'RE USING GLSL VERSION 130
     DELETE THIS PART IF YOU'RE VERSION 330
     ********************************/
-    GLuint test = LoadShader("/home/administrateur/Documents/Synthese_image/GLImac-Template/TPprojet/shaders/3d.vs.glsl", "/home/administrateur/Documents/Synthese_image/GLImac-Template/TPprojet/shaders/normals.fs.glsl");
-    glUseProgram(test);
+    
     /********************************
     END - IF YOU'RE USING GLSL VERSION 130
     ********************************/
