@@ -19,12 +19,9 @@ namespace motor_game
             MotorGame(const MotorGame &mGame) = delete;
             MotorGame &operator=(const MotorGame &mGame) = delete;
             
-            /// \brief initialize the non-graphic game
-            void initGame();
+            
             /// \brief game loop
             void playGame();
-            /// \brief delete passed elements
-            void deletePassedElts();
         
         private :
             // ATTRIBUTE

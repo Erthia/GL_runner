@@ -1,4 +1,4 @@
-/*#include "../../include/motor_game/MotorGame.hpp"
+#include "../../include/motor_game/MotorGame.hpp"
 #include "include/glimac/SDLWindowManager.hpp"
 #include <SDL/SDL.h>
 
@@ -7,10 +7,6 @@ namespace motor_game{
        m_elements=ppm.elements();
        m_hero=ppm.hero();
        m_enemy=ppm.enemy();
-    }
-    
-    void MotorGame::deletePassedElts(){
-        
     }
     
     MotorGame::playGame(){
@@ -76,4 +72,4 @@ namespace motor_game{
     }
 
 }
-*/
+
