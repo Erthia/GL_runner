@@ -1,15 +1,16 @@
 #include "include/motor_game/MotorGame.hpp"
 #include "include/glimac/SDLWindowManager.hpp"
 #include <SDL/SDL.h>
-
+/*
 namespace motor_game{
-   MotorGame::MotorGame{
-       // on remplit m_elements, m_hero et m_ennely grace à une méthode de ppm
-   }
+    MotorGame::MotorGame(const PPM &ppm){
+       m_elements=ppm.elements();
+       m_hero=ppm.hero();
+       m_enemy=ppm.enemy();
+    }
     
-   MotorGame::initGame(const PPM &ppm, SDLWindowManager window){
-        // on demande le nom au joueur
-        User player(name);
+    void MotorGame::deletePassedElts(){
+        
     }
     
     MotorGame::playGame(){
@@ -18,20 +19,42 @@ namespace motor_game{
             unsigned int startTime = SDL_GetTicks();
             
             // Events
-            
             SDL_Event e;
             while(windowManager.pollEvent(e)){
+                // The user closes the window
+                if(e.type == SDL_QUIT)
+                    loop = 0;
+                
                 switch(e.button.button){
                     // keyboard action
                     case SDL_KEYDOWN:
                         switch(e.key.keysym.sym){
+                            case SDLK_ESCAPE:
+                                loop = 0;
                             case SDLK_q:
-                                
+                                if(m_hero.checkPossibleCollision('q')==false){
+                                    m_hero.moveLeft();
+                                    m_enemy.moveLeft();
+                                }
+                            break;
                             case SDLK_d:
-                            
+                                if(m_hero.checkPossibleCollision('d')==false){
+                                    m_hero.moveRight();
+                                    m_enemy.moveRight();
+                                }
+                            break;
                             case SDLK_z:
-                            
+                                if(m_hero.checkPossibleCollision('z')==false){
+                                    m_hero.up();
+                                    m_enemy.up();
+                                }
+                            break;
                             case SDLK_s:
+                                if(m_hero.checkPossibleCollision('s')==false){
+                                    m_hero.down();
+                                    m_enemy.down();
+                                }
+                            break;
                         }
                     break;
                     
@@ -39,9 +62,12 @@ namespace motor_game{
                     break;
                 }
             }
+            //delete passed elements
+            deletePassedElts();
+            m_hero.run();
+            m_enemy.run();
         }
-        //verify inputs and act
-        //delete passed elements
+        
         // move all elements to be moved
         
         windowManager.swapBuffers();
@@ -54,5 +80,6 @@ namespace motor_game{
             SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
         
     }
-    */
+
 }
+*/

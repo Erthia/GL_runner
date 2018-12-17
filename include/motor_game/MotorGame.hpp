@@ -11,19 +11,26 @@ namespace motor_game
         public :
             // CONSTRUCTOR - DESTRUCTOR
             /// \brief constructor
-            MotorGame();
+            MotorGame(const PPM &ppm);
+            /// \brief destructor
             ~MotorGame = default;
+            
+            MotorGame() = delete;
+            MotorGame(const MotorGame &mGame) = delete;
+            MotorGame &operator=(const MotorGame &mGame) = delete;
             
             /// \brief initialize the non-graphic game
             void initGame();
             /// \brief game loop
             void playGame();
+            /// \brief delete passed elements
+            void deletePassedElts();
         
         private :
             // ATTRIBUTE
-            std::list<Element> m_elements; /*!< contains all the Element.s */
-            Hero m_hero;
-            Ennemy m_ennemy;
+            std::list<Element> m_elements; /*!< contains all the Elements, except the hero and the ennemy */
+            Hero m_hero; /*!< the hero */
+            Enemy m_enemy; /*!< the ennemy */
     };
 }
 #endif
