@@ -125,9 +125,6 @@ namespace glimac {
 		vertex.normal = glm::vec3(1,-1,1);
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
-#include <vector>
-#include "common.hpp"
-
 
 
 		vertex.texCoords = glm::vec2(0,0);

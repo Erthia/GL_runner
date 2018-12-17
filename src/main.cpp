@@ -8,12 +8,14 @@
 #include <glimac/TrackballCamera.hpp>
 #include <glimac/FilePath.hpp>
 #include <glimac/Image.hpp>
+#include <glimac/utils.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
 #include <GLFW/glfw3.h>
 #include <fstream>
+//#include <utils.cpp>
 
 
 using namespace glimac;
@@ -109,7 +111,7 @@ int main(int argc, char** argv) {
     int width = 800;
     int height =600;
     SDLWindowManager windowManager(800, 600, "GLImac");
-    TrackballCamera camera(5,0,0);
+    TrackballCamera camera(0,0,0);
 
 
     // Initialize glew for OpenGL3+ support
@@ -120,7 +122,6 @@ int main(int argc, char** argv) {
     }
 
     FilePath applicationPath(argv[0]);
-    std::cout<<applicationPath.dirPath()<<std::endl;
     Program program = loadProgram("./shaders/3d.vs.glsl",
                                   "./shaders/normals.fs.glsl" );
     program.use();
@@ -151,31 +152,62 @@ int main(int argc, char** argv) {
 
     glEnable(GL_DEPTH_TEST);
 
-    GLuint vbo;
-    glGenBuffers(1,&vbo);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo);
-
+    GLuint vbo[2];
+    //  Cube VBO
     Cube cube(5);
     int nbVertice = cube.getVertexCount();
+
+    glGenBuffers(1,&vbo[0]);
+    glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
 
     glBufferData(GL_ARRAY_BUFFER,nbVertice*sizeof(ShapeVertex),cube.getDataPointer(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER,0);
 
-    GLuint vao;
-    glGenVertexArrays(1,&vao);
-    glBindVertexArray(vao);
+    // Landmark VBO
+
+    Landmark landmark;
+    glGenBuffers(1,&vbo[1]);
+    glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
+
+    glBufferData(GL_ARRAY_BUFFER,landmark.getVertexCount()*sizeof(ShapeVertex),landmark.getDataPointer(), GL_STATIC_DRAW);
+
+    // Cube VAO
+
+    GLuint vao[2];
+    glGenVertexArrays(1,&vao[0]);
+    glBindVertexArray(vao[0]);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
-     // Spécification des attribut de vertex
+
+    // Spécification des attribut de vertex
 
 
-    glBindBuffer(GL_ARRAY_BUFFER,vbo);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,position));
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,normal));
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,texCoords));
-    glBindBuffer(GL_ARRAY_BUFFER,0);
-    glBindVertexArray(0);
+   glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
+   glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,position));
+   glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,normal));
+   glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,texCoords));
+   glBindBuffer(GL_ARRAY_BUFFER,0);
+   glBindVertexArray(0);
+
+    // Landmark VAO
+
+    glGenVertexArrays(1,&vao[1]);
+    glBindVertexArray(vao[1]);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+
+    // Spécification des attribut de vertex
+
+
+   glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
+   glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,position));
+   glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,normal));
+   glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,texCoords));
+   glBindBuffer(GL_ARRAY_BUFFER,0);
+   glBindVertexArray(0);
+
 
     glm::mat4 projMatrix,MVMatrix,NormalMatrix;
 
@@ -193,34 +225,31 @@ int main(int argc, char** argv) {
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
 
+            if (e.button.button == SDL_BUTTON_WHEELUP)
+            {
+                camera.moveFront(-0.01);
+            }
+
+            if (e.button.button == SDL_BUTTON_WHEELDOWN)
+            {
+                camera.moveFront(0.01);
+            }
+
             if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT))
             {
                 glm::ivec2 mousePosition = windowManager.getMousePosition();
                 //std::cout<<mousePosition<<std::endl;
 
-                if (mousePosition.y>width/2)
-                    camera.moveFront(0.01);
-
-                if (mousePosition.y<width/2)
-                    camera.moveFront(-0.01);
-
-            }
-
-            if (windowManager.isMouseButtonPressed(SDL_BUTTON_RIGHT))
-            {
-                glm::ivec2 mousePosition = windowManager.getMousePosition();
-                //std::cout<<mousePosition<<std::endl;
-
                 if (mousePosition.x>width/2)
-                    //std::cout<<"SUPERIEUR"<<std::endl;
+
                     camera.rotateLeft(1);
                 if (mousePosition.x<width/2)
-                    //std::cout<<"SUPERIEUR"<<std::endl;
+
                     camera.rotateLeft(-1);
                 if (mousePosition.y>height/2)
-                    camera.rotateUp(1);
-                if (mousePosition.y<height/2)
                     camera.rotateUp(-1);
+                if (mousePosition.y<height/2)
+                    camera.rotateUp(1);
 
             }
 
@@ -245,7 +274,7 @@ int main(int argc, char** argv) {
         glUniformMatrix4fv(uModelMVMatrix,1,GL_FALSE,glm::value_ptr(MVMatrix));
         glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
 
-        glBindVertexArray(vao);
+        glBindVertexArray(vao[0]);
             glDrawArrays(GL_TRIANGLES,0,cube.getVertexCount());
         glBindVertexArray(0);
 
