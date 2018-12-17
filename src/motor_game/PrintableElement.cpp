@@ -1,6 +1,7 @@
 #include "../../include/motor_game/PrintableElement.hpp"
 #include <iostream>
 #include <GL/glew.h>
+#include "common.hpp"
 
 PrintableElement::PrintableElement()
 	:m_position(glm::vec3(0), m_type("Unknown"))
