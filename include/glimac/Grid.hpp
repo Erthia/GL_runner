@@ -28,6 +28,9 @@ public:
         return m_nVertexCount;
     }
 
+		void vboManager(GLuint &vbo);
+		void vaoManager(GLuint &vao,GLuint &vbo);
+
 private:
 	std::vector<ShapeVertex> m_Vertices;
   GLsizei m_nVertexCount =0; // Nombre de sommets

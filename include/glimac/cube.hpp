@@ -2,21 +2,22 @@
 
 #include <vector>
 #include "common.hpp"
+#include "Object.hpp"
 
 
 namespace glimac{
 
-class Cube
+class Cube :public Object
 {
 
-	void build(GLfloat m_edge);
+	void build();
 
 public:
 
-	Cube(GLfloat m_edge):
+	Cube():
 		m_nVertexCount(36)
     {
-        build(m_edge); // Construction (voir le .cpp)
+        build(); // Construction (voir le .cpp)
     }
 
 	// Renvoit le pointeur vers les données
@@ -28,6 +29,9 @@ public:
     GLsizei getVertexCount() const {
         return m_nVertexCount;
     }
+
+		void vboManager(GLuint &vbo);
+		void vaoManager(GLuint &vao,GLuint &vbo);
 
 private:
 

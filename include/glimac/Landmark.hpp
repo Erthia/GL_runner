@@ -2,11 +2,12 @@
 
 #include <vector>
 #include "common.hpp"
+#include "Object.hpp"
 
 
 namespace glimac{
 
-class Landmark
+class Landmark :public Object
 {
 
 	void build();
@@ -28,6 +29,9 @@ public:
     GLsizei getVertexCount() const {
         return m_nVertexCount;
     }
+
+		void vboManager(GLuint &vbo);
+		void vaoManager(GLuint &vao,GLuint &vbo);
 
 private:
 	std::vector<ShapeVertex> m_Vertices;

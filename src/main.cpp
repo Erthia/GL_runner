@@ -4,6 +4,7 @@
 #include <glimac/common.hpp>
 #include <glimac/Sphere.hpp>
 #include <glimac/cube.hpp>
+#include <glimac/Object.hpp>
 #include <glimac/Program.hpp>
 #include <glimac/TrackballCamera.hpp>
 #include <glimac/FilePath.hpp>
@@ -16,6 +17,7 @@
 #include <cstdlib>
 #include <GLFW/glfw3.h>
 #include <fstream>
+
 //#include <utils.cpp>
 
 
@@ -105,9 +107,6 @@ END - IF YOU'RE USING GLSL VERSION 130
 
 int main(int argc, char** argv) {
 
-
-
-
     // Initialize SDL and open a window
     int width = 800;
     int height =600;
@@ -127,15 +126,6 @@ int main(int argc, char** argv) {
                                   "./shaders/normals.fs.glsl" );
     program.use();
 
-     /********************************
-    IF YOU'RE USING GLSL VERSION 130
-    DELETE THIS PART IF YOU'RE VERSION 330
-    ********************************/
-
-    /********************************
-    END - IF YOU'RE USING GLSL VERSION 130
-    ********************************/
-
 
     std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
@@ -148,78 +138,31 @@ int main(int argc, char** argv) {
     GLint uModelMVMatrix = glGetUniformLocation(program.getGLId(), "uMVMatrix");
     GLint uModelMVPMatrix = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
     GLint uNormalMatrix = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
-    //GLint uModelTexture = glGetUniformLocation(program.getGLId(),"uTexture");
-
-
+    
     glEnable(GL_DEPTH_TEST);
 
-    GLuint vbo[2];
-    //  Cube VBO
-    Cube cube(5);
-    int nbVertice = cube.getVertexCount();
-
-    glGenBuffers(1,&vbo[0]);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
-
-    glBufferData(GL_ARRAY_BUFFER,nbVertice*sizeof(ShapeVertex),cube.getDataPointer(), GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER,0);
-
-    // Landmark VBO
-
-    Grid landmark;
-    glGenBuffers(1,&vbo[1]);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
-
-    glBufferData(GL_ARRAY_BUFFER,landmark.getVertexCount()*sizeof(ShapeVertex),landmark.getDataPointer(), GL_STATIC_DRAW);
-
-    // Cube VAO
-
-    GLuint vao[2];
-    glGenVertexArrays(1,&vao[0]);
-    glBindVertexArray(vao[0]);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-
-    // Spécification des attribut de vertex
+    GLuint vbo[3];
+    GLuint vao[3];
+    //  Cube
+    Cube cube;
+    cube.vboManager(vbo[0]);
+    cube.vaoManager(vao[0],vbo[0]);
+    // Landmark
+    Landmark landmark;
+    landmark.vboManager(vbo[1]);
+    landmark.vaoManager(vao[1],vbo[1]);
+    // Grid
+    Grid grid;
+    grid.vboManager(vbo[2]);
+    grid.vaoManager(vao[2],vbo[2]);
 
 
-   glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
-   glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,position));
-   glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,normal));
-   glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,texCoords));
-   glBindBuffer(GL_ARRAY_BUFFER,0);
-   glBindVertexArray(0);
-
-    // Landmark VAO
-
-    glGenVertexArrays(1,&vao[1]);
-    glBindVertexArray(vao[1]);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-
-    // Spécification des attribut de vertex
-
-
-   glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
-   glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,position));
-   glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,normal));
-   glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,sizeof(ShapeVertex),(void *) offsetof(ShapeVertex,texCoords));
-   glBindBuffer(GL_ARRAY_BUFFER,0);
-   glBindVertexArray(0);
 
 
     glm::mat4 projMatrix,MVMatrix,NormalMatrix;
 
-    if (cube.getDataPointer() == NULL)
-    {
-        std::cout<<"ptr NULL"<<std::endl;
-    }
-
     // Application loop:
 
-    std::cout<< "Vertex Count :" <<cube.getVertexCount()<<std::endl;
     bool done = false;
     while(!done) {
         // Event loop:
@@ -283,6 +226,13 @@ int main(int argc, char** argv) {
         glBindVertexArray(vao[1]);
             glDrawArrays(GL_LINES,0,landmark.getVertexCount());
         glBindVertexArray(0);
+
+        glBindVertexArray(vao[2]);
+            glDrawArrays(GL_LINES,0,grid.getVertexCount());
+        glBindVertexArray(0);
+
+
+
 
 
         // Update the display
