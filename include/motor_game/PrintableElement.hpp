@@ -12,17 +12,22 @@ class PrintableElement
 {
   public:
 
-    /// \default constructor of class PrintableElement
-    /// \our class PrintableElement is only abstract
+    /// \brief default constructor of class PrintableElement
+    /// \brief our class PrintableElement is only abstract
     PrintableElement(); 
 
-     /// \constructor with parameters
+     /// \brief constructor with parameters
     /// \param type : a string which will allow us to know what kind of PrintableElement we're dealing with
     PrintableElement(const glm::vec3 &position, const std::string &type); 
 
   /// \brief method allowing us to know the x, y and z coordinates of our object
   inline glm::vec3 getPosition() const {
       return m_position;
+  }
+  
+  /// \brief setter of position
+  inline void setPosition(glm::vec3 pos){
+      m_position=pos;
   }
 
   /// \brief method allowing us to know the x coordinate of PrintableElement
@@ -49,7 +54,7 @@ class PrintableElement
   virtual void printElement() const;
 
 
-  /// \default destructor of our PrintableElement 
+  /// \brief default destructor of our PrintableElement 
   ~PrintableElement(); 
 
 
