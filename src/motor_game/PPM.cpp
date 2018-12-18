@@ -1,8 +1,16 @@
 #include "motor_game/PPM.hpp"
 #include "exception/ExceptIMAC.hpp"
 #include "motor_game/Floor.hpp"
-
+#include <string>
+/*
 namespace motor_game{
+    
+    PPMreader::PPMreader(const std::string &filename)
+    {
+        //open the file
+        std::ifstream m_ppm_1(filename.c_str(), ios::in);
+        std::abort(m_ppm_1.is_open());
+    }
     
     const std::string PPM::nextString() const{
         std::string readElt << m_ppm_1;
@@ -12,13 +20,6 @@ namespace motor_game{
             if(readElt.c_str[0] == '#') ppm_1.ignore('\n');
             else loop=0;
         }
-    }
-    
-    PPM::PPM(const std::string &filename)
-    {
-        //open the file
-        std::ifstream m_ppm_1(filename.c_str(), ios::in);
-        std::abort(m_ppm_1.is_open());
     }
     
     void readFile(){
@@ -49,48 +50,52 @@ namespace motor_game{
                     (m_ppm_1.nextString()==0) &&
                     (m_ppm_1.nextString()==0) &&
                     (m_ppm_1.nextString()==0)
-                ){
+                )
                     m_elements[x][0][z]=End(glm::vec3(x,0,z));
-                }
+                
                 else if( // gap
                     (m_ppm_1.nextString()==255) &&
                     (m_ppm_1.nextString()==255) &&
                     (m_ppm_1.nextString()==255)
-                ){
-                    m_elements[x][0][z]=Gap();
-                }
+                )
+                    m_elements[x][0][z]=Gap(glm::vec3(x,0,z));
+                
                 else if( // floor
                     (m_ppm_1.nextString()==235) &&
                     (m_ppm_1.nextString()==150) &&
                     (m_ppm_1.nextString()==235)
                 )
+                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z));
                 else if( // wall
                     (m_ppm_1.nextString()==125) &&
                     (m_ppm_1.nextString()==65) &&
                     (m_ppm_1.nextString()==35)
                 )
+                    m_elements[x][0][z]=Wall(glm::vec3(x,0,z));
                 else if( // high obstacle
                     (m_ppm_1.nextString()==95) &&
                     (m_ppm_1.nextString()==95) &&
                     (m_ppm_1.nextString()==225)
                 )
+                    m_elements[x][1][z]=Obstacle(glm::vec3(x,1,z));
                 else if( // low obstacle
                     (m_ppm_1.nextString()==35) &&
                     (m_ppm_1.nextString()==185) &&
                     (m_ppm_1.nextString()==70)
                 )
-                else THROW_EXCEPTION("Unrecognize color in ppm, at coord ??");
+                    m_elements[x][1][z]=Obstacle(glm::vec3(x,0,z));
+                else THROW_EXCEPTION("Unrecognize color in ppm, at coord ("+ x + ", " + y + ")");
             }
         }
     
     }
-        
-        
-    }
     
-    PPM::~PPM(){
+    PPMreader::~PPMreader(){
         // close the file
         m_ppm_1.close();
     }
+        
+    }
 }
 
+/*
