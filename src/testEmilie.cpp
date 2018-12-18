@@ -28,9 +28,9 @@ int main(){
     fin.printElement();
     
     std::cout << "\nTest GAP" << std::endl;
-    motor_game::Gap gap(glm::vec3(1,2,3));
-    gap.collide(milie);
-    gap.printElement;
+    motor_game::Gap gap(glm::vec3(1,2,3), "gap");
+    gap.collide(&milie);
+    gap.printElement();
     
     return 0;
 }
