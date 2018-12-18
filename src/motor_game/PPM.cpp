@@ -1,7 +1,7 @@
 #include "motor_game/PPM.hpp"
 #include "exception/ExceptIMAC.hpp"
 #include "motor_game/Floor.hpp"
-/*
+
 namespace motor_game{
     
     const std::string PPM::nextString() const{
@@ -51,13 +51,14 @@ namespace motor_game{
                     (m_ppm_1.nextString()==0)
                 ){
                     m_elements[x][0][z]=End(glm::vec3(x,0,z));
-                    m_hero.setPosition(glm::vec3(x, 0, z));
                 }
                 else if( // gap
                     (m_ppm_1.nextString()==255) &&
                     (m_ppm_1.nextString()==255) &&
                     (m_ppm_1.nextString()==255)
-                )
+                ){
+                    m_elements[x][0][z]=Gap();
+                }
                 else if( // floor
                     (m_ppm_1.nextString()==235) &&
                     (m_ppm_1.nextString()==150) &&
@@ -92,4 +93,4 @@ namespace motor_game{
         m_ppm_1.close();
     }
 }
-*/
+

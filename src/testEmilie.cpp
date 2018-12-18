@@ -6,6 +6,7 @@
 #include "End.hpp"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "Gap.hpp"
 
 int main(){
     //test ExceptIMAC class
@@ -25,6 +26,11 @@ int main(){
     motor_game::End fin(glm::vec3(1,1,2));
     fin.collide(milie);
     fin.printElement();
+    
+    std::cout << "\nTest GAP" << std::endl;
+    motor_game::Gap gap(glm::vec3(1,2,3));
+    gap.collide(milie);
+    gap.printElement;
     
     return 0;
 }
