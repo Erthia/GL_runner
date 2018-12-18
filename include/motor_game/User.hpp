@@ -9,11 +9,11 @@ class User
   public:
     //methode
     User()
-      :m_name("Unknown"),m_score(0)
+      :m_name("Unknown")
     {}
 
     User(std::string inName)
-      :m_name(inName),m_score(0)
+      :m_name(inName)
     {}
 
     ~User();
@@ -37,7 +37,7 @@ class User
     void printPlayer()
     {
       std::cout<<"Name :"<<m_name<<std::endl;
-      std::cout<<"Score :"<<m_score<<std::endl;
+     // std::cout<<"Score :"<<m_score<<std::endl;
     }
 
 

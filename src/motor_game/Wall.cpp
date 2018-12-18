@@ -17,7 +17,7 @@ Wall::~Wall()
 void Wall::printElement() 
 {
 	std::cout << "\nWALL INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 }
 
 void Wall::collide(Hero *hero){

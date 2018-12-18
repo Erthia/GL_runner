@@ -27,40 +27,40 @@ class PrintableElement
       return m_position;
     }
 
-  /// \brief method allowing us to know the x coordinate of our object
+  /// \brief method allowing us to know the x coordinate of PrintableElement
   inline
     float getX() const
       {
         return m_position.x;
       }
 
-    /// \brief method allowing us to know the y coordinate of our object
+    /// \brief method allowing us to know the y coordinate of PrintableElement
   inline
     float getY() const
       {
         return m_position.y;
       }
 
-    /// \brief method allowing us to know the z coordinate of our object
+    /// \brief method allowing us to know the z coordinate of PrintableElement
   inline
     float getZ() const
       {
         return m_position.z;
       }
 
-  /// \brief method allowing us to know the type of our object
+  /// \brief method allowing us to know the type of PrintableElement
   inline
     std::string getType() const
     {
       return m_type;
     }
     
-  /// \brief method to test the value of our object's attributes
+  /// \brief method to test the value of PrintableElement's attributes
   virtual void printElement();
 
 
-
-  ~PrintableElement(); /// default destructor
+  /// \default destructor of our PrintableElement 
+  ~PrintableElement(); 
 
 
   protected:

@@ -9,12 +9,6 @@ Element::Element(const glm::vec3 &position, const std::string &type)
 :PrintableElement(position, type)
 {}
 
-void Element::printElement() 
-{
-	PrintableElement::printElement();
-}
-void Element::collide(Hero *hero){}
-
 
 Element::~Element()
 {}

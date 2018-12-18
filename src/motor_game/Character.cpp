@@ -88,9 +88,7 @@ bool Character::checkCollisionMovement(const PrintableElement &b, const char &mo
 					if(abs((this->getZ()+1)- b.getZ()) < 1)
 						return true;
 			return false;
-			break;
-
-
+			break;  
 	}
 		return false;
 }

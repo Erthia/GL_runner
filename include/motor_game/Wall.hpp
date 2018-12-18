@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Element.hpp"
+#include "Hero.hpp"
 
 class Wall : public Element
 {

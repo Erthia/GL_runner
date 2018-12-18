@@ -7,7 +7,7 @@
 
 
 #include "Element.hpp"
-
+#include "Hero.hpp"
 
 class Coin : public Element
 {

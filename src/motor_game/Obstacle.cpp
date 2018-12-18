@@ -16,7 +16,7 @@ Obstacle::~Obstacle()
 void Obstacle::printElement() 
 {
 	std::cout << "\nOBSTACLE INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 }
 
 

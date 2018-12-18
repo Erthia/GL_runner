@@ -7,7 +7,6 @@
 
 
 #include "PrintableElement.hpp"
-//#include "Hero.hpp"
 
 class Element : public PrintableElement
 {
@@ -20,12 +19,8 @@ class Element : public PrintableElement
     /// \param type : a string which will allow us to know what kind of Element we're dealing with
     Element(const glm::vec3 &position, const std::string &type); 
 
-    /// \brief method to test the value of our object's attributes
-    virtual void printElement();
 
-    //virtual void collide(Hero *hero);
-
-    /// \default destructor of our class Element
+    /// \default destructor of our Element
     ~Element(); 
 
 

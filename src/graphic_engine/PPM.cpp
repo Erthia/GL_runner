@@ -1,4 +1,4 @@
-
+/*
 namespace graphic_engine{
     
     PPM::PPM(const std::string &filename)
@@ -10,4 +10,4 @@ namespace graphic_engine{
     PPM::~PPM(){
         m_ppm.close();
     }
-}
+}*/

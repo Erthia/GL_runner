@@ -16,7 +16,7 @@ Floor::~Floor()
 void Floor::printElement() 
 {
 	std::cout << "\nFLOOR INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 }
 
 

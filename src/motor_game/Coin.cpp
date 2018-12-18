@@ -21,7 +21,7 @@ void Coin::collide(Hero *hero){
 void Coin::printElement() 
 {
 	std::cout << "\nCOIN INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 	std::cout << "Value : " << m_value << std::endl;
 }
 
