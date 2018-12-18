@@ -117,13 +117,7 @@ void Character::scanArray(PrintableElement (*list)[50][50], const char &movement
 		int y=this->getY();
 		int z=this->getZ();
 
-		std::cout << std::endl;
-		Character wally(glm::vec3(0,0,1), "wally", 0);
 		list[x][y][z].printElement();
-		this->printElement();
-
-		std::cout << "x =" << x << "y = " << y << "z : " << z << std::endl;
-		list[x+1][y][z].printElement();
 
 		if(checkCollision(list[x][y][z]) == true)
 				std::cout << "HALLELUJAH" << std::endl;
@@ -134,7 +128,7 @@ void Character::scanArray(PrintableElement (*list)[50][50], const char &movement
 			if(checkCollisionMovement(list[x+1][y][z], movement) == true)
 				std::cout << "Collision !" << std::endl;
 			case 'd' :
-			if(checkCollisionMovement(list[x][y][z], movement) == true)
+			if(checkCollisionMovement(list[x-1][y][z], movement) == true)
 				std::cout << "Collision !" << std::endl;
 		}
 		//list[x][y][z+1]
