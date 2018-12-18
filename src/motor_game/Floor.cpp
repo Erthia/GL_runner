@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 Floor::Floor()
-	:Element()
+	:Element(glm::vec3(0), "Floor")
 {}
 
 Floor::Floor(const glm::vec3 &position, const std::string &type)
@@ -13,10 +13,10 @@ Floor::Floor(const glm::vec3 &position, const std::string &type)
 Floor::~Floor()
 {}
 
-void Floor::printElement() 
+void Floor::printElement() const
 {
 	std::cout << "\nFLOOR INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 }
 
 

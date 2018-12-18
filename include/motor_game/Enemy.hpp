@@ -16,7 +16,7 @@ class Enemy : public Character
     void killHero();
    
 
-    virtual void printElement();
+    void printElement() const;
     ~Enemy(); /// default destructor
 
 

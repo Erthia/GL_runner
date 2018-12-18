@@ -1,58 +1,38 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 
-#pragma once
 
 class User
 {
-public:
-  //methode
-  User()
-    :m_name("Unknown"),m_score(0)
-  {}
+  public:
+    //methode
+    User();
 
-  User(std::string inName)
-    :m_name(inName),m_score(0)
-  {}
+    /// \default constructor of class User
+    User(std::string &inName);
 
-  ~User();
-
-  inline
-  std::string getName() const
-  {
-    return m_name;
+  /// \brief method to retrieve the value of User's attributes
+  inline std::string getName() const {
+      return m_name;
   }
 
-  inline
-  void setName(std::string const &inName)
-  {
-    m_name = inName;
+  /// \brief method to set the value of User's name
+  inline void setName(std::string const &inName) {
+      m_name = inName;
+  }
+  /// \brief method to test the value of User's attributes
+  inline void printPlayer() const {
+      std::cout<<"Name :"<<m_name<<std::endl;
+     // std::cout<<"Score :"<<m_score<<std::endl;
   }
 
-  inline
-  int getScore() const
-  {
-    return m_score;
-  }
+    /// \default destructor of our Element
+    ~User();
 
-  inline
-  void setScore(int const &inScore)
-  {
-    m_score += inScore;
-  }
+  private:
+    std::string m_name; /*!< name of User */
 
-  inline
-  void printPlayer()
-  {
-    std::cout<<"Name :"<<m_name<<std::endl;
-    std::cout<<"Score :"<<m_score<<std::endl;
-  }
-
-
-
-private:
-  //attributs
-  std::string m_name;
-  int m_score;
 
 };

@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 Wall::Wall()
-	:Element()
+	:Element(glm::vec3(0), "Wall")
 {}
 
 Wall::Wall(const glm::vec3 &position, const std::string &type)
@@ -14,13 +14,13 @@ Wall::Wall(const glm::vec3 &position, const std::string &type)
 Wall::~Wall()
 {}
 
-void Wall::printElement() 
+void Wall::printElement() const
 {
 	std::cout << "\nWALL INFORMATION :" << std::endl;
-	Element::printElement();
+	PrintableElement::printElement();
 }
 
-void Wall::collide(User &hero){
+void Wall::collide(Hero *hero) {
 	std::cout << "Can't walk through walls" << std::endl;
 }
 
