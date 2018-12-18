@@ -1,10 +1,10 @@
-#include <iostream>
-#include <string>
-
 #pragma once
 
-
+#include <iostream>
+#include <string>
 #include "Element.hpp"
+#include "Hero.hpp"
+
 
 class Obstacle : public Element
 {
@@ -15,7 +15,8 @@ class Obstacle : public Element
 
     ~Obstacle(); /// default destructor
 
-    virtual void printElement();
+    void printElement() const;
+    void collide(Hero *hero);
 
 
 };

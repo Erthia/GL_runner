@@ -2,7 +2,7 @@
 #include <iostream>
 
 Character::Character()
-	:PrintableElement()
+	:PrintableElement(glm::vec3(0), "Character"), m_speed(0)
 {}
 
 Character::Character(const glm::vec3 &position, const std::string &type, const unsigned int &speed)
@@ -12,7 +12,7 @@ Character::Character(const glm::vec3 &position, const std::string &type, const u
 Character::~Character()
 {}
 
-void Character::printElement() 
+void Character::printElement() const
 {
 	PrintableElement::printElement();
 	std::cout << "Speed : " << m_speed << std::endl;

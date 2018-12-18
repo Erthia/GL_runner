@@ -16,11 +16,12 @@ int main()
   	User player1;
   	player1.printPlayer();
 
-  	PrintableElement p1(glm::vec3(5), "Mur");
+  	Wall p1(glm::vec3(5), "Mur");
   	p1.printElement();
 
   	Element e1(glm::vec3(5, 5, 5), "Element");
   	e1.printElement();
+
 
   	Character emilie(glm::vec3(0, 0, 0), "Humaine", 0.000001);
   	emilie.printElement();
@@ -49,6 +50,9 @@ int main()
  		std::cout << "collision" << std::endl;
  	else 
  		std::cout << "pas collision" << std::endl;
+
+  Enemy test;
+  test.printElement();
 
  	std::list<Element> myList;
  	myList.push_back(coin1);

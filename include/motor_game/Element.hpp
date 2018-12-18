@@ -19,7 +19,6 @@ class Element : public PrintableElement
     /// \param type : a string which will allow us to know what kind of Element we're dealing with
     Element(const glm::vec3 &position, const std::string &type); 
 
-
     /// \default destructor of our Element
     ~Element(); 
 

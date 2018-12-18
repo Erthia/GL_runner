@@ -57,7 +57,7 @@ class Character : public PrintableElement
     //const Element* scanList(const std::list<Element> &list, const char &movement);
 
     /// \brief method to test the value of our Element's attributes: TO ERASE ????
-    virtual void printElement();
+    virtual void printElement() const;
 
     //////////////////////////// TO ADD : speed changer with bonus !!!! VOIR SI ON PEUT FAIRE UNE SCANLIST SANS PARAMETRE DE MOUVEMENT
 

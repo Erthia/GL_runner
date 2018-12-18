@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 Coin::Coin()
-	:Element(), m_value(0)
+	:Element(glm::vec3(0), "Coin"), m_value(0)
 {}
 
 Coin::Coin(const glm::vec3 &position, const std::string &type, const unsigned int &value)
@@ -14,11 +14,11 @@ Coin::~Coin()
 {}
 
 void Coin::collide(Hero *hero){
-	hero->setScore(this->getScore());
+	hero->setScore(this->getValue());
 	// delete coin ?????
 }
 
-void Coin::printElement() 
+void Coin::printElement() const
 {
 	std::cout << "\nCOIN INFORMATION :" << std::endl;
 	PrintableElement::printElement();
