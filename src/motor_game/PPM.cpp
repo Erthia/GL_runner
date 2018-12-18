@@ -42,7 +42,7 @@ namespace motor_game{
                     (m_ppm_1.nextString()==100) &&
                     (m_ppm_1.nextString()==100)
                 ){
-                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z), "Floor");
+                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z));
                     m_hero.setPosition(glm::vec3(x, 0, z));
                 }
                 else if( // end
@@ -50,7 +50,7 @@ namespace motor_game{
                     (m_ppm_1.nextString()==0) &&
                     (m_ppm_1.nextString()==0)
                 ){
-                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z), "Floor");
+                    m_elements[x][0][z]=End(glm::vec3(x,0,z));
                     m_hero.setPosition(glm::vec3(x, 0, z));
                 }
                 else if( // gap

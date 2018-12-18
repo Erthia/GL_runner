@@ -11,7 +11,7 @@ class Floor : public Element
   public:
   	/// \default constructor of class Floor
     Floor(); 
-    Floor(const glm::vec3 &position, const std::string &type); /// constructor with parameters
+    Floor(const glm::vec3 &position, const std::string &type = "Floor"); /// constructor with parameters
 
  	/// default destructor of our Floor
     ~Floor(); 

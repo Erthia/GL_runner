@@ -12,7 +12,7 @@ class Enemy : public Character
   public:
 
     Enemy(); /// default constructor
-    Enemy(const glm::vec3 &position, const std::string &type, const unsigned int &speed); /// constructor with parameters
+    Enemy(const glm::vec3 &position, const unsigned int &speed, const std::string &type="Enemy"); /// constructor with parameters
     void killHero();
    
 

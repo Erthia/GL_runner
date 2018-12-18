@@ -6,7 +6,7 @@ Coin::Coin()
 	:Element(glm::vec3(0), "Coin"), m_value(0)
 {}
 
-Coin::Coin(const glm::vec3 &position, const std::string &type, const unsigned int &value)
+Coin::Coin(const glm::vec3 &position, const unsigned int &value, const std::string &type="Coin")
 :Element(position, type), m_value(value)
 {}
 

@@ -13,7 +13,7 @@ class Hero : public Character
     Hero(); 
 
     /// \constructor with parameters
-    Hero(const glm::vec3 &position, const std::string &type, const unsigned int &speed); 
+    Hero(const glm::vec3 &position, const unsigned int &speed, const std::string &type = "Hero"); 
    
    	/// \brief method to test the value of Hero's attributes
     void printElement() const;

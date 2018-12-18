@@ -12,7 +12,7 @@ class Wall : public Element
     Wall();
 
     /// \constructor with parameters
-    Wall(const glm::vec3 &position, const std::string &type);
+    Wall(const glm::vec3 &position, const std::string &type = "Wall");
 
     /// default destructor of our Wall
     ~Wall(); 
