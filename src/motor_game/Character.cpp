@@ -112,26 +112,42 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 		std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
 	}*/
 
-void Character::scanArray(PrintableElement (*list)[50][50], const char &movement) {
+bool Character::scanArray(PrintableElement (*list)[50][50], const char &movement) {
 		int x=this->getX();
 		int y=this->getY();
 		int z=this->getZ();
+		PrintableElement tmpElt = list[x][y][z];
 
-		list[x][y][z].printElement();
+		/*list[x][y][z].printElement();
 		this->printElement();
 
 		if(checkCollision(list[x][y][z]) == true)
 				std::cout << "HALLELUJAH" << std::endl;
-		else std::cout << "LA MOOOOOOOORT PUTAIIN" << std::endl;
+		else std::cout << "LA MOOOOOOOORT PUTAIIN" << std::endl;*/
 
 		switch(movement) {
 			case 'q' :
+			if(abs((this->getX()-1) - tmpElt.getX()) < 1) {
+				if(abs(this->getY()- tmpElt.getY()) < 2) /// \our character's heighth is two
+				{
+					if(abs((this->getZ()+1)- tmpElt.getZ()) < 1)
+					{
+						std::cout << "HALLELUJAH" << std::endl;
+						return true;
+					}}}
+			else {
+				std::cout << "BOOOOOUH" << std::endl;
+				return false;
+			}
+			break;
+			/*
 			if(checkCollisionMovement(list[x-1][y][z+1], movement) == true)
-				std::cout << "Collision scanArray !" << std::endl;
+				std::cout << "Collision scanArray !" << std::endl;*/
 			case 'd' :
 			if(checkCollisionMovement(list[x+1][y][z+1], movement) == true)
 				std::cout << "Collision scanArray !" << std::endl;
 		}
+
 		//list[x][y][z+1]
 		//std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
 	}
