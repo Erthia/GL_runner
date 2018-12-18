@@ -12,11 +12,11 @@ out vec3 fFragColor;
 //uniform sampler2D uTexture;
 
 void main() {
-	
+
 
 	fFragColor  = normalize(vNormal);
-	
+
 
 	//fFragColor = vec3(1.0,0.0,0.0);
-	
+
 }

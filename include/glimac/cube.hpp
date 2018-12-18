@@ -35,7 +35,7 @@ public:
 
 private:
 
-	GLfloat m_edge;
+
 	std::vector<ShapeVertex> m_Vertices;
   GLsizei m_nVertexCount; // Nombre de sommets
 
