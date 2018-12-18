@@ -1,17 +1,21 @@
-#include <fstream>
-#include <string>
-
 #ifndef PPM_HPP
 #define PPM_HPP
 
 #pragma once
+
+#include <fstream>
+#include <string>
+#include <vector>
+#include "Element.hpp"
+#include "Hero.hpp"
+#include "Enemy.hpp"
 
 namespace motor_game{
     class PPM{
         public :
             /// \brief constructor, can throw an exception
             /// \param string of the file name
-            PPM(const &std::string filename);
+            PPM(const std::string &filename);
             
             ///\brief destructor
             ~PPM();
@@ -19,7 +23,7 @@ namespace motor_game{
             PPM() = delete;
             
             /// \brief getter : Element list of the level
-            std::list<Element> elements();
+            std::vector<Element> elements();
             
             /// \brief getter : and returns the hero
             Hero hero();
@@ -32,7 +36,7 @@ namespace motor_game{
             
         private:
             std::ifstream m_ppm_1; /*!< ppm file */
-            std::vec<std::vec<std::vec<Element>>> m_elements; /*!< elements of the setting */
+            std::vector<Element> m_elements; /*!< elements of the setting */
             Hero m_hero; /*!< hero, at his beginning position */
             Enemy m_enemy; /*!< ennemy, at his beginning position */
             unsigned int m_x;

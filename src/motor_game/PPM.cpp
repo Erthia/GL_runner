@@ -1,6 +1,7 @@
-#include "../../include/graphic_engine/PPM.hpp"
-#include "../../include/exception/ExceptIMAC.hpp"
-
+#include "motor_game/PPM.hpp"
+#include "exception/ExceptIMAC.hpp"
+#include "motor_game/Floor.hpp"
+/*
 namespace motor_game{
     
     const std::string PPM::nextString() const{
@@ -33,19 +34,52 @@ namespace motor_game{
         // the ppm file is supposed valid
         
         // read colors, and create elements
-        for(size_t i=0; i<m_x; i++){
-        m_ppm_1.nextString();
-            if(
-                (m_ppm_1.nextString()==100) &&
-                (m_ppm_1.nextString()==100) &&
-                (m_ppm_1.nextString()==100)
-            )
-            else if
-            else if
-            else if
-            else if
-            else if
-            else THROW_EXCEPTION("Unrecognize color in ppm, at coord ??");
+        for(size_t x=0; x<m_x; x++){
+            for(size_t z=0; z<m_z; z++){
+                m_ppm_1.nextString();
+                if( // beginning
+                    (m_ppm_1.nextString()==100) &&
+                    (m_ppm_1.nextString()==100) &&
+                    (m_ppm_1.nextString()==100)
+                ){
+                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z), "Floor");
+                    m_hero.setPosition(glm::vec3(x, 0, z));
+                }
+                else if( // end
+                    (m_ppm_1.nextString()==0) &&
+                    (m_ppm_1.nextString()==0) &&
+                    (m_ppm_1.nextString()==0)
+                ){
+                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z), "Floor");
+                    m_hero.setPosition(glm::vec3(x, 0, z));
+                }
+                else if( // gap
+                    (m_ppm_1.nextString()==255) &&
+                    (m_ppm_1.nextString()==255) &&
+                    (m_ppm_1.nextString()==255)
+                )
+                else if( // floor
+                    (m_ppm_1.nextString()==235) &&
+                    (m_ppm_1.nextString()==150) &&
+                    (m_ppm_1.nextString()==235)
+                )
+                else if( // wall
+                    (m_ppm_1.nextString()==125) &&
+                    (m_ppm_1.nextString()==65) &&
+                    (m_ppm_1.nextString()==35)
+                )
+                else if( // high obstacle
+                    (m_ppm_1.nextString()==95) &&
+                    (m_ppm_1.nextString()==95) &&
+                    (m_ppm_1.nextString()==225)
+                )
+                else if( // low obstacle
+                    (m_ppm_1.nextString()==35) &&
+                    (m_ppm_1.nextString()==185) &&
+                    (m_ppm_1.nextString()==70)
+                )
+                else THROW_EXCEPTION("Unrecognize color in ppm, at coord ??");
+            }
         }
     
     }
@@ -58,4 +92,4 @@ namespace motor_game{
         m_ppm_1.close();
     }
 }
-
+*/
