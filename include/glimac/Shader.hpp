@@ -42,8 +42,8 @@ public:
 private:
 	Shader(const Shader&);
 	Shader& operator =(const Shader&);
-
 	GLuint m_nGLId;
+	
 };
 
 // Load a shader (but does not compile it)

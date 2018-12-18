@@ -19,6 +19,7 @@
 #include <fstream>
 #include "AppManager.hpp"
 #include "Menu.hpp"
+#include "drawObject.hpp"
 
 AppManager::AppManager()
 {}
@@ -43,19 +44,20 @@ int AppManager::start(char** argv)
       return EXIT_FAILURE;
   }
 
-// A changer d'endroit
+// SHADER
   FilePath applicationPath(argv[0]);
-  Program program = loadProgram("./shaders/3d.vs.glsl",
+  Program program1 = loadProgram("./shaders/3d.vs.glsl",
                                 "./shaders/normals.fs.glsl" );
-  program.use();
+  program1.use();
+  GLint uModelMVMatrix = glGetUniformLocation(program1.getGLId(), "uMVMatrix");
+  GLint uModelMVPMatrix = glGetUniformLocation(program1.getGLId(), "uMVPMatrix");
+  GLint uNormalMatrix = glGetUniformLocation(program1.getGLId(), "uNormalMatrix");
 
-// Init all game stuff
+
+
   TrackballCamera camera(0,0,0);
-  // Dépendance avec shaders -> à voir comment créer classe shader et lié avec
-  // obj et element
-  GLint uModelMVMatrix = glGetUniformLocation(program.getGLId(), "uMVMatrix");
-  GLint uModelMVPMatrix = glGetUniformLocation(program.getGLId(), "uMVPMatrix");
-  GLint uNormalMatrix = glGetUniformLocation(program.getGLId(), "uNormalMatrix");
+
+
 
   glEnable(GL_DEPTH_TEST);
 
@@ -118,7 +120,6 @@ int AppManager::start(char** argv)
         glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
 
         menu.displayMenu(vao[3]);
-
         // Update the display
         windowManager.swapBuffers();
 
@@ -171,10 +172,7 @@ int AppManager::start(char** argv)
           glUniformMatrix4fv(uModelMVMatrix,1,GL_FALSE,glm::value_ptr(MVMatrix));
           glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
 
-         glBindVertexArray(vao[0]);
-            glDrawArrays(GL_TRIANGLES,0,cube.getVertexCount());
-          glBindVertexArray(0);
-
+          draw3DObject(vao[0],cube.getVertexCount());
 
           glBindVertexArray(vao[1]);
               glDrawArrays(GL_LINES,0,landmark.getVertexCount());

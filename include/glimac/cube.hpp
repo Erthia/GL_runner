@@ -33,6 +33,8 @@ public:
 		void vboManager(GLuint &vbo);
 		void vaoManager(GLuint &vao,GLuint &vbo);
 
+		
+
 private:
 
 
