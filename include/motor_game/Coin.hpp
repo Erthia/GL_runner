@@ -17,7 +17,7 @@ class Coin : public Element
 
     /// \constructor with parameters
     /// \param value to give each Coin a number to increment the hero's score
-    Coin(const glm::vec3 &position, const unsigned int &value, const std::string &type);
+    Coin(const glm::vec3 &position, const unsigned int &value, const std::string &type="Coin");
 
     /// \brief method to retrieve the value of the Coin
     inline const int getValue() const {

@@ -37,16 +37,16 @@ int main()
     obs.printElement();*/
 
 
-  	Character emilie(glm::vec3(0, 0, 0), "Humaine", 0.000001);
+  	Character emilie(glm::vec3(0, 0, 0), 0.000001, "emilie");
   	emilie.printElement();
    // emilie.moveLeft();
     //emilie.printElement();
 
 
-  	Wall wall1(glm::vec3(0,3,1), "Wall");
+  	Wall wall1(glm::vec3(0,3,1));
     wall1.printElement();
 
-  	Coin coin1(glm::vec3(-1, 0, 0), "Coin", 100);
+  	Coin coin1(glm::vec3(0, 0, 0), 100);
   	coin1.printElement();
 
 
@@ -55,8 +55,8 @@ int main()
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
 
-	if(emilie.checkCollisionMovement(coin1, 'q') == 1)
- 		std::cout << "collision coin" << std::endl;
+	if(emilie.checkCollisionMovement(coin1, 'd') == 1)
+ 		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
  	else 
  		std::cout << "pas collision" << std::endl;
 
@@ -81,9 +81,9 @@ vec[2][3][0] = coin1;
 */
 
   PrintableElement listElement2[50][50][50];
-  listElement2[1][0][0] = coin1;
-  listElement2[1][0][0].printElement();
-  Character laurine(glm::vec3(0, 0, 0), "Laurine", 0);
+  listElement2[0][0][0] = coin1;
+  listElement2[0][0][0].printElement();
+  Character laurine(glm::vec3(0, 0, 0), 0, "laurine");
   laurine.scanArray(listElement2, 'g');
 
  	//const Element* resultTest = emilie.scanList(myList, 'q');
