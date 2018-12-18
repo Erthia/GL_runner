@@ -1,8 +1,8 @@
-/*#include "motor_game/PPM.hpp"
+#include "motor_game/PPM.hpp"
 #include "exception/ExceptIMAC.hpp"
 #include "motor_game/Floor.hpp"
 #include <string>
-/*
+
 namespace motor_game{
     
     PPMreader::PPMreader(const std::string &filename)
@@ -22,7 +22,7 @@ namespace motor_game{
         }
     }
     
-    void readFile(){
+    PPM PPMreader::readFile(){
         if(m_ppm_1.nextString() != "P3") THROW_EXCEPTION("The ppm file is not valid");
         
         // map's dimensions
@@ -33,6 +33,7 @@ namespace motor_game{
         else m_z=m_currentStr;
         
         // the ppm file is supposed valid
+        PPM ppm(m_x, 2, m_z);
         
         // read colors, and create elements
         for(size_t x=0; x<m_x; x++){
@@ -97,5 +98,3 @@ namespace motor_game{
         
     }
 }
-
-*/
