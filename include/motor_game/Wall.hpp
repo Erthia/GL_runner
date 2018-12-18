@@ -1,10 +1,7 @@
-#include <iostream>
-#include <string>
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-
 #pragma once
 
+#include <iostream>
+#include <string>
 #include "Element.hpp"
 
 class Wall : public Element
@@ -17,7 +14,7 @@ class Wall : public Element
     ~Wall(); /// default destructor
 
     void printElement();
-    void collide(User *hero);
+    void collide(Hero *hero);
 
 
 };

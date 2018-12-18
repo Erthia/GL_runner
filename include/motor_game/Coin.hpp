@@ -1,13 +1,13 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#pragma once
-
 
 #include "Element.hpp"
-#include "User.hpp"
+
 
 class Coin : public Element
 {
@@ -22,7 +22,7 @@ class Coin : public Element
     ~Coin(); /// default destructor
 
 	void printElement();
-	void collide(User *hero);
+	void collide(Hero *hero);
 
 
   protected:

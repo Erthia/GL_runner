@@ -1,24 +1,32 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#pragma once
-
 
 #include "PrintableElement.hpp"
-#include "User.hpp"
-
+//#include "Hero.hpp"
 
 class Element : public PrintableElement
 {
   public:
+  	/// \default constructor of class Element
+  	/// \our class Element is only abstract
+    Element(); 
 
-    Element(); /// default constructor
-    Element(const glm::vec3 &position, const std::string &type); /// constructor with parameters
+    /// \constructor with parameters
+    /// \param type : a string which will allow us to know what kind of Element we're dealing with
+    Element(const glm::vec3 &position, const std::string &type); 
+
+    /// \brief method to test the value of our object's attributes
     virtual void printElement();
-    virtual void collide(User *hero);
-    ~Element(); /// default destructor
+
+    //virtual void collide(Hero *hero);
+
+    /// \default destructor of our class Element
+    ~Element(); 
 
 
   protected:

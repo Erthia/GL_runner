@@ -6,7 +6,7 @@ Hero::Hero()
 {}
 
 Hero::Hero(const glm::vec3 &position, const std::string &type, const unsigned int &speed)
-:Character(position, type, speed)
+:Character(position, type, speed), m_score(0)
 {}
 
 Hero::~Hero()
