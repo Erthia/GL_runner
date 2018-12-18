@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <list>
+#include <vector>
 
 
 // héritage de class printableElement
@@ -53,6 +54,10 @@ class Character : public PrintableElement
     /// \method scanning a list of Element objects until a collision is detected (using our checkCollision methods)
     /// \this method is activated when the player wants to move and checks if the position is available. the direction of the movement (determined by the pressed touch) is passed as a second parameter.
     void scanList(std::list<Element> &list, const char &movement);
+
+    void scanArray(PrintableElement (*list)[50][50], const char &movement);
+
+   void scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement);
 
     //const Element* scanList(const std::list<Element> &list, const char &movement);
 

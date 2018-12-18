@@ -1,6 +1,8 @@
 #include "../../include/motor_game/Character.hpp"
 #include <iostream>
 
+
+
 Character::Character()
 	:PrintableElement(glm::vec3(0), "Character"), m_speed(0)
 {}
@@ -54,7 +56,7 @@ bool Character::checkCollision(const PrintableElement &b)
 {
 	if(abs(this->getX()- b.getX()) < 1) 
 		if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
-			if(abs((this->getZ()+1)- b.getZ()) < 1)
+			if(abs((this->getZ())- b.getZ()) < 1)
 				return true;
 	return false;
 }
@@ -103,9 +105,41 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 	    }
 	    	
 	}
+
 }
 
+/*void Character::scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement) {
+		std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
+	}*/
 
+void Character::scanArray(PrintableElement (*list)[50][50], const char &movement) {
+		int x=this->getX();
+		int y=this->getY();
+		int z=this->getZ();
+
+		std::cout << std::endl;
+		Character wally(glm::vec3(0,0,1), "wally", 0);
+		list[x][y][z].printElement();
+		this->printElement();
+
+		std::cout << "x =" << x << "y = " << y << "z : " << z << std::endl;
+		list[x+1][y][z].printElement();
+
+		if(checkCollision(list[x][y][z]) == true)
+				std::cout << "HALLELUJAH" << std::endl;
+		else std::cout << "LA MOOOOOOOORT PUTAIIN" << std::endl;
+
+		switch(movement) {
+			case 'q' :
+			if(checkCollisionMovement(list[x+1][y][z], movement) == true)
+				std::cout << "Collision !" << std::endl;
+			case 'd' :
+			if(checkCollisionMovement(list[x][y][z], movement) == true)
+				std::cout << "Collision !" << std::endl;
+		}
+		//list[x][y][z+1]
+		//std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
+	}
 
 
 

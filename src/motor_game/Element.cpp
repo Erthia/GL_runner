@@ -13,6 +13,9 @@ Element::Element(const glm::vec3 &position, const std::string &type)
 Element::~Element()
 {}
 
+void Element::printElement() const {
+	std::cout << "\nELEMENT INFORMATION :" << std::endl;
+	PrintableElement::printElement();
 
-
+}
 
