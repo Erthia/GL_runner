@@ -24,7 +24,7 @@ class Character : public PrintableElement
     /// \constructor with parameters
     /// \param type : a string which will allow us to know what kind of character we're dealing with
     /// \param speed : the speed in which our character will run, can be changed with bonus elements
-    Character(const glm::vec3 &position, const std::string &type, const unsigned int &speed);
+    Character(const glm::vec3 &position, const unsigned int &speed, const std::string &type);
 
     /// \method allowing the character to move forward on the z axis
     void run();

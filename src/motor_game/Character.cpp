@@ -7,7 +7,7 @@ Character::Character()
 	:PrintableElement(glm::vec3(0), "Character"), m_speed(0)
 {}
 
-Character::Character(const glm::vec3 &position, const std::string &type, const unsigned int &speed)
+Character::Character(const glm::vec3 &position, const unsigned int &speed, const std::string &type)
 :PrintableElement(position, type), m_speed(speed)
 {}
 
@@ -23,7 +23,7 @@ void Character::printElement() const
 void Character::run()
 {
 	std::cout << m_type << " ran." << std::endl;
-	m_position.z += m_speed; /// ???????
+	m_position.z += m_speed; //???????
 }
 
 void Character::moveLeft()
@@ -41,14 +41,14 @@ void Character::moveRight()
 void Character::up()
 {
 	std::cout << m_type << " jumped." << std::endl;
-	m_position.y += 1; /// ???????
+	m_position.y += 1; // ???????
 }
 
-/// à gérer avec le moteur de rendu et un scale particulier ??????? 
+// à gérer avec le moteur de rendu et un scale particulier ??????? 
 void Character::down()
 {
 	std::cout << m_type << " crawled." << std::endl;
-	m_position.y -= 0.5; /// ???????
+	m_position.y -= 0.5; // ???????
 }
 
 
@@ -118,6 +118,7 @@ void Character::scanArray(PrintableElement (*list)[50][50], const char &movement
 		int z=this->getZ();
 
 		list[x][y][z].printElement();
+		this->printElement();
 
 		if(checkCollision(list[x][y][z]) == true)
 				std::cout << "HALLELUJAH" << std::endl;
@@ -125,16 +126,14 @@ void Character::scanArray(PrintableElement (*list)[50][50], const char &movement
 
 		switch(movement) {
 			case 'q' :
-			if(checkCollisionMovement(list[x+1][y][z], movement) == true)
-				std::cout << "Collision !" << std::endl;
+			if(checkCollisionMovement(list[x-1][y][z+1], movement) == true)
+				std::cout << "Collision scanArray !" << std::endl;
 			case 'd' :
-			if(checkCollisionMovement(list[x-1][y][z], movement) == true)
-				std::cout << "Collision !" << std::endl;
+			if(checkCollisionMovement(list[x+1][y][z+1], movement) == true)
+				std::cout << "Collision scanArray !" << std::endl;
 		}
 		//list[x][y][z+1]
 		//std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
 	}
-
-
 
 // gauche/droite : x, haut : y, profondeur : z

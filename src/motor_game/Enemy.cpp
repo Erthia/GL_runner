@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 Enemy::Enemy()
-	:Character(glm::vec3(0), "Enemy", 0)
+	:Character(glm::vec3(0), 0, "Enemy")
 {}
 
 Enemy::Enemy(const glm::vec3 &position, const unsigned int &speed, const std::string &type)
