@@ -42,19 +42,19 @@ int main()
 
 
   	Character emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
-  	emilie.printElement();
+  	//emilie.printElement();
    // emilie.moveLeft();
     //emilie.printElement();
 
 
   	Wall wall1(glm::vec3(0,3,1));
-    wall1.printElement();
+   // wall1.printElement();
 
   	Coin coin1(glm::vec3(2, 0, 1), 100);
-  	coin1.printElement();
+  	//coin1.printElement();
 
 
-  	if(emilie.checkCollision(coin1) == 1)
+  	/*if(emilie.checkCollision(coin1) == 1)
  		std::cout << "récupération coin" << std::endl;
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
@@ -64,7 +64,7 @@ int main()
  		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
  	else 
  		std::cout << "pas collision" << std::endl;
-
+*/
  /* Enemy test;
   test.printElement();
 
@@ -83,19 +83,35 @@ int main()
 std::vector< std::vector<std::vector<Element>>> vec(4, 4, std::vector<Element>(4));
 vec[2][3][0] = coin1;
  emilie.scanVec(listVec, 'd');
-*/
- Element list5[1][1][1];
- list5[0][0][1] = coin1;
- 
+*/////
+ Element list5[10][10][10];
+ //list5[0][0][1] = coin1;
 
   Element* listElement2[50][50][50];
-  Coin *coin2= new Coin(glm::vec3(2, 0,1), 100);
+  Coin *coin2= new Coin(glm::vec3(2, 0,5), 100);
+  Wall *wall3 = new Wall(glm::vec3(0, 2, 1));
+  Wall *wall5 = new Wall(glm::vec3(1, 0, 1));
+   Wall *wall4 = new Wall(glm::vec3(1, 0, 1));
+  listElement2[0][0][1] = wall5;
+  listElement2[1][2][1] = wall3;
+  listElement2[1][0][1] = wall4;
+
   //listElement2[2][0][1] = coin1;
   listElement2[2][0][1] = coin2;
-  listElement2[2][0][1]->printElement();
-  Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
+  //wall3->description();
+  Hero laurine(glm::vec3(0, 0, 0), 0, "laurine");
+
   laurine.scanArray(listElement2, 'd');
-  /*coin2->collision(laurine);
+  laurine.moveRight();
+      laurine.description();
+  //wall3->description();
+
+  //listElement2[0][0][1]->collision(laurine);
+
+  //std::cout << wall5->getY()+1 << std::endl;
+
+
+    /*coin2->collision(laurine);
   listElement2[2][0][1]->collision(laurine);*/
 
 
