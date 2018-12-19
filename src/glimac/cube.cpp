@@ -6,6 +6,14 @@
 
 namespace glimac {
 
+	void Cube::draw()
+	{
+		glBindVertexArray(m_vao);
+			glDrawArrays(GL_TRIANGLES,0,m_nVertexCount);
+		glBindVertexArray(0);
+
+	}
+
 	void Cube::build()
 	{
 

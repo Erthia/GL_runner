@@ -3,6 +3,12 @@
 #include "Landmark.hpp"
 
 namespace glimac {
+  void Landmark::draw()
+  {
+    glBindVertexArray(m_vao);
+        glDrawArrays(GL_LINES,0,m_nVertexCount);
+    glBindVertexArray(0);
+  }
   void Landmark::build()
   {
     ShapeVertex vertex;

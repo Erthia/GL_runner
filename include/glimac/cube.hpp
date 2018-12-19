@@ -41,6 +41,8 @@ public:
 		return m_vao;
 	}
 
+	void draw();
+
 
 private:
 

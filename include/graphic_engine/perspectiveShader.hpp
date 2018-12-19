@@ -17,7 +17,7 @@ public:
   ~PerspectiveShader() {};
 
   void setUniformMatrix() const;
-  void setViewMatrix(const glm::mat4 &sceneModel);
+  void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
 
   void use();
 
@@ -28,6 +28,7 @@ private:
   const char* m_filepathFragmentShader;
 
   glm::mat4 m_modelviewMatrix;
+  glm::mat4 m_modelprojMatrix;
 
   const char* uniformMVPName = "uMVPMatrix";
   const char* uniformMVName = "uMVMatrix";

@@ -32,6 +32,8 @@ namespace glimac{
         return m_vao;
       }
 
+    //  virtual void draw() = 0;
+
 
   private:
     GLuint m_vbo,m_vao;

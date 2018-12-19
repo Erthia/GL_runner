@@ -22,10 +22,11 @@ void PerspectiveShader::use()
 {
   m_program.use();
 }
-void PerspectiveShader::setViewMatrix(const glm::mat4 &sceneModel)
+void PerspectiveShader::setViewMatrix(const glm::mat4 &sceneModel, const glm::mat4 &projection)
 {
 //  m_projectionMatrix = projection;
   m_modelviewMatrix = sceneModel;
+  m_modelprojMatrix = projection;
 }
 
 void PerspectiveShader::setUniformMatrix() const
@@ -34,7 +35,7 @@ void PerspectiveShader::setUniformMatrix() const
   glm::mat4 projMatrix,MVMatrix,NormalMatrix;
   float a = 800.0/600.0;
   projMatrix = glm::perspective(glm::radians(70.f),a,0.1f,100.f);
-  MVMatrix = glm::translate(glm::mat4(1.0),glm::vec3(0.0,0.0,-5.0));
+  MVMatrix = glm::translate(glm::mat4(1.0),glm::vec3(0.0,0.0,-5.0))*m_modelprojMatrix;
   NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
   glm::mat4 modelViewProjection = projMatrix * MVMatrix * m_modelviewMatrix;

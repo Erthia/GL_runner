@@ -3,6 +3,14 @@
 #include "Grid.hpp"
 
 namespace glimac {
+
+  void Grid::draw()
+  {
+    glBindVertexArray(m_vao);
+        glDrawArrays(GL_LINES,0,m_nVertexCount);
+    glBindVertexArray(0);
+  }
+
   void Grid::build()
   {
     ShapeVertex vertex;
@@ -44,7 +52,7 @@ namespace glimac {
     }
 
     vboManager(m_vbo);
-    vaoManager(m_vao,m_vbo);  
+    vaoManager(m_vao,m_vbo);
   }
 
   void Grid::vboManager(GLuint &vbo)

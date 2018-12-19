@@ -17,8 +17,8 @@
 #include <fstream>
 #include "AppManager.hpp"
 #include "Menu.hpp"
-#include "drawObject.hpp"
 #include "perspectiveShader.hpp"
+#include "Grid.hpp"
 
 AppManager::AppManager()
 {}
@@ -93,8 +93,9 @@ int AppManager::start(char** argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
+
         shaderRed.use();
-        shaderRed.setViewMatrix(glm::mat4(1.0));
+        shaderRed.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shaderRed.setUniformMatrix();
 
         menu.displayMenu();
@@ -136,21 +137,24 @@ int AppManager::start(char** argv)
 
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+          glm::mat4 projection = glm::translate(glm::mat4(1),glm::vec3(1,0,0));
+
           shader3D.use();
-          shader3D.setViewMatrix(camera.getViewMatrix());
+          shader3D.setViewMatrix(camera.getViewMatrix(),projection);
           shader3D.setUniformMatrix();
 
-          draw3DObject(cube.getVao(),cube.getVertexCount());
+          cube.draw();
 
 
 /***** UTILITAIRE **********************************************************/
-          glBindVertexArray(landmark.getVao());
-              glDrawArrays(GL_LINES,0,landmark.getVertexCount());
-          glBindVertexArray(0);
 
-          glBindVertexArray(grid.getVao());
-              glDrawArrays(GL_LINES,0,grid.getVertexCount());
-          glBindVertexArray(0);
+          shader3D.setViewMatrix(camera.getViewMatrix(),glm::mat4(1.0));
+          shader3D.setUniformMatrix();
+
+          landmark.draw();
+          grid.draw();
+
+
 
 /**************************************************************************/
 

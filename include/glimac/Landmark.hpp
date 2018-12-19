@@ -41,6 +41,8 @@ public:
 		return m_vao;
 	}
 
+	void draw();
+
 private:
 
 	GLuint m_vbo,m_vao;
