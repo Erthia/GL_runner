@@ -53,6 +53,11 @@ class PrintableElement
   /// \brief method to test the value of PrintableElement's attributes
   virtual void printElement() const;
 
+ inline void description()
+  {
+    this->printElement();
+  }
+
 
   /// \brief default destructor of our PrintableElement 
   ~PrintableElement(); 

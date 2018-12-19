@@ -20,7 +20,7 @@ void Wall::printElement() const
 	PrintableElement::printElement();
 }
 
-void Wall::collide(Hero *hero) {
+void Wall::collide(Hero &hero) {
 	std::cout << "Can't walk through walls" << std::endl;
 }
 

@@ -7,6 +7,7 @@
 
 
 #include "PrintableElement.hpp"
+class Hero;
 
 class Element : public PrintableElement
 {
@@ -20,6 +21,13 @@ class Element : public PrintableElement
     Element(const glm::vec3 &position, const std::string &type); 
 
     virtual void printElement() const;
+
+    virtual void collide(Hero &hero);
+
+    inline void collision(Hero &hero)
+    {
+      this->collide(hero);
+    }
 
     /// \default destructor of our Element
     ~Element(); 

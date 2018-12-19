@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include "Character.hpp"
 
+class Element;
+
 class Hero : public Character
 {
  public:
@@ -31,6 +33,8 @@ class Hero : public Character
 	inline int getScore() const{
 		return m_score;
 	}
+
+    bool scanArray(Element (*list)[50][50], const char &movement);
 
   	private:
   	unsigned int m_score; /*!< score of Hero */
