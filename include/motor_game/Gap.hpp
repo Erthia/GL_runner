@@ -1,7 +1,11 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <iostream>
+#include <string>
 #include "Element.hpp"
-#include "Hero.hpp"
+class Hero;
 
 namespace motor_game{
     
@@ -9,19 +13,19 @@ namespace motor_game{
     {
       public:
         Gap(); 
-        /// \brief constructor
-        /// \param position, and type
+        /// brief constructor
+        /// param position, and type
         /*Gap(const glm::vec3 &position = glm::vec3(0), const std::string &type = "Gap")
             : m_position(position), m_type(type) {}*/
-        Gap(const glm::vec3 &position, const std::string &type);
+        Gap(const glm::vec3 &position, const std::string &type="Gap");
 
-        /// \brief default destructor
+        /// brief default destructor
         ~Gap() = default;
         
-        /// \brief fonction to call when a character collide the gap
-        void collide(Hero *hero);
+        /// method determining the behavior of a Gap when the player is colliding with it
+        void collide(Hero &hero);
 
-        /// \test print the gap info
+        /// brief method to display the value of Gap's attributes
         void printElement() const;
     };
 }

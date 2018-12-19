@@ -11,6 +11,7 @@
 #include "Wall.hpp"
 #include "Floor.hpp"
 #include "Obstacle.hpp"
+#include "Gap.hpp"
 #include <list>
 #include <vector>
 #include <map>
@@ -40,7 +41,7 @@ int main()
     obs.printElement();*/
 
 
-  	Character emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
+  	Hero emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
   	emilie.printElement();
    // emilie.moveLeft();
     //emilie.printElement();
@@ -53,16 +54,16 @@ int main()
   	coin1.printElement();
 
 
-  	if(emilie.checkCollision(coin1) == 1)
+  	/*if(emilie.checkCollision(coin1) == 1)
  		std::cout << "récupération coin" << std::endl;
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
 
-	if(emilie.checkCollisionMovement(coin1, 'q') == 1)
+	if(emilie.checkCollision(coin1, 'q') == 1)
     
  		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
  	else 
- 		std::cout << "pas collision" << std::endl;
+ 		std::cout << "pas collision" << std::endl;*/
 
  /* Enemy test;
   test.printElement();
@@ -89,8 +90,13 @@ vec[2][3][0] = coin1;
   listElement2[2][0][1].printElement();
   Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
   laurine.scanArray(listElement2, 'd');
- Enemy decadence;
-
+  Enemy decadence;
+  motor_game::Gap trou;
+  trou.description();
+  decadence.moveRight();
+  Obstacle ob;
+  Floor floor1;
+  floor1.description();
 
 //std::map<int, std::map< int> , std::map<int> std::map<Element>>> my_map ;
  // std::map< std::string, std::map< int, double > > my_map ;

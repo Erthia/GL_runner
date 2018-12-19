@@ -1,14 +1,11 @@
-#ifndef PPM_HPP
-#define PPM_HPP
-
 #pragma once
 
 #include <fstream>
 #include <string>
 #include <vector>
-#include "Element.hpp"
-#include "Hero.hpp"
-#include "Enemy.hpp"
+class Element;
+class Hero;
+class Enemy;
 
 namespace motor_game{
     class PPM{
@@ -75,6 +72,6 @@ namespace motor_game{
             size_t m_x;
             size_t m_y=2;
             size_t m_z;
-    }
+    };
 }
-#endif
+
