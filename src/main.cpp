@@ -107,9 +107,8 @@ END - IF YOU'RE USING GLSL VERSION 130
 ********************************/
 
 int main(int argc, char** argv) {
-
-    AppManager App;
-    App.start(argv);
+  AppManager App;
+  App.start(argv);
 
     return EXIT_SUCCESS;
 }

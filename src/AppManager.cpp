@@ -11,8 +11,6 @@
 #include <glimac/Image.hpp>
 #include <glimac/Landmark.hpp>
 #include <glimac/Grid.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
 #include <GLFW/glfw3.h>
@@ -20,6 +18,7 @@
 #include "AppManager.hpp"
 #include "Menu.hpp"
 #include "drawObject.hpp"
+#include "perspectiveShader.hpp"
 
 AppManager::AppManager()
 {}
@@ -34,7 +33,9 @@ int AppManager::start(char** argv)
 /********************************/
 
 // Initialize and Open Window
-  SDLWindowManager windowManager(800,600, "GLImac");
+  int width = 800;
+  int height = 600;
+  SDLWindowManager windowManager(width,height, "GLImac");
 
 
   // Initialize glew for OpenGL3+ support
@@ -45,20 +46,14 @@ int AppManager::start(char** argv)
   }
 
 // SHADER
-  FilePath applicationPath(argv[0]);
-  Program program1 = loadProgram("./shaders/3d.vs.glsl",
-                                "./shaders/normals.fs.glsl" );
-  program1.use();
-  GLint uModelMVMatrix = glGetUniformLocation(program1.getGLId(), "uMVMatrix");
-  GLint uModelMVPMatrix = glGetUniformLocation(program1.getGLId(), "uMVPMatrix");
-  GLint uNormalMatrix = glGetUniformLocation(program1.getGLId(), "uNormalMatrix");
+  PerspectiveShader shader3D;
+  PerspectiveShader shaderRed("./shaders/red.fs.glsl");
 
-
-
+// CAMERA
   TrackballCamera camera(0,0,0);
 
 
-
+// MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
   GLuint vbo[4];
@@ -67,6 +62,7 @@ int AppManager::start(char** argv)
   Cube cube;
   cube.vboManager(vbo[0]);
   cube.vaoManager(vao[0],vbo[0]);
+
   // Landmark
   Landmark landmark;
   landmark.vboManager(vbo[1]);
@@ -75,12 +71,13 @@ int AppManager::start(char** argv)
   Grid grid;
   grid.vboManager(vbo[2]);
   grid.vaoManager(vao[2],vbo[2]);
+
+
   // Menu
   Menu menu;
   menu.vboManager(vbo[3]);
   menu.vaoManager(vao[3],vbo[3]);
 
-  glm::mat4 projMatrix,MVMatrix,NormalMatrix;
 
   // Application loop:
 
@@ -108,16 +105,9 @@ int AppManager::start(char** argv)
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        float a = 800.0/600.0;
-
-        projMatrix = glm::perspective(glm::radians(70.f),a,0.1f,100.f);
-        MVMatrix = glm::translate(glm::mat4(1.0),glm::vec3(0.0,0.0,-5.0));
-        NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
-
-        glm::mat4 mat1 = projMatrix * MVMatrix;
-        glUniformMatrix4fv(uModelMVPMatrix,1,GL_FALSE,glm::value_ptr(mat1));
-        glUniformMatrix4fv(uModelMVMatrix,1,GL_FALSE,glm::value_ptr(MVMatrix));
-        glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
+        shaderRed.use();
+        shaderRed.setViewMatrix(glm::mat4(1.0));
+        shaderRed.setUniformMatrix();
 
         menu.displayMenu(vao[3]);
         // Update the display
@@ -161,16 +151,9 @@ int AppManager::start(char** argv)
 
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-          float a = 800.0/600.0;
-
-          projMatrix = glm::perspective(glm::radians(70.f),a,0.1f,100.f)*camera.getViewMatrix();
-          MVMatrix = glm::translate(glm::mat4(1.0),glm::vec3(0.0,0.0,-5.0))*camera.getViewMatrix();
-          NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
-
-          glm::mat4 mat1 = projMatrix * MVMatrix;
-          glUniformMatrix4fv(uModelMVPMatrix,1,GL_FALSE,glm::value_ptr(mat1));
-          glUniformMatrix4fv(uModelMVMatrix,1,GL_FALSE,glm::value_ptr(MVMatrix));
-          glUniformMatrix4fv(uNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
+          shader3D.use();
+          shader3D.setViewMatrix(camera.getViewMatrix());
+          shader3D.setUniformMatrix();
 
           draw3DObject(vao[0],cube.getVertexCount());
 
