@@ -8,7 +8,7 @@ namespace motor_game{
     PPMreader::PPMreader(const std::string &filename)
     {
         //open the file
-        std::ifstream m_ppm_1(filename.c_str(), ios::in);
+        std::ifstream m_ppm_1("elt/ppm/" + filename.c_str(), ios::in);
         std::abort(m_ppm_1.is_open());
     }
     
@@ -22,30 +22,40 @@ namespace motor_game{
         }
     }
     
-    PPM PPMreader::readFile(){
-        if(m_ppm_1.nextString() != "P3") THROW_EXCEPTION("The ppm file is not valid");
+    PPM &PPMreader::readFile(){
+        PPM ppm;
+        if(m_ppm_1.nextString() != "P3"){
+            THROW_EXCEPTION("The ppm file is not valid");
+            return ppm;
+        }
         
         // map's dimensions
-        if(m_ppm_1.eof() == true) THROW_EXCEPTION("The ppm file is not valid");
-        else m_x=m_currentStr;
+        if(m_ppm_1.eof() == true){
+            THROW_EXCEPTION("The ppm file is not valid");
+            return ppm;
+        }
+        else ppm.x()=std::stoul(m_currentStr);
         
-        if(m_ppm_1.eof() == true) THROW_EXCEPTION("The ppm file is not valid");
-        else m_z=m_currentStr;
+        if(m_ppm_1.eof() == true){
+            THROW_EXCEPTION("The ppm file is not valid");
+            return ppm;
+        }
+        else ppm.z()=std::stoul(m_currentStr);
         
         // the ppm file is supposed valid
-        PPM ppm(m_x, 2, m_z);
         
         // read colors, and create elements
-        for(size_t x=0; x<m_x; x++){
-            for(size_t z=0; z<m_z; z++){
+        for(unsigned int x=0; x<ppm.x(); x++){
+            for(unsigned int z=0; z<ppm.z(); z++){
                 m_ppm_1.nextString();
                 if( // beginning
                     (m_ppm_1.nextString()==100) &&
                     (m_ppm_1.nextString()==100) &&
                     (m_ppm_1.nextString()==100)
                 ){
-                    m_elements[x][0][z]=Floor(glm::vec3(x,0,z));
-                    m_hero.setPosition(glm::vec3(x, 0, z));
+                    m_elements[x+(0*ppm.y)+(m_x*m_y)*z]=Floor(glm::vec3(x,0,z));
+                    m_hero.setPosition(glm::vec3(x+2, 0, z));
+                    m_enemy.setPosition(glm::vec3(x, 0, z));
                 }
                 else if( // end
                     (m_ppm_1.nextString()==0) &&
