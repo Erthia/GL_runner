@@ -81,7 +81,7 @@ vec[2][3][0] = coin1;
  emilie.scanVec(listVec, 'd');
 */
 
-  PrintableElement listElement2[50][50][50];
+  Element listElement2[50][50][50];
   listElement2[2][0][1] = coin1;
   listElement2[2][0][1].printElement();
   Character laurine(glm::vec3(1, 0, 0), 0, "laurine");

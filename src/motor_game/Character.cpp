@@ -112,7 +112,7 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 		std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
 	}*/
 
-bool Character::scanArray(PrintableElement (*list)[50][50], const char &movement) {
+bool Character::scanArray(Element (*list)[50][50], const char &movement) {
 
 		/*list[x][y][z].printElement();
 		this->printElement();

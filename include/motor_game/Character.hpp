@@ -55,7 +55,7 @@ class Character : public PrintableElement
     /// \this method is activated when the player wants to move and checks if the position is available. the direction of the movement (determined by the pressed touch) is passed as a second parameter.
     void scanList(std::list<Element> &list, const char &movement);
 
-    bool scanArray(PrintableElement (*list)[50][50], const char &movement);
+    bool scanArray(Element (*list)[50][50], const char &movement);
 
    void scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement);
 
