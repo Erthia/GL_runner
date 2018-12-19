@@ -11,10 +11,10 @@ namespace motor_game
     class MotorGame{
         public :
             // CONSTRUCTOR - DESTRUCTOR
-            /// brief constructor
+            /// \brief constructor
             MotorGame(const PPM &ppm);
 
-            /// brief destructor
+            /// \brief destructor
             ~MotorGame = default;
             
             /// no default constructors
@@ -23,7 +23,7 @@ namespace motor_game
             MotorGame &operator=(const MotorGame &mGame) = delete;
             
             
-            /// brief game loop
+            /// \brief game loop
             void playGame();
         
         private :

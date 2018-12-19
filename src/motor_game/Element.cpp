@@ -16,7 +16,6 @@ Element::~Element()
 void Element::printElement() const {
 	std::cout << "\nELEMENT INFORMATION :" << std::endl;
 	PrintableElement::printElement();
-
 }
 
 void Element::collide(Hero &hero){

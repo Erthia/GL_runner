@@ -11,73 +11,52 @@
  #include "Map.hpp"
  #include "Wall.hpp"
  #include "Coin.hpp"
+ #include "Element.hpp"
  
  int main(){
-     //tests
-     /*
-     try{
-         if(true) THROW_EXCEPTION("Exception lancée !");
-     }
-     catch(const std::exception &e){
-         std::cerr << e.what() << std::endl;
-     }
- 
-     Hero milie;
-     milie.setPosition(glm::vec3(1,1,1));
- 
-     milie.printElement();
- 
-     motor_game::End fiiin;
-     motor_game::End fin(glm::vec3(1,1,2));
-     fin.collide(milie);
-     fin.printElement();
- 
-     std::cout << "\nTest GAP" << std::endl;
-     motor_game::Gap gap(glm::vec3(1,2,3), "gap");
-     gap.collide(&milie);
-     gap.printElement();
-     
-     */
-     //test PPM and PPM reader class
-     /*
-     PPMreader readerDeLaMort("level_01_ASCII.ppm");
-     PPM amazingPPM = readerDeLaMort.readFile();
-     
-     Hero milie=amazingPPM.hero();
-     milie.printElement();
-     
-     Enemy laurine=amazingPPM.enemy();
-     enemy.printElement();
-     
-     Element[][][] listKK=amazingPPM.elements();
-     for(unsigned int i=0; i<amazingPPM.x(); i++){
-        for(unsigned int j=0; j<amazingPPM.y(); j++){
-            for(unsigned int k=0; k<amazingPPM.z(); k++){
-                listKK[i][j][k].printElement;
-            }
-        }
-    }
-    */
     //test Map class
-    motor_game::Map map_1;
-    motor_game::Map map_2(50, 2, 50);
-    motor_game::Map map_3(map_2);
-    motor_game::Map map_4 = map_2;
-    map_1.x()=10;
-    map_1.y()=20;
-    map_1.z()=12;
+    std::cout << "TEST MAP CLASS" << std::endl;
+    
+    motor_game::Map map_2(3, 50, 5);
+    motor_game::Map map_1 = map_2;
     
     std::cout << "map_1.x() : " << map_1.x() << std::endl;
     std::cout << "map_1.y() : " << map_1.y() << std::endl;
     std::cout << "map_1.z() : " << map_1.z() << std::endl;
     
-    Wall milie(glm::vec3(0,1,2));
-    Coin laurine(glm::vec3(9,19,11), 100);
-    map_1.element(0,1,2)=milie;
-    map_1.element(9, 19, 11)=laurine;
+    Wall *milie = new Wall(glm::vec3(0,1,2));
+    Coin *laurine = new Coin(glm::vec3(2,49,4), 100);
     
-    map_1.element(0,1,2).printElement;
-    map_1.element(9, 19, 11).printElement;
+    std::cout << "Yo !" << std::endl;
+    
+    map_2.element(0,1,2,milie);
+    std::cout << "YoYo !" << std::endl;
+    map_2.element(0,1,2)->description();
+   
+    map_2.element(2, 49, 4,laurine);
+    map_2.element(2, 49, 4)->description();
+    
+    //test PPM class
+    std::cout << "TEST PPM CLASS" << std::endl;
+    
+    motor_game::PPMreader theReader("level_01_ASCII.ppm");
+    try{
+        motor_game::PPM ppmCool=theReader.readFile();
+    }
+    catch(const std::exception &e){
+        std::cerr << e.what() << std::endl;
+    }
+    
+    for(unsigned int i=0; i<ppmCool.x(); i++){
+        for(unsigned int j=0; j<ppmCool.y(); j++){
+            for(unsigned int k=0; k<ppmCool.z(); k++){
+                ppmCool.element(i, j, k)->description();
+            }
+        }
+    }
+    
+    
+    
  
-     return 0;
- }
+    return 0;
+}
