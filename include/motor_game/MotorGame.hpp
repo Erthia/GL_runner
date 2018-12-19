@@ -3,6 +3,10 @@
 
 #pragma once
 
+#include "Map.hpp"
+#include "Hero.hpp"
+#include "Enemy.hpp"
+
 namespace motor_game
 {
     /// \class MotorGame
@@ -25,12 +29,9 @@ namespace motor_game
         
         private :
             // ATTRIBUTE
-            Element[][][] m_elements; /*!< contains all the Elements, except the hero and the ennemy */
+            Map m_map;
             Hero m_hero; /*!< the hero */
             Enemy m_enemy; /*!< the ennemy */
-            size_t m_x; /*!< x-size of the map */
-            size_t m_y = 2; /*!< y-size of the map */
-            size_t m_z; /*!< z-size of the map */
     };
 }
 #endif

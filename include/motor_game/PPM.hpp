@@ -9,9 +9,10 @@
 #include "Element.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
+#include "Map.hpp"
 
 namespace motor_game{
-    
+    /*
     class PPMreader{
         public:
             /// \brief constructor
@@ -42,12 +43,12 @@ namespace motor_game{
             PPM() = default;
             
             /// \brief getter : Element vector of the level
-            inline const glm::vec<Element> elements() const{
+            inline const glm::vector<Element> elements() const{
                 return m_elements;
             }
             
             /// \brief setter : Element vector of the level
-            inline glm::vec<Element> elements(){
+            inline glm::vector<Element> elements(){
                 return m_elements;
             }
             
@@ -90,18 +91,15 @@ namespace motor_game{
             inline unsigned int &z(){
                 return m_z;
             }
-            
+        
         private:
-            std::vector<Element> m_elements; /*!< elements of the setting */
-            Hero m_hero; /*!< hero, at his beginning position */
-            Enemy m_enemy; /*!< ennemy, at his beginning position */
-            unsigned int m_x=0;
-            unsigned int m_y=2;
-            unsigned int m_z=0;
+            Map m_map;
+            Hero m_hero;
+            Enemy m_enemy;
             
             
             
     };
-    
+    */
 }
 #endif

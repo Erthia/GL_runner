@@ -4,7 +4,7 @@
 #include <string>
 
 namespace motor_game{
-    
+    /*
     PPMreader::PPMreader(const std::string &filename)
     {
         //open the file
@@ -107,4 +107,5 @@ namespace motor_game{
     }
         
     }
+    */
 }
