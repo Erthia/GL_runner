@@ -22,7 +22,7 @@ class Wall : public Element
 
     /// \method to check the specific behavior if the player collides with a Coin
   	/// \takes an Hero instance as parameter. the hero doesn't die if they touches a wall, it just prevents them from moving where the wall is.
-    void collide(Hero *hero);
+    void collide(Hero &hero);
 
 
 };

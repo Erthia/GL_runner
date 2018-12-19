@@ -7,11 +7,9 @@
 #include <list>
 #include <vector>
 
-
 // héritage de class printableElement
-// besoin d'inclure element.hpp ? à vérifier
-#include "PrintableElement.hpp"
-#include "Element.hpp"
+class PrintableElement;
+class Element;
 
 class Character : public PrintableElement
 {
@@ -55,13 +53,13 @@ class Character : public PrintableElement
     /// \this method is activated when the player wants to move and checks if the position is available. the direction of the movement (determined by the pressed touch) is passed as a second parameter.
     void scanList(std::list<Element> &list, const char &movement);
 
-    bool scanArray(PrintableElement (*list)[50][50], const char &movement);
+
 
    void scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement);
 
     //const Element* scanList(const std::list<Element> &list, const char &movement);
 
-    /// \brief method to test the value of our Element's attributes: TO ERASE ????
+    /// \brief method to display the value of our Element's attributes: TO ERASE ????
     virtual void printElement() const;
 
     //////////////////////////// TO ADD : speed changer with bonus !!!! VOIR SI ON PEUT FAIRE UNE SCANLIST SANS PARAMETRE DE MOUVEMENT

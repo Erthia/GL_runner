@@ -15,6 +15,7 @@ Coin::~Coin()
 
 void Coin::collide(Hero *hero){
 	hero->setScore(this->getValue());
+	std::cout << "\nTEST COLLIDE DE MON SUPER COIIIIIIN HELLO " << std::endl;
 	// delete coin ?????
 }
 

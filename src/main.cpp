@@ -13,6 +13,9 @@
 #include "Obstacle.hpp"
 #include <list>
 #include <vector>
+#include <map>
+
+
 
 int main()
 {
@@ -81,11 +84,35 @@ vec[2][3][0] = coin1;
  emilie.scanVec(listVec, 'd');
 */
 
-  PrintableElement listElement2[50][50][50];
+  Element listElement2[50][50][50];
   listElement2[2][0][1] = coin1;
   listElement2[2][0][1].printElement();
-  Character laurine(glm::vec3(1, 0, 0), 0, "laurine");
+  Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
   laurine.scanArray(listElement2, 'd');
+ Enemy decadence;
+
+
+//std::map<int, std::map< int> , std::map<int> std::map<Element>>> my_map ;
+ // std::map< std::string, std::map< int, double > > my_map ;
+std::map< int, std::map<int, Element*>> my_map ;
+Wall *wall = new Wall(glm::vec3(0,3,1));
+
+  my_map[1][2] = wall ;
+  my_map[1][2]->description();
+  wall->description();
+  wall->collide(laurine);
+  my_map[1][2]->collision(laurine);
+
+  /*std::vector<Element*> hello;
+
+  hello.push_back(wall);
+  for(size_t i=0; i<hello.size(); ++i)
+  {
+    hello[i]->description();
+  }*/
+
+  //laurine.moveRight();
+  //coin1.collide(laurine);
 
  	//const Element* resultTest = emilie.scanList(myList, 'q');
 
