@@ -19,14 +19,9 @@ void Hero::printElement() const
 	std::cout << "Score :" << getScore() << std::endl;
 }
 
-bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
+/*bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 
-		/*list[x][y][z].printElement();
-		this->printElement();
-
-		if(checkCollision(list[x][y][z]) == true)
-				std::cout << "HALLELUJAH" << std::endl;
-		else std::cout << "LA MOOOOOOOORT PUTAIIN" << std::endl;*/
+		
 			int x=this->getX();
 			int y=this->getY();
 			int z=(this->getZ()+1);
@@ -165,7 +160,7 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 							}
 						}
 					}
-						*/
+						
 							return true;						
 				}
 				std::cout << "Can crawl" << std::endl;
@@ -174,9 +169,58 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 			
 		}
 		return false;
+	}*/
+/*
+
+bool Hero::scanArray(Map list, const char &movement) {
+
+			int x=this->getX();
+			int y=this->getY();
+			int z=(this->getZ()+1);
+			Element* tmpElt;
+			Element* tmpElt2; // second obj to test when the hero jumps (from above)
+			Hero tmpChar = *this;
+
+		switch(movement) {
+
+			case 'd' :
+				x+=1;
+				tmpElt = list(x, y, z);
+				if(tmpElt != NULL)	{
+					if(abs((this->getX()+1) - tmpElt->getX()) < 1) {
+						if(abs(this->getY()- tmpElt->getY()) < 2)
+						{
+							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
+							{
+								std::cout << "HALLELUJAH BELOW" << std::endl;
+								list(x, y, z)->collision(tmpChar);
+								return true; 
+							}
+						}
+					}
+				}
+				tmpElt2 = list(x, y+1, z);
+				if(tmpElt2 != NULL)	{
+					if(abs((this->getX()+1) - tmpElt2->getX()) < 1) {
+						if(abs(this->getY()- tmpElt2->getY()) < 2)
+						{
+							if(abs((this->getZ()+1)- tmpElt2->getZ()) < 1)
+							{
+								std::cout << "COLLIDE FROM ABOVE" << std::endl;
+								list[x][y+1][z]->collision(tmpChar);
+								return true; 
+							}
+						}
+					}
+				}
+				std::cout << "Can move" << std::endl;
+				return false;
+				break;
+			
+		}
+		return false;
 	}
 
 
-
-
+*/
 

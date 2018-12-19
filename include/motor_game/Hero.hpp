@@ -7,6 +7,7 @@
 #include "Character.hpp"
 
 #include "Element.hpp"
+#include "Map.hpp"
 
 class Hero : public Character
 {
@@ -38,6 +39,8 @@ class Hero : public Character
   /// this method checks if there is an element where the Hero wants to move
   /// then uses the collide methods to do something according to what type of element we're dealing with
     bool scanArray(Element* (*list)[50][50], const char &movement);
+
+    bool checkCollide(Map, const char &movement);
 
   	private:
   	unsigned int m_score; /*!< score of Hero */

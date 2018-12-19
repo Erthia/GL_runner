@@ -12,6 +12,7 @@
 #include "Floor.hpp"
 #include "Obstacle.hpp"
 #include "Gap.hpp"
+#include "Map.hpp"
 #include <list>
 #include <vector>
 #include <map>
@@ -20,98 +21,40 @@
 
 int main()
 {
-  
-      /*
-    Enemy singe(glm::vec3(0, 3, 5), "Enemy", 5);
-    singe.printElement();
-      User player1;
-    player1.printPlayer();
-
-    Wall p1(glm::vec3(5), "Mur");
-    p1.printElement();
-
-    Element e1(glm::vec3(5, 5, 5), "Element");
-    e1.printElement();
-
-
-    Floor floor1(glm::vec3(5), "Floor");
-    floor1.printElement();
-
-    Obstacle obs(glm::vec3(10), "Obstacle");
-    obs.printElement();*/
 
 
   	Character emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
-  	//emilie.printElement();
-   // emilie.moveLeft();
-    //emilie.printElement();
-
 
   	Wall wall1(glm::vec3(0,3,1));
    // wall1.printElement();
 
   	Coin coin1(glm::vec3(2, 0, 1), 100);
-  	//coin1.printElement();
 
-
-  	/*if(emilie.checkCollision(coin1) == 1)
- 		std::cout << "récupération coin" << std::endl;
- 	else 
- 		std::cout << "pas de coin récupéré" << std::endl;
-
-	if(emilie.checkCollision(coin1) == 1)
-    
- 		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
- 	else 
- 		std::cout << "pas collision" << std::endl;
-*/
- /* Enemy test;
-  test.printElement();
-
- 	std::list<Element> myList;
- 	myList.push_back(coin1);
- 	myList.push_back(wall1);*/
-  /*glm::tmat3x3<Element> listTest;
-  listTest[0][0][1] = coin1;*/
-
-  //std::vector<std::vector<std::vector<Element>>> listVec(1);
-  //listVec[0][1][2] = wall1;
- //listVec[0][0][0] = coin1;
-
-
-/*
-std::vector< std::vector<std::vector<Element>>> vec(4, 4, std::vector<Element>(4));
-vec[2][3][0] = coin1;
- emilie.scanVec(listVec, 'd');
-*/////
- Element list5[10][10][10];
+  Element list5[10][10][10];
  //list5[0][0][1] = coin1;
 
   Element* listElement2[50][50][50];
-  Coin *coin2= new Coin(glm::vec3(1, 1,1), 100);
+  Coin *coin2= new Coin(glm::vec3(0, 0,1), 100);
   Wall *wall3 = new Wall(glm::vec3(0, 1, 1));
   Wall *wall5 = new Wall(glm::vec3(1, 2, 1));
    Wall *wall4 = new Wall(glm::vec3(1, 1, 1));
   listElement2[1][2][1] = wall5;
   listElement2[0][1][1] = wall3;
   listElement2[1][1][1] = wall4;
-  listElement2[1][1][1] = coin2;
+  listElement2[0][0][1] = coin2;
 
   //wall3->description();
   Hero laurine(glm::vec3(2, 0, 0), 0, "laurine");
 
-  laurine.scanArray(listElement2, 'q');
+ /* laurine.scanArray(listElement2, 'q');
   laurine.moveLeft();
-  laurine.description();
-  //wall3->description();
+  laurine.description();*/
 
-  //listElement2[0][0][1]->collision(laurine);
+  motor_game::Map map_1(50, 50, 50);
+  map_1.element(0,0,1, coin2);
+  map_1.element(1, 2, 1, wall5);
+  laurine.scanArray(map_1, 'd');
 
-  //std::cout << wall5->getY()+1 << std::endl;
-
-
-    /*coin2->collision(laurine);
-  listElement2[2][0][1]->collision(laurine);*/
 
 
 //std::map<int, std::map< int> , std::map<int> std::map<Element>>> my_map ;
