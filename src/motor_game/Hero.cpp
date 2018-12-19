@@ -35,26 +35,40 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 			Hero tmpChar = *this;
 
 		switch(movement) {
+
 			case 'q' :
-			tmpElt = list[x][y][z];
-			if(tmpElt != NULL)	
-			{
-				list[x-1][y][z]->collision(tmpChar);
-				/*if(abs((this->getX()-1) - tmpElt->getX()) < 1) {
-					if(abs(this->getY()- tmpElt->getY()) < 2) 
-					{
-						if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
+				x-=1;
+				tmpElt = list[x][y][z];
+				if(tmpElt != NULL)	{
+					if(abs((this->getX()-1) - tmpElt->getX()) < 1) {
+						if(abs(this->getY()- tmpElt->getY()) < 2)
 						{
-							//list[x][y][z]->description();
-							//list[x][y][z]->collision(tmpChar);
-							return true;
+							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
+							{
+								std::cout << "HALLELUJAH LEFT" << std::endl;
+								//list[x][y][z]->collision(tmpChar);
+								return true; 
+							}
 						}
 					}
-				}	*/
-			}
-			std::cout << "Can move" << std::endl;
-			return false;
-			break;
+				}
+				tmpElt2 = list[x][y+1][z];
+				if(tmpElt2 != NULL)	{
+					if(abs((this->getX()-1) - tmpElt2->getX()) < 1) {
+						if(abs(this->getY()- tmpElt2->getY()) < 2)
+						{
+							if(abs((this->getZ()+1)- tmpElt2->getZ()) < 1)
+							{
+								std::cout << "COLLIDE LEFT" << std::endl;
+								list[x][y+1][z]->collision(tmpChar);
+								return true; 
+							}
+						}
+					}
+				}
+				std::cout << "Can move" << std::endl;
+				return false;
+				break;
 
 			case 'd' :
 				x+=1;

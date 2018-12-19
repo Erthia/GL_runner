@@ -91,14 +91,14 @@ vec[2][3][0] = coin1;
   Coin *coin2= new Coin(glm::vec3(1, 1,1), 100);
   Wall *wall3 = new Wall(glm::vec3(0, 1, 1));
   Wall *wall5 = new Wall(glm::vec3(1, 2, 1));
-   Wall *wall4 = new Wall(glm::vec3(0, 1, 1));
+   Wall *wall4 = new Wall(glm::vec3(1, 1, 1));
   listElement2[1][2][1] = wall5;
   listElement2[0][1][1] = wall3;
-  listElement2[0][1][1] = wall4;
+  listElement2[1][1][1] = wall4;
   listElement2[1][1][1] = coin2;
 
   //wall3->description();
-  Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
+  Hero laurine(glm::vec3(2, 0, 0), 0, "laurine");
 
   laurine.scanArray(listElement2, 'q');
   laurine.moveLeft();
