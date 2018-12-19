@@ -59,56 +59,8 @@ bool Character::checkCollision(const PrintableElement &b)
 			if(abs((this->getZ())- b.getZ()) < 1)
 				return true;
 	return false;
-}
-/*
-bool Character::checkCollisionMovement(const PrintableElement &b, const char &movement){
-	switch(movement) {
-		case 'q' : 
-			if(abs((this->getX()-1) - b.getX()) < 1) 
-				if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
-					if(abs((this->getZ()+1)- b.getZ()) < 1)
-						return true;
-			return false;
-			break;
-		case 'd' : 
-			if(abs((this->getX()+1) - b.getX()) < 1) 
-				if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
-					if(abs((this->getZ()+1)- b.getZ()) < 1)
-						return true;
-			return false;
-			break;
-		case 'z' :
-			if(abs(this->getX() - b.getX()) < 1) 
-				if(abs((this->getY()+1)- b.getY()) < 2) /// \our character's heighth is two
-					if(abs((this->getZ()+1)- b.getZ()) < 1)
-						return true;
-			return false;
 
-		case 's' :
-			if(abs(this->getX() - b.getX()) < 1) 
-				if(abs(this->getY()- b.getY()) < 1) /// \our character's heighth is two
-					if(abs((this->getZ()+1)- b.getZ()) < 1)
-						return true;
-			return false;
-			break;  
-	}
-		return false;
 }
 
-void Character::scanList(std::list<Element> &list, const char &movement){
-	std::list<Element>::iterator it;
-	for (std::list<Element>::iterator it = list.begin(); it != list.end(); ++it){
-	    if(checkCollisionMovement(*it, movement) == true || checkCollision(*it) == true){
-	    	//return &(*it); appelle collide(this, *it, movement) de *it
-	    	//(*it).collide(this); /// \problem : parameter must be a user and not a character 
-	    	std::cout << "ok" << std::endl;
-	    }
-	    	
-	}
 
-}*/
-
-/*
-			if(checkCollisionMovement(list[x-1][y][z+1], movement) == true)
-				std::cout << "Collision scanArray !" << std::endl;*/
 // gauche/droite : x, haut : y, profondeur : z
