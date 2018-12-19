@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include "Character.hpp"
 
-class Element;
+#include "Element.hpp"
 
 class Hero : public Character
 {

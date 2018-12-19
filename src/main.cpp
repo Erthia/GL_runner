@@ -41,7 +41,7 @@ int main()
     obs.printElement();*/
 
 
-  	Hero emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
+  	Character emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
   	emilie.printElement();
    // emilie.moveLeft();
     //emilie.printElement();
@@ -54,16 +54,16 @@ int main()
   	coin1.printElement();
 
 
-  	/*if(emilie.checkCollision(coin1) == 1)
+  	if(emilie.checkCollision(coin1) == 1)
  		std::cout << "récupération coin" << std::endl;
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
 
-	if(emilie.checkCollision(coin1, 'q') == 1)
+	if(emilie.checkCollision(coin1) == 1)
     
  		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
  	else 
- 		std::cout << "pas collision" << std::endl;*/
+ 		std::cout << "pas collision" << std::endl;
 
  /* Enemy test;
   test.printElement();
