@@ -1,23 +1,33 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#pragma once
-
-#include "Character.hpp"
+class Character;
 
 class Enemy : public Character
 {
   public:
+ 	/// \default constructor of class Enemy
+    Enemy();
 
-    Enemy(); /// default constructor
+	/// \constructor with parameters
+    /// \param type : enemy by default
     Enemy(const glm::vec3 &position, const unsigned int &speed, const std::string &type="Enemy"); /// constructor with parameters
+
+    // A VOIR SI ON GARDE : fonction appelée dans la fonction collide ???
     void killHero();
    
-
+    /// \method determining the behavior of an Enemy when the player is colliding with it
+    void collide(Hero &hero);
+            
+    /// \brief method to display the value of Enemy's attributes
     void printElement() const;
-    ~Enemy(); /// default destructor
+
+	/// \default destructor of our Enemy
+    ~Enemy(); 
 
 
   protected:

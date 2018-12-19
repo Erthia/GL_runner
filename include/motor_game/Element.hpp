@@ -5,8 +5,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-
-#include "PrintableElement.hpp"
+class PrintableElement;
 class Hero;
 
 class Element : public PrintableElement
@@ -20,10 +19,13 @@ class Element : public PrintableElement
     /// \param type : a string which will allow us to know what kind of Element we're dealing with
     Element(const glm::vec3 &position, const std::string &type); 
 
+    /// \brief method to display the value of Element's attributes
     virtual void printElement() const;
 
+    /// \method determining the behavior of an Element when the player is colliding with it
     virtual void collide(Hero &hero);
 
+    /// \brief method to implement the polymorphism of the collide method for different inherited Element classes
     inline void collision(Hero &hero)
     {
       this->collide(hero);
@@ -31,8 +33,5 @@ class Element : public PrintableElement
 
     /// \default destructor of our Element
     ~Element(); 
-
-
-  protected:
 
 };
