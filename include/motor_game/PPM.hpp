@@ -96,5 +96,6 @@ namespace motor_game{
             Hero m_hero;
             Enemy m_enemy;
     };
+    */
 }
 
