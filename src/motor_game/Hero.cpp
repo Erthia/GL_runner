@@ -19,7 +19,7 @@ void Hero::printElement() const
 	std::cout << "Score :" << getScore() << std::endl;
 }
 
-bool Hero::scanArray(Element (*list)[50][50], const char &movement) {
+bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 
 		/*list[x][y][z].printElement();
 		this->printElement();
@@ -30,22 +30,22 @@ bool Hero::scanArray(Element (*list)[50][50], const char &movement) {
 			int x=this->getX();
 			int y=this->getY();
 			int z=this->getZ()+1;
-			PrintableElement tmpElt;
+			PrintableElement* tmpElt;
 			Hero tmpChar = *this;
-			list[x-1][y][z].collide(tmpChar);
+			//list[x-1][y][z]->collide(tmpChar);
 
 		switch(movement) {
 			case 'q' :
 			x-=1;
 			tmpElt = list[x][y][z];
-			list[x][y][z].printElement();
-			if(abs((this->getX()-1) - tmpElt.getX()) < 1) {
-				if(abs(this->getY()- tmpElt.getY()) < 2) /// \our character's heighth is two
+			list[x][y][z]->printElement();
+			if(abs((this->getX()-1) - tmpElt->getX()) < 1) {
+				if(abs(this->getY()- tmpElt->getY()) < 2) /// \our character's heighth is two
 				{
-					if(abs((this->getZ()+1)- tmpElt.getZ()) < 1)
+					if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 					{
-						std::cout << "HALLELUJAH" << std::endl;
-						list[x][y][z].collide(tmpChar);
+						//std::cout << "HALLELUJAH" << std::endl;
+						list[x][y][z]->collision(tmpChar);
 						return true;
 					}}}
 			else {
@@ -59,13 +59,34 @@ bool Hero::scanArray(Element (*list)[50][50], const char &movement) {
 			case 'd' :
 			x+=1;
 				tmpElt = list[x][y][z];
-				if(abs((this->getX()+1) - tmpElt.getX()) < 1) {
-					if(abs(this->getY()- tmpElt.getY()) < 2) /// \our character's heighth is two
+				if(abs((this->getX()+1) - tmpElt->getX()) < 1) {
+					if(abs(this->getY()- tmpElt->getY()) < 2) /// \our character's heighth is two
 					{
-						if(abs((this->getZ()+1)- tmpElt.getZ()) < 1)
+						if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 						{
 							std::cout << "HALLELUJAH" << std::endl;
+							//list[x][y][z]->collision(tmpChar);
 							return true;
+
+						}}}
+				else {
+					std::cout << "BOOOOOUH" << std::endl;
+					return false;
+				}
+				break;
+
+			case 'z' :
+			z+=1;
+				tmpElt = list[x][y][z];
+				if(abs((this->getX()+1) - tmpElt->getX()) < 1) {
+					if(abs(this->getY()- tmpElt->getY()) < 2) /// \our character's heighth is two
+					{
+						if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
+						{
+							std::cout << "HALLELUJAH" << std::endl;
+							//list[x][y][z]->collision(tmpChar);
+							return true;
+
 						}}}
 				else {
 					std::cout << "BOOOOOUH" << std::endl;

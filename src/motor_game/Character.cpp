@@ -50,7 +50,7 @@ void Character::down()
 	std::cout << m_type << " crawled." << std::endl;
 	m_position.y -= 0.5; // ???????
 }
-/*
+
 
 bool Character::checkCollision(const PrintableElement &b)
 {
@@ -60,7 +60,7 @@ bool Character::checkCollision(const PrintableElement &b)
 				return true;
 	return false;
 }
-
+/*
 bool Character::checkCollisionMovement(const PrintableElement &b, const char &movement){
 	switch(movement) {
 		case 'q' : 
@@ -107,63 +107,6 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 	}
 
 }*/
-
-/*void Character::scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement) {
-		std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
-	}*/
-/*
-bool Character::scanArray(Element (*list)[50][50], const char &movement) {
-
-			int x=this->getX();
-			int y=this->getY();
-			int z=this->getZ()+1;
-			PrintableElement tmpElt;
-			Hero tmpChar = *this;
-			list[x-1][y][z].collide(tmpChar);
-
-		switch(movement) {
-			case 'q' :
-			x-=1;
-			tmpElt = list[x][y][z];
-			list[x][y][z].printElement();
-			if(abs((this->getX()-1) - tmpElt.getX()) < 1) {
-				if(abs(this->getY()- tmpElt.getY()) < 2) /// \our character's heighth is two
-				{
-					if(abs((this->getZ()+1)- tmpElt.getZ()) < 1)
-					{
-						std::cout << "HALLELUJAH" << std::endl;
-						list[x][y][z].collide(tmpChar);
-						return true;
-					}}}
-			else {
-				std::cout << "BOOOOOUH" << std::endl;
-				return false;
-			}
-			break;
-			
-			case 'd' :
-			x+=1;
-				tmpElt = list[x][y][z];
-				if(abs((this->getX()+1) - tmpElt.getX()) < 1) {
-					if(abs(this->getY()- tmpElt.getY()) < 2) /// \our character's heighth is two
-					{
-						if(abs((this->getZ()+1)- tmpElt.getZ()) < 1)
-						{
-							std::cout << "HALLELUJAH" << std::endl;
-							return true;
-						}}}
-				else {
-					std::cout << "BOOOOOUH" << std::endl;
-					return false;
-				}
-				break;
-			
-		}
-		return false;
-
-		//list[x][y][z+1]
-		//std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
-	}*/
 
 /*
 			if(checkCollisionMovement(list[x-1][y][z+1], movement) == true)

@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include "Character.hpp"
 
-class Element;
+#include "Element.hpp"
 
 class Hero : public Character
 {
@@ -37,7 +37,7 @@ class Hero : public Character
   /// method called when the hero tries to move
   /// this method checks if there is an element where the Hero wants to move
   /// then uses the collide methods to do something according to what type of element we're dealing with
-    bool scanArray(Element (*list)[50][50], const char &movement);
+    bool scanArray(Element* (*list)[50][50], const char &movement);
 
   	private:
   	unsigned int m_score; /*!< score of Hero */

@@ -41,7 +41,7 @@ int main()
     obs.printElement();*/
 
 
-  	Hero emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
+  	Character emilie(glm::vec3(1, 0, 0), 0.000001, "emilie");
   	emilie.printElement();
    // emilie.moveLeft();
     //emilie.printElement();
@@ -54,16 +54,16 @@ int main()
   	coin1.printElement();
 
 
-  	/*if(emilie.checkCollision(coin1) == 1)
+  	if(emilie.checkCollision(coin1) == 1)
  		std::cout << "récupération coin" << std::endl;
  	else 
  		std::cout << "pas de coin récupéré" << std::endl;
 
-	if(emilie.checkCollision(coin1, 'q') == 1)
+	if(emilie.checkCollision(coin1) == 1)
     
  		std::cout << "collision coin YYYYYYYYYYYES" << std::endl;
  	else 
- 		std::cout << "pas collision" << std::endl;*/
+ 		std::cout << "pas collision" << std::endl;
 
  /* Enemy test;
   test.printElement();
@@ -84,30 +84,31 @@ std::vector< std::vector<std::vector<Element>>> vec(4, 4, std::vector<Element>(4
 vec[2][3][0] = coin1;
  emilie.scanVec(listVec, 'd');
 */
+ Element list5[1][1][1];
+ list5[0][0][1] = coin1;
+ 
 
-  Element listElement2[50][50][50];
-  listElement2[2][0][1] = coin1;
-  listElement2[2][0][1].printElement();
+  Element* listElement2[50][50][50];
+  Coin *coin2= new Coin(glm::vec3(2, 0,1), 100);
+  //listElement2[2][0][1] = coin1;
+  listElement2[2][0][1] = coin2;
+  listElement2[2][0][1]->printElement();
   Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
   laurine.scanArray(listElement2, 'd');
-  Enemy decadence;
-  motor_game::Gap trou;
-  trou.description();
-  decadence.moveRight();
-  Obstacle ob;
-  Floor floor1;
-  floor1.description();
+  /*coin2->collision(laurine);
+  listElement2[2][0][1]->collision(laurine);*/
+
 
 //std::map<int, std::map< int> , std::map<int> std::map<Element>>> my_map ;
  // std::map< std::string, std::map< int, double > > my_map ;
-std::map< int, std::map<int, Element*>> my_map ;
+/*std::map< int, std::map<int, Element*>> my_map ;
 Wall *wall = new Wall(glm::vec3(0,3,1));
 
   my_map[1][2] = wall ;
   my_map[1][2]->description();
   wall->description();
   wall->collide(laurine);
-  my_map[1][2]->collision(laurine);
+  my_map[1][2]->collision(laurine);*/
 
   /*std::vector<Element*> hello;
 
