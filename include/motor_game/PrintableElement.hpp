@@ -50,10 +50,11 @@ class PrintableElement
       return m_type;
   }
     
-  /// \brief method to test the value of PrintableElement's attributes
+  /// \brief method to display the value of PrintableElement's attributes
   virtual void printElement() const;
 
- inline void description()
+  /// brief method to implement the polymorphism of the printElement method for different inherited PrintableElement classes
+  inline void description()
   {
     this->printElement();
   }

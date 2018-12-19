@@ -13,8 +13,8 @@ Coin::Coin(const glm::vec3 &position, const unsigned int &value, const std::stri
 Coin::~Coin()
 {}
 
-void Coin::collide(Hero *hero){
-	hero->setScore(this->getValue());
+void Coin::collide(Hero &hero){
+	hero.setScore(this->getValue());
 	std::cout << "\nTEST COLLIDE DE MON SUPER COIIIIIIN HELLO " << std::endl;
 	// delete coin ?????
 }

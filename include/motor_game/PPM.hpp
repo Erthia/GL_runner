@@ -1,11 +1,9 @@
-#ifndef PPM_HPP
-#define PPM_HPP
-
 #pragma once
 
 #include <fstream>
 #include <string>
 #include <vector>
+
 #include "Element.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
@@ -92,11 +90,11 @@ namespace motor_game{
                 return m_z;
             }
         
+
         private:
             Map m_map;
             Hero m_hero;
             Enemy m_enemy;
     };
-    */
 }
-#endif
+

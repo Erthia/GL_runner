@@ -50,7 +50,7 @@ void Character::down()
 	std::cout << m_type << " crawled." << std::endl;
 	m_position.y -= 0.5; // ???????
 }
-
+/*
 
 bool Character::checkCollision(const PrintableElement &b)
 {
@@ -106,7 +106,7 @@ void Character::scanList(std::list<Element> &list, const char &movement){
 	    	
 	}
 
-}
+}*/
 
 /*void Character::scanVec(std::vector<std::vector<std::vector<Element>>> &vecList, const char &movement) {
 		std::cout << "NON AU DEPLACEMENT A DROITE" << std::endl;
