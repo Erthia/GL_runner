@@ -88,22 +88,21 @@ vec[2][3][0] = coin1;
  //list5[0][0][1] = coin1;
 
   Element* listElement2[50][50][50];
-  Coin *coin2= new Coin(glm::vec3(2, 0,5), 100);
-  Wall *wall3 = new Wall(glm::vec3(0, 2, 1));
-  Wall *wall5 = new Wall(glm::vec3(1, 0, 1));
+  Coin *coin2= new Coin(glm::vec3(0, 2,1), 100);
+  Wall *wall3 = new Wall(glm::vec3(0, 1, 1));
+  Wall *wall5 = new Wall(glm::vec3(1, 2, 1));
    Wall *wall4 = new Wall(glm::vec3(1, 0, 1));
-  listElement2[0][0][1] = wall5;
-  listElement2[1][2][1] = wall3;
+  listElement2[1][2][1] = wall5;
+  listElement2[0][1][1] = wall3;
   listElement2[1][0][1] = wall4;
+  listElement2[0][2][1] = coin2;
 
-  //listElement2[2][0][1] = coin1;
-  listElement2[2][0][1] = coin2;
   //wall3->description();
-  Hero laurine(glm::vec3(0, 0, 0), 0, "laurine");
+  Hero laurine(glm::vec3(0, 2, 0), 0, "laurine");
 
-  laurine.scanArray(listElement2, 'd');
-  laurine.moveRight();
-      laurine.description();
+  laurine.scanArray(listElement2, 'z');
+  laurine.up();
+  laurine.description();
   //wall3->description();
 
   //listElement2[0][0][1]->collision(laurine);

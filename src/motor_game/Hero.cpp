@@ -30,7 +30,8 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 			int x=this->getX();
 			int y=this->getY();
 			int z=(this->getZ()+1);
-			PrintableElement* tmpElt;
+			Element* tmpElt;
+			Element* tmpElt2; // second obj to test when the hero jumps (from above)
 			Hero tmpChar = *this;
 
 		switch(movement) {
@@ -40,11 +41,10 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 			if(tmpElt != NULL)	
 			{
 				if(abs((this->getX()-1) - tmpElt->getX()) < 1) {
-					if(abs(this->getY()- tmpElt->getY()) < 2) /// \our character's heighth is two
+					if(abs(this->getY()- tmpElt->getY()) < 2) 
 					{
 						if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 						{
-							//std::cout << "HALLELUJAH" << std::endl;
 							list[x][y][z]->description();
 							list[x][y][z]->collision(tmpChar);
 							return true;
@@ -60,7 +60,7 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 				tmpElt = list[x+1][y][z];
 				if(tmpElt != NULL)	{
 					if(abs((this->getX()+1) - tmpElt->getX()) < 1) {
-						if(abs(this->getY()- tmpElt->getY()) < 2) /// \our character's heighth is two
+						if(abs(this->getY()- tmpElt->getY()) < 2)
 						{
 							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 							{
@@ -76,11 +76,13 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 				break;
 
 			case 'z' :
-				y+=1;
-				tmpElt = list[x][y][z];
+				tmpElt = list[x][y+1][z];
+				tmpElt2 = list[x][y+2][z];
+
+				// check collision from 'below'
 				if(tmpElt != NULL)	{
 					if(abs((this->getX()) - tmpElt->getX()) < 1) {
-						if(abs((this->getY()+1) - tmpElt->getY()) < 2) /// \our character's heighth is two
+						if((abs((this->getY()+1) - tmpElt->getY()) < 2))/// \our character's heighth is two
 						{
 							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 							{
@@ -92,6 +94,21 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 						}
 					}
 				}
+				// check ollision from 'above'
+				if(tmpElt2 != NULL)	{
+					if(abs((this->getX()) - tmpElt2->getX()) < 1) {
+						if((abs((this->getY()+2) - tmpElt2->getY()) < 2))
+						{
+							if(abs((this->getZ()+1)- tmpElt2->getZ()) < 1)
+							{
+								std::cout << "Can't jump" << std::endl;
+								return true;
+
+							}
+						}
+					}
+				}
+
 				std::cout << "Can move" << std::endl;
 				return false;
 				break;
