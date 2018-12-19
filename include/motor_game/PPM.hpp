@@ -25,7 +25,7 @@ namespace motor_game{
             ~PPMreader();
             
             /// \brief read the file and set the ppm
-            PPMreader &readFile();
+            PPM &readFile();
         
         private :
             // return the next valid string in the file (ie not a comment)
@@ -96,9 +96,6 @@ namespace motor_game{
             Map m_map;
             Hero m_hero;
             Enemy m_enemy;
-            
-            
-            
     };
     */
 }
