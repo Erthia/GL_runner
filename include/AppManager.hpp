@@ -19,4 +19,5 @@ public:
   int m_width = 800;
   int m_height = 600;
   std::string m_window_name = "GLrunner";
+  
 };

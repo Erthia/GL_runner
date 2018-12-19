@@ -33,12 +33,10 @@ int AppManager::start(char** argv)
 /********************************/
 
 // Initialize and Open Window
-  int width = 800;
-  int height = 600;
-  SDLWindowManager windowManager(width,height, "GLImac");
+  SDLWindowManager windowManager(m_width,m_height, "GLImac");
 
 
-  // Initialize glew for OpenGL3+ support
+// Initialize glew for OpenGL3+ support
   GLenum glewInitError = glewInit();
   if(GLEW_OK != glewInitError) {
       std::cerr << glewGetErrorString(glewInitError) << std::endl;
@@ -52,7 +50,6 @@ int AppManager::start(char** argv)
 // CAMERA
   TrackballCamera camera(0,0,0);
 
-
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
@@ -60,8 +57,7 @@ int AppManager::start(char** argv)
   GLuint vao[5];
   //  Cube
   Cube cube;
-  cube.vboManager(vbo[0]);
-  cube.vaoManager(vao[0],vbo[0]);
+
 
   // Landmark
   Landmark landmark;
@@ -91,9 +87,11 @@ int AppManager::start(char** argv)
 
             if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
-              int verify = menu.onMouseEvent(windowManager.getMousePosition());
-              if (verify == 1)
-                GAME = true;
+              if (menu.onMouseEvent(windowManager.getMousePosition()) == 1)
+              {
+                GAME = 1;
+                glUseProgram(0);
+              }
             }
 
             if(e.type == SDL_QUIT) {
@@ -105,16 +103,14 @@ int AppManager::start(char** argv)
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
         shaderRed.use();
         shaderRed.setViewMatrix(glm::mat4(1.0));
         shaderRed.setUniformMatrix();
 
         menu.displayMenu(vao[3]);
         // Update the display
-        windowManager.swapBuffers();
-
-
-
+        //windowManager.swapBuffers();
 
       }
 
@@ -128,8 +124,9 @@ int AppManager::start(char** argv)
               camera.onKeyboardEvent(e);
               if (e.key.keysym.sym  == SDLK_ESCAPE)
               {
-                GAME = false;
                 menu.setVisibility(true);
+                GAME = false; //A changer pour faie un mode popUp
+                glUseProgram(0);
               }
             }
 
@@ -155,8 +152,10 @@ int AppManager::start(char** argv)
           shader3D.setViewMatrix(camera.getViewMatrix());
           shader3D.setUniformMatrix();
 
-          draw3DObject(vao[0],cube.getVertexCount());
+          draw3DObject(cube.getVao(),cube.getVertexCount());
 
+
+/***** UTILITAIRE **********************************************************/
           glBindVertexArray(vao[1]);
               glDrawArrays(GL_LINES,0,landmark.getVertexCount());
           glBindVertexArray(0);
@@ -165,12 +164,13 @@ int AppManager::start(char** argv)
               glDrawArrays(GL_LINES,0,grid.getVertexCount());
           glBindVertexArray(0);
 
-
+/**************************************************************************/
 
           // Update the display
-          windowManager.swapBuffers();
+          //windowManager.swapBuffers();
 
         }
+        windowManager.swapBuffers();
 
       }
   return EXIT_SUCCESS;

@@ -17,29 +17,37 @@ public:
 	Cube():
 		m_nVertexCount(36)
     {
-        build(); // Construction (voir le .cpp)
+        build();
     }
 
 	// Renvoit le pointeur vers les données
-    const ShapeVertex* getDataPointer() const {
-        return &m_Vertices[0];
-    }
+	inline
+  const ShapeVertex* getDataPointer() const {
+      return &m_Vertices[0];
+  }
 
-    // Renvoit le nombre de vertex
-    GLsizei getVertexCount() const {
-        return m_nVertexCount;
-    }
+  // Renvoit le nombre de vertex
+	inline
+  GLsizei getVertexCount() const {
+      return m_nVertexCount;
+  }
 
-		void vboManager(GLuint &vbo);
-		void vaoManager(GLuint &vao,GLuint &vbo);
+	void vboManager(GLuint &vbo);
+	void vaoManager(GLuint &vao,GLuint &vbo);
 
-		
+	inline
+	GLuint getVao() const
+	{
+		return m_vao;
+	}
+
 
 private:
 
-
+	GLuint m_vbo,m_vao;
 	std::vector<ShapeVertex> m_Vertices;
   GLsizei m_nVertexCount; // Nombre de sommets
+
 
 };
 

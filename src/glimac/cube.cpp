@@ -201,6 +201,8 @@ namespace glimac {
 		vertex.position = vertex.normal;
 		m_Vertices.push_back(vertex);
 
+		vboManager(m_vbo);
+		vaoManager(m_vao,m_vbo);
 
 	}
 
