@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include "common.hpp"
 #include "Object.hpp"
@@ -39,6 +40,11 @@ public:
 	}
 
 	void draw();
+
+	void description()
+	{
+		std::cout<<"Je suis un Grid"<<std::endl;
+	}
 
 private:
 

@@ -19,6 +19,10 @@
 #include "Menu.hpp"
 #include "perspectiveShader.hpp"
 #include "Grid.hpp"
+#include "Scene.hpp"
+#include "TrackballCamera.hpp"
+
+#include <memory>
 
 AppManager::AppManager()
 {}
@@ -48,20 +52,26 @@ int AppManager::start(char** argv)
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
 
 // CAMERA
-  TrackballCamera camera(0,0,0);
+  //TrackballCamera camera(0,0,0);
+  std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
 
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
   //  Cube
-  Cube cube;
-  // Landmark
-  Landmark landmark;
-  // Grid
-  Grid grid;
+  std::unique_ptr<Cube> cube(new Cube);
+  cube->x = 5;
+  cube->y = 0;
   // Menu
   Menu menu;
 
+  std::vector<std::unique_ptr<Object>> vectorObject;
+
+  vectorObject.emplace_back(std::move(cube));
+  vectorObject.emplace_back(new Grid);
+  vectorObject.emplace_back(new Landmark);
+
+  Scene game(std::move(vectorObject),camera);
 
 
   // Application loop:
@@ -110,7 +120,7 @@ int AppManager::start(char** argv)
         while(windowManager.pollEvent(e)) {
 
             if (e.type == SDL_KEYDOWN){
-              camera.onKeyboardEvent(e);
+              camera->onKeyboardEvent(e);
               if (e.key.keysym.sym  == SDLK_ESCAPE)
               {
                 menu.setVisibility(true);
@@ -121,11 +131,11 @@ int AppManager::start(char** argv)
 
 
             if (e.button.button == SDL_BUTTON_WHEELUP || e.button.button == SDL_BUTTON_WHEELDOWN )
-              camera.onMouseWheelEvent(e);
+              camera->onMouseWheelEvent(e);
 
             if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT))
             {
-              camera.onMouseEvent(e);
+              camera->onMouseEvent(e);
             }
 
             if(e.type == SDL_QUIT) {
@@ -137,25 +147,20 @@ int AppManager::start(char** argv)
 
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-          glm::mat4 projection = glm::translate(glm::mat4(1),glm::vec3(1,0,0));
 
-          shader3D.use();
-          shader3D.setViewMatrix(camera.getViewMatrix(),projection);
-          shader3D.setUniformMatrix();
 
-          cube.draw();
+          game.loadScene();
+
 
 
 /***** UTILITAIRE **********************************************************/
-
+/*
           shader3D.setViewMatrix(camera.getViewMatrix(),glm::mat4(1.0));
           shader3D.setUniformMatrix();
 
           landmark.draw();
           grid.draw();
-
-
-
+*/
 /**************************************************************************/
 
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include "common.hpp"
 
@@ -7,9 +8,12 @@ namespace glimac{
 
   class Object
   {
-    virtual void build() = 0;
+    //virtual void build() = 0;
 
   public:
+
+    Object()
+    {}
 
     // Renvoit le pointeur vers les données
       inline
@@ -32,12 +36,20 @@ namespace glimac{
         return m_vao;
       }
 
-    //  virtual void draw() = 0;
+    virtual void draw()
+    {}
 
+/********************************************TEST********/
+    int x = 0;
+    int y = 0;
 
+/********************************************************/
   private:
+
     GLuint m_vbo,m_vao;
     std::vector<ShapeVertex> m_Vertices;
     GLsizei m_nVertexCount; // Nombre de sommets
+
+
   };
 }

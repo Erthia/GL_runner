@@ -10,7 +10,10 @@ class TrackballCamera :public Camera
 {
 public:
 
-	TrackballCamera();
+	TrackballCamera():
+		,m_fDistance(0),m_fAngleX(0),m_fAngleY(0)
+	{}
+
 	TrackballCamera(const float fDistance,const float fAngleX,const float fAngleY)
 		:m_fDistance(fDistance),m_fAngleX(fAngleX),m_fAngleY(fAngleY)
 	{}
