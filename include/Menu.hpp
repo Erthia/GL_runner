@@ -45,7 +45,7 @@ public:
   }
 
   void initMenu(GLuint &vbo,GLuint &vao);
-  void displayMenu(const GLuint &vao);
+  void displayMenu() const;
 
   // Renvoit le pointeur vers les données
   const ShapeVertex* getDataPointer() const {
@@ -65,6 +65,8 @@ public:
 private:
   bool isVisible = true;
   int m_type = 0;
+
+  GLuint m_vbo,m_vao;
   std::vector<ShapeVertex> m_Vertices;
   GLsizei m_nVertexCount = 6;
 

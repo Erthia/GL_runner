@@ -53,26 +53,15 @@ int AppManager::start(char** argv)
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
-  GLuint vbo[4];
-  GLuint vao[5];
   //  Cube
   Cube cube;
-
-
   // Landmark
   Landmark landmark;
-  landmark.vboManager(vbo[1]);
-  landmark.vaoManager(vao[1],vbo[1]);
   // Grid
   Grid grid;
-  grid.vboManager(vbo[2]);
-  grid.vaoManager(vao[2],vbo[2]);
-
-
   // Menu
   Menu menu;
-  menu.vboManager(vbo[3]);
-  menu.vaoManager(vao[3],vbo[3]);
+
 
 
   // Application loop:
@@ -108,9 +97,8 @@ int AppManager::start(char** argv)
         shaderRed.setViewMatrix(glm::mat4(1.0));
         shaderRed.setUniformMatrix();
 
-        menu.displayMenu(vao[3]);
-        // Update the display
-        //windowManager.swapBuffers();
+        menu.displayMenu();
+
 
       }
 
@@ -156,20 +144,20 @@ int AppManager::start(char** argv)
 
 
 /***** UTILITAIRE **********************************************************/
-          glBindVertexArray(vao[1]);
+          glBindVertexArray(landmark.getVao());
               glDrawArrays(GL_LINES,0,landmark.getVertexCount());
           glBindVertexArray(0);
 
-          glBindVertexArray(vao[2]);
+          glBindVertexArray(grid.getVao());
               glDrawArrays(GL_LINES,0,grid.getVertexCount());
           glBindVertexArray(0);
 
 /**************************************************************************/
 
-          // Update the display
-          //windowManager.swapBuffers();
+
 
         }
+        //Update the display
         windowManager.swapBuffers();
 
       }

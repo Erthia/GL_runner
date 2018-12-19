@@ -42,6 +42,9 @@ namespace glimac {
 
       m_nVertexCount += 2;
     }
+
+    vboManager(m_vbo);
+    vaoManager(m_vao,m_vbo);  
   }
 
   void Grid::vboManager(GLuint &vbo)

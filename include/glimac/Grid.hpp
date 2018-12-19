@@ -32,10 +32,17 @@ public:
 	void vboManager(GLuint &vbo);
 	void vaoManager(GLuint &vao,GLuint &vbo);
 
+	inline
+	GLuint getVao() const
+	{
+		return m_vao;
+	}
+
 private:
 
+	GLuint m_vbo,m_vao;
 	std::vector<ShapeVertex> m_Vertices;
-  GLsizei m_nVertexCount =0; // Nombre de sommets
+  GLsizei m_nVertexCount = 0; // Nombre de sommets
 
 };
 

@@ -1,9 +1,9 @@
 #include "Menu.hpp"
 
-void Menu::displayMenu(const GLuint&vao)
+void Menu::displayMenu() const
 {
 
-  glBindVertexArray(vao);
+  glBindVertexArray(m_vao);
     glDrawArrays(GL_TRIANGLES,0,m_nVertexCount);
   glBindVertexArray(0);
 }
@@ -74,6 +74,9 @@ void Menu::build()
   vertex.normal = glm::vec3(2,-1,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
+
+  vboManager(m_vbo);
+  vaoManager(m_vao,m_vbo);
 
 }
 
