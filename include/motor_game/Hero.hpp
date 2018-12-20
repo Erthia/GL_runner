@@ -40,9 +40,10 @@ class Hero : public Character
   /// then uses the collide methods to do something according to what type of element we're dealing with
     bool scanArray(Element* (*list)[50][50], const char &movement);
 
-    bool checkCollide(Map, const char &movement);
+    bool checkCollide(motor_game::Map &map, const char &movement);
 
   	private:
   	unsigned int m_score; /*!< score of Hero */
 
 };
+

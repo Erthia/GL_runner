@@ -19,7 +19,7 @@ void Hero::printElement() const
 	std::cout << "Score :" << getScore() << std::endl;
 }
 
-/*bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
+bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 
 		
 			int x=this->getX();
@@ -147,7 +147,7 @@ void Hero::printElement() const
 					
 					//list[x+1][y][z]->collision(tmpChar);
 					//tmpElt->description();
-					/*
+					
 					if(abs((this->getX()) - tmpElt->getX()) < 1) {
 						if(abs(this->getY()- tmpElt->getY()) < 2) 
 						{
@@ -169,37 +169,36 @@ void Hero::printElement() const
 			
 		}
 		return false;
-	}*/
-/*
+	}
 
-bool Hero::scanArray(Map list, const char &movement) {
+
+bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 
 			int x=this->getX();
 			int y=this->getY();
 			int z=(this->getZ()+1);
-			Element* tmpElt;
-			Element* tmpElt2; // second obj to test when the hero jumps (from above)
+			/*Element* tmpElt;
+			Element* tmpElt2; */ // second obj to test when the hero jumps (from above)
 			Hero tmpChar = *this;
 
 		switch(movement) {
 
-			case 'd' :
-				x+=1;
-				tmpElt = list(x, y, z);
-				if(tmpElt != NULL)	{
-					if(abs((this->getX()+1) - tmpElt->getX()) < 1) {
-						if(abs(this->getY()- tmpElt->getY()) < 2)
+			case 'q' :
+				x-=1;
+				if(map.element(x, y, z) != NULL)	{
+					if(abs((this->getX()-1) - map.element(x, y, z)->getX()) < 1) {
+						if(abs(this->getY()- map.element(x, y, z)->getY()) < 2)
 						{
-							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
+							if(abs((this->getZ()+1)- map.element(x, y, z)->getZ()) < 1)
 							{
-								std::cout << "HALLELUJAH BELOW" << std::endl;
-								list(x, y, z)->collision(tmpChar);
+								std::cout << "HALLELUJAH LEFT" << std::endl;
+								map.element(x, y, z)->collision(tmpChar);
 								return true; 
 							}
 						}
 					}
 				}
-				tmpElt2 = list(x, y+1, z);
+				/*tmpElt2 = list(x, y+1, z);
 				if(tmpElt2 != NULL)	{
 					if(abs((this->getX()+1) - tmpElt2->getX()) < 1) {
 						if(abs(this->getY()- tmpElt2->getY()) < 2)
@@ -212,7 +211,7 @@ bool Hero::scanArray(Map list, const char &movement) {
 							}
 						}
 					}
-				}
+				}*/
 				std::cout << "Can move" << std::endl;
 				return false;
 				break;
@@ -222,5 +221,4 @@ bool Hero::scanArray(Map list, const char &movement) {
 	}
 
 
-*/
 
