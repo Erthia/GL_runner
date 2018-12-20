@@ -11,7 +11,9 @@ Enemy::Enemy(const glm::vec3 &position, const unsigned int &speed, const std::st
 {}
 
 Enemy::~Enemy()
-{}
+{
+	
+}
 
 void Enemy::printElement() const {
 	std::cout << "\nENEMY INFORMATION :" << std::endl;

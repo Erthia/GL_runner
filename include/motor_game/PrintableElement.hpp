@@ -61,7 +61,7 @@ class PrintableElement
 
 
   /// \brief default destructor of our PrintableElement 
-  ~PrintableElement(); 
+  virtual ~PrintableElement() {}
 
 
   protected:

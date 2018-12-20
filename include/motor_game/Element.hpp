@@ -32,6 +32,6 @@ class Element : public PrintableElement
     }
 
     /// default destructor of our Element
-    ~Element(); 
+    virtual ~Element(){} 
 
 };

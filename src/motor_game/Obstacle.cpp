@@ -11,7 +11,9 @@ Obstacle::Obstacle(const glm::vec3 &position, const std::string &type)
 {}
 
 Obstacle::~Obstacle()
-{}
+{
+	
+}
 
 void Obstacle::printElement() const
 {

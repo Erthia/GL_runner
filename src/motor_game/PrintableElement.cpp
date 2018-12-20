@@ -10,8 +10,8 @@ PrintableElement::PrintableElement(const glm::vec3 &position, const std::string 
 :m_position(position), m_type(type)
 {}
 
-PrintableElement::~PrintableElement()
-{}
+/*PrintableElement::~PrintableElement()
+{}*/
 
 void PrintableElement::printElement() const
   {

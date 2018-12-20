@@ -12,7 +12,9 @@ Wall::Wall(const glm::vec3 &position, const std::string &type)
 
 
 Wall::~Wall()
-{}
+{
+	
+}
 
 void Wall::printElement() const
 {

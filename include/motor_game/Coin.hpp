@@ -22,8 +22,16 @@ class Coin final : public Element
     	return m_value;
     }
 
+    inline void isAlive(const bool &status)
+  {
+    m_isAlive = status;
+  }
+  inline bool getStatus() const {
+    return m_isAlive;
+  }
+
     /// default destructor of our Coin
-    virtual ~Coin(); 
+    ~Coin(); 
 
   /// brief method to display the value of Coin's attributes
 	void printElement() const;
@@ -34,5 +42,6 @@ class Coin final : public Element
 
   private:
   unsigned int m_value; /*!< value of the Coin */
+  bool m_isAlive=true; /*!< value of the Coin */
 
 };

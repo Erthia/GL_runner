@@ -10,7 +10,9 @@ Hero::Hero(const glm::vec3 &position, const unsigned int &speed, const std::stri
 {}
 
 Hero::~Hero()
-{}
+{
+
+}
 
 void Hero::printElement() const
 {
@@ -19,7 +21,6 @@ void Hero::printElement() const
 	std::cout << "Score :" << getScore() << std::endl;
 }
 
-
 bool Hero::checkCollision(const Element &b)
 {
 	if(abs(this->getX()- b.getX()) < 1) 
@@ -27,7 +28,6 @@ bool Hero::checkCollision(const Element &b)
 			if(abs((this->getZ())- b.getZ()) < 1)
 				return true;
 	return false;
-
 }
 
 
@@ -54,7 +54,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 									std::cout << "COLLISION LEFT BAS" << std::endl;
 									map.element(x, y, z)->collision(this);
 									if(map.element(x, y, z)->getType() == "Coin")
-										this->moveLeft();
+										this->moveLeft();										
 								}
 							}
 						}

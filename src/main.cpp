@@ -36,7 +36,7 @@ int main()
   listElement2[0][0][1] = coin2;*/
 
   //wall3->description();
-  Hero *laurine = new Hero(glm::vec3(1, 0, 0), 0, "laurine");
+  Hero *laurine = new Hero(glm::vec3(2, 0, 0), 0, "laurine");
 
  //laurine.scanArray(listElement2, 'q');
   //laurine.moveLeft();
@@ -46,17 +46,35 @@ int main()
   map_1.element(0,4,1, wall4);
   map_1.element(0,2,1, coin2);
   map_1.element(0, 1, 1, wall3);
-  map_1.element(1, 1, 1, coin);
+  map_1.element(1, 3, 1, coin);
   map_1.element(1, 2, 1, wall5);
   //map_1.element(1, 1, 1, obs);
 
-  laurine->checkCollide(map_1, 'z');
+  laurine->checkCollide(map_1, 'q');
   if(laurine->getStatus() == false)
   {
         std::cout << "GAME OVER" << std::endl;
         delete laurine;
+  }
 
-  } 
+  Hero *emilie= new Hero;
+  delete emilie;
+
+  Coin *coin0 = new Coin(glm::vec3(2,2,5), 100);
+
+  delete coin0;/*
+  {
+  	Obstacle *ob = new Obstacle(glm::vec3(5,5,5));
+  	map_1.element(5, 5,5, ob);
+  }
+  
+  delete map_1.element(5, 5,5);*/
+  //delete (map_1.element(5,5,5));
+
+
+  //map_1.element(5, 5,5, ob);
+  //delete map_1.element(5,5,5);
+
 
   	return 0;
 }

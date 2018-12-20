@@ -11,8 +11,8 @@ Character::Character(const glm::vec3 &position, const unsigned int &speed, const
 :PrintableElement(position, type), m_speed(speed)
 {}
 
-Character::~Character()
-{}
+/*Character::~Character()
+{}*/
 
 void Character::printElement() const
 {

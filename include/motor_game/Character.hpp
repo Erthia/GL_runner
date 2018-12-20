@@ -62,7 +62,7 @@ class Character : public PrintableElement
     //////////////////////////// TO ADD : speed changer with bonus !!!! VOIR SI ON PEUT FAIRE UNE SCANLIST SANS PARAMETRE DE MOUVEMENT
 
     /// default destructor of class character
-    ~Character(); 
+    virtual ~Character(){}
 
 
   protected:

@@ -11,7 +11,9 @@ Floor::Floor(const glm::vec3 &position, const std::string &type)
 {}
 
 Floor::~Floor()
-{}
+{
+	
+}
 
 void Floor::printElement() const
 {
