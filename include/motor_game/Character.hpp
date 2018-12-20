@@ -39,12 +39,6 @@ class Character : public PrintableElement
     /// method allowing the character to move right along the x axis
     void moveRight();
 
-
-
-    /// method checking the collision between a character instance and a printableElement instance which is passed as a parameter
-    bool checkCollision(const PrintableElement &b);
-
-
     /// method checking the collision between a character instance and a printableElement instance which is passed as a parameter
     /// this method is activated when the player wants to move and checks if the position is available. the direction of the movement (determined by the pressed touch) is passed as a second parameter.
    // bool checkCollisionMovement(const PrintableElement &b, const char &movement);
@@ -61,6 +55,9 @@ class Character : public PrintableElement
 
     /// brief method to display the value of our Element's attributes: TO ERASE ????
     virtual void printElement() const;
+
+    /// to use in case we turn all movement methods into virtual ones : see how we'll handle enemy deplacement
+    void move(const char &movement);
 
     //////////////////////////// TO ADD : speed changer with bonus !!!! VOIR SI ON PEUT FAIRE UNE SCANLIST SANS PARAMETRE DE MOUVEMENT
 

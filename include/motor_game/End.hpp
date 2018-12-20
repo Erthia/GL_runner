@@ -18,7 +18,7 @@ namespace motor_game{
                 : Element(position, type) {}
 
             /// method to determine the behavior of an End when the player is colliding with it
-            void collide(Hero &hero);
+            void collide(Hero *hero);
             
             /// brief method to display the value of End's attributes
             void printElement() const;

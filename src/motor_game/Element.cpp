@@ -18,7 +18,7 @@ void Element::printElement() const {
 	PrintableElement::printElement();
 }
 
-void Element::collide(Hero &hero){
+void Element::collide(Hero *hero){
 	std::cout << "\nTEST COLLIDE HELLO element :(" << std::endl;
 }
 

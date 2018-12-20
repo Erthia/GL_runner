@@ -23,7 +23,7 @@ namespace motor_game{
         ~Gap() = default;
         
         /// method determining the behavior of a Gap when the player is colliding with it
-        void collide(Hero &hero);
+        void collide(Hero *hero);
 
         /// brief method to display the value of Gap's attributes
         void printElement() const;

@@ -7,6 +7,7 @@
 #include "Character.hpp"
 
 #include "Element.hpp"
+#include "Map.hpp"
 
 class Hero : public Character
 {
@@ -39,7 +40,13 @@ class Hero : public Character
   /// then uses the collide methods to do something according to what type of element we're dealing with
     bool scanArray(Element* (*list)[50][50], const char &movement);
 
+    /// method checking the collision between a character instance and a printableElement instance which is passed as a parameter
+    bool checkCollision(const Element &b);
+
+    bool checkCollide(motor_game::Map &map, const char &movement);
+
   	private:
   	unsigned int m_score; /*!< score of Hero */
 
 };
+

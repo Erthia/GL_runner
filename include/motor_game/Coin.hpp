@@ -23,14 +23,14 @@ class Coin : public Element
     }
 
     /// default destructor of our Coin
-    ~Coin(); 
+    virtual ~Coin(); 
 
   /// brief method to display the value of Coin's attributes
 	void printElement() const;
 
   /// method to check the specific behavior if the player collides with a Coin
   /// takes an Hero instance as parameter and increments their score with the value of the Coin
-	void collide(Hero &hero);
+	void collide(Hero *hero);
 
   private:
   unsigned int m_value; /*!< value of the Coin */
