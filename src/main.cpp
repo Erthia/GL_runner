@@ -24,7 +24,7 @@ int main()
 
 
   //Element* listElement2[50][50][50];
-  Coin *coin2= new Coin(glm::vec3(0, 0,1), 100);
+  Coin *coin2= new Coin(glm::vec3(0, 2,1), 100);
   Wall *wall4 = new Wall(glm::vec3(0, 1, 1));
   Wall *wall3 = new Wall(glm::vec3(1, 0, 1));
   Wall *wall5 = new Wall(glm::vec3(1, 2, 1));
@@ -35,22 +35,22 @@ int main()
   listElement2[0][0][1] = coin2;*/
 
   //wall3->description();
-  Hero laurine(glm::vec3(1, 0, 0), 0, "laurine");
+  Hero laurine(glm::vec3(0, 0, 0), 0, "laurine");
 
  //laurine.scanArray(listElement2, 'q');
-  laurine.moveLeft();
+  //laurine.moveLeft();
   laurine.description();
 
 
 
   motor_game::Map map_1(50, 50, 50);
   map_1.element(0,1,1, wall4);
-  map_1.element(0,0,1, coin2);
+  map_1.element(0,2,1, coin2);
   map_1.element(1, 0, 1, wall3);
   map_1.element(1, 1, 1, coin);
   map_1.element(1, 2, 1, wall5);
 
-  laurine.checkCollide(map_1, 'd');
+  laurine.checkCollide(map_1, 'z');
 
 //std::map<int, std::map< int> , std::map<int> std::map<Element>>> my_map ;
  // std::map< std::string, std::map< int, double > > my_map ;

@@ -182,7 +182,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 			// move to the left
 			case 'q' :
 				x-=1;
-				// we ave to think about the fact that the hero is of height 2, so we have to check the collision from the lowest and highest y coordinates of our hero in case he collides two elements at the same time
+				// we have to think about the fact that the hero is of height 2, so we have to check the collision from the lowest and highest y coordinates of our hero in case he collides two elements at the same time
 				if(map.element(x, y, z) != nullptr || map.element(x, y+1, z) != nullptr){
 
 					// test lowest y coordinate
@@ -219,6 +219,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 				break;
 
 			case 'd' :
+				// move to the right
 				x+=1;
 				if(map.element(x, y, z) != nullptr || map.element(x, y+1, z) != nullptr){
 					if(map.element(x, y, z) != nullptr)	{
@@ -251,6 +252,41 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 				std::cout << "Can move" << std::endl;
 				return false;
 				break;
+
+			case 'z' :
+					if(map.element(x, y+1, z) != nullptr || map.element(x, y+2, z) != nullptr){
+						// check collision from 'below'
+						if(map.element(x, y+1, z) != nullptr)	{
+							if(abs((this->getX()) - map.element(x, y+1, z)->getX()) < 1) {
+								if(abs(this->getY()+1- map.element(x, y+1, z)->getY()) < 2)
+								{
+									if(abs((this->getZ()+1)- map.element(x, y+1, z)->getZ()) < 1)
+									{
+										std::cout << "COLLISION JUMP BAS" << std::endl;
+										map.element(x, y+1, z)->collision(tmpChar);
+
+									}
+								}
+							}
+						}
+						// check collision from 'above'
+						if(map.element(x, y+2, z) != nullptr)	{
+							if(abs((this->getX()) - map.element(x, y+2, z)->getX()) < 1) {
+								if(abs(this->getY()+2- map.element(x, y+2, z)->getY()) < 2)
+								{
+									if(abs((this->getZ()+1)- map.element(x, y+2, z)->getZ()) < 1)
+									{
+										std::cout << "COLLISION JUMP HAUT" << std::endl;
+										map.element(x, y+2, z)->collision(tmpChar);
+									}
+								}
+							}
+						}
+						return true;
+					}
+					std::cout << "Can jump" << std::endl;
+					return false;
+					break;
 
 			
 		}
