@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_printable_element.html" title="PrintableElement" alt="" coords="5,132,133,159"/>
+<area shape="rect" id="node2" href="$class_character.html" title="Character" alt="" coords="181,56,267,83"/>
+<area shape="rect" id="node5" href="$class_element.html" title="Element" alt="" coords="187,208,261,235"/>
+<area shape="rect" id="node3" href="$class_enemy.html" title="Enemy" alt="" coords="349,5,415,32"/>
+<area shape="rect" id="node4" href="$class_hero.html" title="Hero" alt="" coords="355,56,409,83"/>
+<area shape="rect" id="node6" href="$class_coin.html" title="Coin" alt="" coords="357,107,407,133"/>
+<area shape="rect" id="node7" href="$class_floor.html" title="Floor" alt="" coords="355,157,409,184"/>
+<area shape="rect" id="node8" href="$classmotor__game_1_1_end.html" title="motor_game::End" alt="" coords="316,208,448,235"/>
+<area shape="rect" id="node9" href="$classmotor__game_1_1_gap.html" title="motor_game::Gap" alt="" coords="315,259,449,285"/>
+<area shape="rect" id="node10" href="$class_obstacle.html" title="Obstacle" alt="" coords="343,309,421,336"/>
+<area shape="rect" id="node11" href="$class_wall.html" title="Wall" alt="" coords="357,360,407,387"/>
+</map>

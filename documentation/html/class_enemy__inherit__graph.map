@@ -1,0 +1,4 @@
+<map id="Enemy" name="Enemy">
+<area shape="rect" id="node2" href="$class_character.html" title="Character" alt="" coords="27,80,112,107"/>
+<area shape="rect" id="node3" href="$class_printable_element.html" title="PrintableElement" alt="" coords="5,5,133,32"/>
+</map>

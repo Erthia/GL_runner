@@ -1,0 +1,9 @@
+<map id="Element" name="Element">
+<area shape="rect" id="node3" href="$class_coin.html" title="Coin" alt="" coords="5,155,56,181"/>
+<area shape="rect" id="node4" href="$class_floor.html" title="Floor" alt="" coords="81,155,135,181"/>
+<area shape="rect" id="node5" href="$classmotor__game_1_1_end.html" title="motor_game::End" alt="" coords="159,155,291,181"/>
+<area shape="rect" id="node6" href="$classmotor__game_1_1_gap.html" title="motor_game::Gap" alt="" coords="315,155,450,181"/>
+<area shape="rect" id="node7" href="$class_obstacle.html" title="Obstacle" alt="" coords="475,155,552,181"/>
+<area shape="rect" id="node8" href="$class_wall.html" title="Wall" alt="" coords="577,155,626,181"/>
+<area shape="rect" id="node2" href="$class_printable_element.html" title="PrintableElement" alt="" coords="240,5,368,32"/>
+</map>

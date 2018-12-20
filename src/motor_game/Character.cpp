@@ -28,34 +28,30 @@ void Character::run()
 
 void Character::moveLeft()
 {
-	this->run();
 	std::cout << m_type << " moved to the left." << std::endl;
 	m_position.x -= 1;
 }
 
 void Character::moveRight()
 {
-	this->run();
 	std::cout << m_type << " moved to the right." << std::endl;
 	m_position.x += 1;
 }
 
 void Character::up()
 {
-	this->run();
+
 	std::cout << m_type << " jumped." << std::endl;
-	m_position.y += 1; // ???????
-	this->run();
+	m_position.y += 1; // ??????
 }
 
 // à gérer avec le moteur de rendu et un scale particulier ??????? 
 void Character::down()
 {
-	this->run();
+	//this->run();
 	std::cout << m_type << " crawled." << std::endl;
-	m_position.y -= 0.5; // ???????
+	//m_position.y -= 0.5; // ???????
 }
-
 
 // A VOIR EN FONCTION DE LA GESTION DES ENNEMIS : si on l'utilise, transformer les autre en virtual
 void Character::move(const char &movement)
