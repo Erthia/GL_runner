@@ -52,15 +52,26 @@ void Character::down()
 }
 
 
-bool Character::checkCollision(const PrintableElement &b)
+// A VOIR EN FONCTION DE LA GESTION DES ENNEMIS : si on l'utilise, transformer les autre en virtual
+void Character::move(const char &movement)
 {
-	if(abs(this->getX()- b.getX()) < 1) 
-		if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
-			if(abs((this->getZ())- b.getZ()) < 1)
-				return true;
-	return false;
+	switch(movement)
+	{
+		case 'q' :
+			this->moveLeft();
+			break;
+		case 'd' :
+			this->moveRight();
+			break;
+		case 'z' :
+			this->up();
+			break;
+		case 's' :
+			this->down();
+		default :
+		break;
 
+	}
 }
-
 
 // gauche/droite : x, haut : y, profondeur : z

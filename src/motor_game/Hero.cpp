@@ -53,6 +53,8 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION LEFT BAS" << std::endl;
 									map.element(x, y, z)->collision(this);
+									if(map.element(x, y, z)->getType() == "Coin")
+										this->moveLeft();
 								}
 							}
 						}
@@ -66,7 +68,8 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION LEFT HAUT" << std::endl;
 									map.element(x, y+1, z)->collision(this);
-
+									if(map.element(x, y+1, z)->getType() == "Coin")
+										this->moveLeft();
 								}
 							}
 						}
@@ -74,6 +77,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 				return true; 
 				}	
 				std::cout << "Can move" << std::endl;
+				this->moveLeft();
 				return false;
 				break;
 
@@ -89,6 +93,8 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION RIGHT BAS" << std::endl;
 									map.element(x, y, z)->collision(this);
+									if(map.element(x, y, z)->getType() == "Coin")
+										this->moveRight();
 								}
 							}
 						}
@@ -101,6 +107,8 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION RIGHT HAUT" << std::endl;
 									map.element(x, y+1, z)->collision(this);
+									if(map.element(x, y+1, z)->getType() == "Coin")
+										this->moveRight();
 
 								}
 							}
@@ -109,6 +117,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 				return true; 
 				}
 				std::cout << "Can move" << std::endl;
+				this->moveRight();
 				return false;
 				break;
 
@@ -124,6 +133,8 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION JUMP BAS" << std::endl;
 									map.element(x, y+1, z)->collision(this);
+									if(map.element(x, y+1, z)->getType() == "Coin")
+										this->up();
 
 								}
 							}
@@ -138,13 +149,16 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 								{
 									std::cout << "COLLISION JUMP HAUT" << std::endl;
 									map.element(x, y+2, z)->collision(this);
+									if(map.element(x, y+2, z)->getType() == "Coin")
+										this->up();
 								}
 							}
 						}
 					}
 				return true;
 				}
-				std::cout << "Can jump" << std::endl;
+				std::cout << "Can jump" << std::endl;				
+				this->up();
 				return false;
 				break;
 
@@ -158,13 +172,16 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 							{
 								std::cout << "COLLISION CRAWL BAS" << std::endl;
 								map.element(x, y, z)->collision(this);
+								if(map.element(x, y, z)->getType() == "Coin")
+										this->down();
 
 							}
 						}
 					}
-									return true;
+				return true;
 				}
 				std::cout << "Can crawl" << std::endl;
+				this->down();
 				return false;
 				break;
 			default : return false;

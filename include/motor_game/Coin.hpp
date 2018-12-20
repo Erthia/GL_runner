@@ -23,7 +23,7 @@ class Coin : public Element
     }
 
     /// default destructor of our Coin
-    ~Coin(); 
+    virtual ~Coin(); 
 
   /// brief method to display the value of Coin's attributes
 	void printElement() const;

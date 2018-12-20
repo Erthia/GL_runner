@@ -21,6 +21,8 @@ void Obstacle::printElement() const
 
 void Obstacle::collide(Hero *hero){
 	std::cout << "Can't walk through obstacle, you're DEAD" << std::endl;
+	delete hero;
+	//delete hero;
 }
 
 
