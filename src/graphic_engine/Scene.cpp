@@ -22,6 +22,8 @@ Scene::Scene(
 void Scene::loadScene(motor_game::Map &inMap)
 {
   PerspectiveShader shader3D;
+  PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+
   for (unsigned int i= 0; i<inMap.x();i++)
   {
     for (unsigned int j=0;j<inMap.y();j++)
@@ -33,26 +35,29 @@ void Scene::loadScene(motor_game::Map &inMap)
           if (inMap.element(i,j,k)->getType() == "Wall")
           {
             // Initialize Landmark
-            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(-2.5,-3,-2));
-            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
 
-            shader3D.use();
-            shader3D.setViewMatrix(glm::mat4(1.0f),projection);
-            shader3D.setUniformMatrix();
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
+          //  std::cout<<glm::vec3(i,j,k)<<std::endl;
+
+            shaderRed.use();
+            shaderRed.setViewMatrix(glm::mat4(1),projection);
+            shaderRed.setUniformMatrix();
 
             (m_dataObject[0])->draw();
+
           }
           if (inMap.element(i,j,k)->getType()=="Floor")
           {
             //Initialize Landmark
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-            projection *= glm::translate(glm::mat4(1),glm::vec3(-2.5,-3,-2));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
 
             projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
 
             shader3D.use();
-            shader3D.setViewMatrix(glm::mat4(1.0f),projection);
+            shader3D.setViewMatrix(glm::mat4(1),projection);
             shader3D.setUniformMatrix();
 
             (m_dataObject[0])->draw();
@@ -60,11 +65,6 @@ void Scene::loadScene(motor_game::Map &inMap)
         }
       }
     }
-
-
-
-
-
   }
 };
 

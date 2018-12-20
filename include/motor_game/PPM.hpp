@@ -3,99 +3,88 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "Element.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
 #include "Map.hpp"
+#include "End.hpp"
+#include "Floor.hpp"
+#include "Coin.hpp"
+#include "Wall.hpp"
+#include "Gap.hpp"
+#include "Obstacle.hpp"
 
 namespace motor_game{
-    /*
-    class PPMreader{
-        public:
-            /// \brief constructor
-            /// \param string of the file name
-            PPMreader(const std::string &filename);
-            
-            PPMreader() = delete;
-            
-            ///\brief destructor
-            ~PPMreader();
-            
-            /// \brief read the file and set the ppm
-            PPM &readFile();
-        
-        private :
-            // return the next valid string in the file (ie not a comment)
-            // don't manage end of file
-            const std::string nextString() const;
-        
-            std::ifstream m_ppm_1;
-            std::string m_currentStr;
-    };
-    
+
+
     class PPM{
         public :
+            PPM() = delete;
+
             ///\brief constructor
             /// \param dimensions of the map
-            PPM() = default;
-            
+            inline PPM(unsigned int x, unsigned int y, unsigned int z)
+                : m_map(Map(x, y, z)) {}
+
+            ~PPM() = default;
+
             /// \brief getter : Element vector of the level
-            inline const glm::vector<Element> elements() const{
-                return m_elements;
+            inline const Map map() const{
+                return m_map;
             }
-            
+
             /// \brief setter : Element vector of the level
-            inline glm::vector<Element> elements(){
-                return m_elements;
+            inline Map &map(){
+                return m_map;
             }
-            
+
             /// \brief getter : returns the hero
             inline const Hero &hero() const{
                 return m_hero;
             }
-            
+
             /// \brief setter : the hero
             inline Hero &hero(){
                 return m_hero;
             }
-            
+
             /// \brief getter : returns the enemy
             inline const Enemy &enemy() const{
                 return m_enemy;
             }
-            
+
             /// \brief setter : the enemy
             inline Enemy &enemy(){
                 return m_enemy;
             }
-            
+
             /// \brief getter : returns the dimensions of the map
-            inline const glm::vec3 &dimensions() const{
-                return glm::vec3(m_x, m_y, m_z);
+            inline const glm::vec3 dimensions() const{
+                return glm::vec3(m_map.x(), m_map.y(), m_map.z());
             }
-            
+
             /// \brief setter : the x-dimension of the map
-            inline unsigned int &x(){
-                return m_x;
+            inline unsigned int x(){
+                return m_map.x();
             }
-            
+
             /// \brief setter : y-dimension of the map
-            inline unsigned int &y(){
-                return m_y;
+            inline unsigned int y(){
+                return m_map.y();
             }
-            
+
             /// \brief setter : the z-dimension of the map
-            inline unsigned int &z(){
-                return m_z;
+            inline unsigned int z(){
+                return m_map.z();
             }
-        
+
 
         private:
             Map m_map;
             Hero m_hero;
             Enemy m_enemy;
     };
-    */
-}
 
+}

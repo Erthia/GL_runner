@@ -17,7 +17,22 @@
 #include <cstdlib>
 #include <GLFW/glfw3.h>
 #include <fstream>
+
 #include "AppManager.hpp"
+
+#include "ExceptIMAC.hpp"
+#include "Hero.hpp"
+#include "PrintableElement.hpp"
+#include "Character.hpp"
+#include "End.hpp"
+#include "Gap.hpp"
+#include "PPM.hpp"
+#include "PPMreader.hpp"
+#include "Map.hpp"
+#include "Wall.hpp"
+#include "Coin.hpp"
+#include "Element.hpp"
+
 
 //#include <utils.cpp>
 
@@ -107,8 +122,9 @@ END - IF YOU'RE USING GLSL VERSION 130
 ********************************/
 
 int main(int argc, char** argv) {
+
   AppManager App;
   App.start(argv);
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }

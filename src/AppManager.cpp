@@ -15,7 +15,7 @@
 #include <glimac/Grid.hpp>
 #include <vector>
 #include <cstdlib>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <fstream>
 #include "AppManager.hpp"
 #include "Menu.hpp"
@@ -37,6 +37,8 @@
 #include "Obstacle.hpp"
 #include "Gap.hpp"
 #include "Map.hpp"
+#include "PPM.hpp"
+#include "PPMreader.hpp"
 
 #include <memory>
 
@@ -68,23 +70,24 @@ int AppManager::start(char** argv)
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
 
 // CAMERA
-
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
-
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
-  //  Cube
+  motor_game::PPMreader theReader("level_01_ASCII.ppm");
+  motor_game::PPM ppmCool=theReader.readFile();
 
+  Hero hero = ppmCool.hero();
 
-
+/*** A changer ***/
   std::unique_ptr<Cube> cube(new Cube);
-  //std::unique_ptr<Cone> cone = std::unique_ptr<Cone> (new Cone(1,11,1,1));
-
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
   // Menu
   Menu menu;
+  Cube player;
+  Landmark landmark;
+  Grid grid;
 
 
   motor_game::Map map(5,4,4);
@@ -143,6 +146,7 @@ int AppManager::start(char** argv)
 
       }
 
+
       if (GAME)
       {
         // Event loop:
@@ -177,17 +181,26 @@ int AppManager::start(char** argv)
 
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-          game.loadScene(map);
+          game.loadScene(ppmCool.map());
+
+          //glm::mat4 projection =
+          glm::mat4 projection =glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
 
           shader3D.use();
-          shader3D.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+          shader3D.setViewMatrix(glm::mat4(1),projection);
           shader3D.setUniformMatrix();
+          //player.draw();
+          landmark.draw();
+          grid.draw();
 
 
-
-
-
-
+          projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+          projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
+          projection *=glm::translate(glm::mat4(1),hero.getPosition());
+          shader3D.use();
+          shader3D.setViewMatrix(glm::mat4(1),projection);
+          shader3D.setUniformMatrix();
+          player.draw();
 
 
         }
