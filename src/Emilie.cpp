@@ -1,13 +1,15 @@
  #include <iostream>
- #include "../include/exception/ExceptIMAC.hpp"
+ #include <GL/glew.h>
+ #include <glm/glm.hpp>
+ 
+ #include "ExceptIMAC.hpp"
  #include "Hero.hpp"
  #include "PrintableElement.hpp"
  #include "Character.hpp"
  #include "End.hpp"
- #include <GL/glew.h>
- #include <glm/glm.hpp>
  #include "Gap.hpp"
  #include "PPM.hpp"
+ #include "PPMreader.hpp"
  #include "Map.hpp"
  #include "Wall.hpp"
  #include "Coin.hpp"
@@ -27,30 +29,33 @@
     Wall *milie = new Wall(glm::vec3(0,1,2));
     Coin *laurine = new Coin(glm::vec3(2,49,4), 100);
     
-    std::cout << "Yo !" << std::endl;
-    
     map_2.element(0,1,2,milie);
-    std::cout << "YoYo !" << std::endl;
     map_2.element(0,1,2)->description();
    
     map_2.element(2, 49, 4,laurine);
     map_2.element(2, 49, 4)->description();
     
     //test PPM class
-    std::cout << "TEST PPM CLASS" << std::endl;
+    std::cout << "\nTEST PPM CLASS" << std::endl;
+    
     
     motor_game::PPMreader theReader("level_01_ASCII.ppm");
-    try{
-        motor_game::PPM ppmCool=theReader.readFile();
-    }
-    catch(const std::exception &e){
-        std::cerr << e.what() << std::endl;
-    }
+    motor_game::PPM ppmCool=theReader.readFile();
+
     
     for(unsigned int i=0; i<ppmCool.x(); i++){
+        std::cout << "i: " << i << std::endl;
         for(unsigned int j=0; j<ppmCool.y(); j++){
+            std::cout << "j: " << j << std::endl;
             for(unsigned int k=0; k<ppmCool.z(); k++){
-                ppmCool.element(i, j, k)->description();
+                std::cout << "k: " << k << std::endl;
+                if(ppmCool.map().element(i, j, k)==nullptr)
+                    std::cout
+                        << "Element null aux coordonnées ("
+                        << i << ", " << j << ", " << k << " )"
+                        << std::endl;
+                else
+                    ppmCool.map().element(i, j, k)->description();
             }
         }
     }
