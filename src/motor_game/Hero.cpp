@@ -171,50 +171,87 @@ bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 		return false;
 	}
 
-
 bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 
 			int x=this->getX();
 			int y=this->getY();
 			int z=(this->getZ()+1);
-			/*Element* tmpElt;
-			Element* tmpElt2; */ // second obj to test when the hero jumps (from above)
 			Hero tmpChar = *this;
 
 		switch(movement) {
-
+			// move to the left
 			case 'q' :
 				x-=1;
-				if(map.element(x, y, z) != NULL)	{
-					if(abs((this->getX()-1) - map.element(x, y, z)->getX()) < 1) {
-						if(abs(this->getY()- map.element(x, y, z)->getY()) < 2)
-						{
-							if(abs((this->getZ()+1)- map.element(x, y, z)->getZ()) < 1)
+				// we ave to think about the fact that the hero is of height 2, so we have to check the collision from the lowest and highest y coordinates of our hero in case he collides two elements at the same time
+				if(map.element(x, y, z) != nullptr || map.element(x, y+1, z) != nullptr){
+
+					// test lowest y coordinate
+					if(map.element(x, y, z) != nullptr)	{
+						if(abs((this->getX()-1) - map.element(x, y, z)->getX()) < 1) {
+							if(abs(this->getY()- map.element(x, y, z)->getY()) < 2)
 							{
-								std::cout << "HALLELUJAH LEFT" << std::endl;
-								map.element(x, y, z)->collision(tmpChar);
-								return true; 
+								if(abs((this->getZ()+1)- map.element(x, y, z)->getZ()) < 1)
+								{
+									std::cout << "COLLISION LEFT BAS" << std::endl;
+									map.element(x, y, z)->collision(tmpChar);
+								}
 							}
 						}
 					}
-				}
-				/*tmpElt2 = list(x, y+1, z);
-				if(tmpElt2 != NULL)	{
-					if(abs((this->getX()+1) - tmpElt2->getX()) < 1) {
-						if(abs(this->getY()- tmpElt2->getY()) < 2)
-						{
-							if(abs((this->getZ()+1)- tmpElt2->getZ()) < 1)
+					// test highest y coordinate
+					if(map.element(x, y+1, z) != nullptr)	{
+						if(abs((this->getX()-1) - map.element(x, y+1, z)->getX()) < 1) {
+							if(abs(this->getY()- map.element(x, y+1, z)->getY()) < 2)
 							{
-								std::cout << "COLLIDE FROM ABOVE" << std::endl;
-								list[x][y+1][z]->collision(tmpChar);
-								return true; 
+								if(abs((this->getZ()+1)- map.element(x, y+1, z)->getZ()) < 1)
+								{
+									std::cout << "COLLISION LEFT HAUT" << std::endl;
+									map.element(x, y+1, z)->collision(tmpChar);
+
+								}
 							}
 						}
 					}
-				}*/
+				return true; 
+			}
 				std::cout << "Can move" << std::endl;
 				return false;
 				break;
+
+			case 'd' :
+				x+=1;
+				if(map.element(x, y, z) != nullptr || map.element(x, y+1, z) != nullptr){
+					if(map.element(x, y, z) != nullptr)	{
+						if(abs((this->getX()+1) - map.element(x, y, z)->getX()) < 1) {
+							if(abs(this->getY()- map.element(x, y, z)->getY()) < 2)
+							{
+								if(abs((this->getZ()+1)- map.element(x, y, z)->getZ()) < 1)
+								{
+									std::cout << "COLLISION RIGHT BAS" << std::endl;
+									map.element(x, y, z)->collision(tmpChar);
+								}
+							}
+						}
+					}
+					if(map.element(x, y+1, z) != nullptr)	{
+						if(abs((this->getX()+1) - map.element(x, y+1, z)->getX()) < 1) {
+							if(abs(this->getY()- map.element(x, y+1, z)->getY()) < 2)
+							{
+								if(abs((this->getZ()+1)- map.element(x, y+1, z)->getZ()) < 1)
+								{
+									std::cout << "COLLISION RIGHT HAUT" << std::endl;
+									map.element(x, y+1, z)->collision(tmpChar);
+
+								}
+							}
+						}
+					}
+				return true; 
+			}
+				std::cout << "Can move" << std::endl;
+				return false;
+				break;
+
 			
 		}
 		return false;
