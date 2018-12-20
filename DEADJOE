@@ -1,0 +1,62 @@
+
+*** These modified files were found in JOE when it aborted on Thu Dec 20 14:45:37 2018
+*** JOE was aborted because the terminal closed
+
+*** Fichier '/home/6im2/mseminel/Documents/Laurine/GL_runner/.git/COMMIT_EDITMSG'
+laurine: implementation virtual destructors
+
+# Veuillez saisir le message de validation pour vos modifications. Les lignes
+# commençant par '#' seront ignorées, et un message vide abandonne la validation.
+#
+# Validateur : SEMINEL MARION <mseminel@localhost.localdomain>
+#
+# Sur la branche master
+# Votre branche est en avance sur 'origin/master' de 2 commits.
+#   (utilisez "git push" pour publier vos commits locaux)
+#
+# Modifications qui seront validées :
+#	supprimé :        bin/glrunner
+#	modifié :         elt/ppm/level_01.xcf
+#	nouveau fichier : elt/ppm/level_01_coin_ASCII.ppm
+#	modifié :         include/motor_game/PPMreader.hpp
+#	supprimé :        obj/Emilie.o
+#	supprimé :        obj/exception/ExceptIMAC.o
+#	supprimé :        obj/glimac/Cone.o
+#	supprimé :        obj/glimac/Geometry.o
+#	supprimé :        obj/glimac/Image.o
+#	supprimé :        obj/glimac/Program.o
+#	supprimé :        obj/glimac/SDLWindowManager.o
+#	supprimé :        obj/glimac/Shader.o
+#	supprimé :        obj/glimac/Sphere.o
+#	supprimé :        obj/glimac/cube.o
+#	supprimé :        obj/glimac/tiny_obj_loader.o
+#	supprimé :        obj/graphic_engine/PPM.o
+#	supprimé :        obj/main.o
+#	supprimé :        obj/motor_game/Character.o
+#	supprimé :        obj/motor_game/Coin.o
+#	supprimé :        obj/motor_game/Element.o
+#	supprimé :        obj/motor_game/End.o
+#	supprimé :        obj/motor_game/Enemy.o
+#	supprimé :        obj/motor_game/Floor.o
+#	supprimé :        obj/motor_game/Gap.o
+#	supprimé :        obj/motor_game/Hero.o
+#	supprimé :        obj/motor_game/Map.o
+#	supprimé :        obj/motor_game/MotorGame.o
+#	supprimé :        obj/motor_game/Obstacle.o
+#	supprimé :        obj/motor_game/PPM.o
+#	supprimé :        obj/motor_game/PPMreader.o
+#	supprimé :        obj/motor_game/PrintableElement.o
+#	supprimé :        obj/motor_game/User.o
+#	supprimé :        obj/motor_game/Wall.o
+#	nouveau fichier : src/Emilie.cpp
+#	modifié :         src/motor_game/PPMreader.cpp
+#
+
+*** Fichier '(Sans nom)'
+/home/6im2/mseminel/.gitconfig
+/home/6im2/mseminel/Documents/Laurine/GL_runner/.git/COMMIT_EDITMSG
+/home/6im2/mseminel/Documents/Laurine/GL_runner/.git/COMMIT_EDITMSG
+
+*** Fichier '* Startup Log *'
+Traitement de '/etc/joe/editorrc'...Traitement de '/etc/joe/ftyperc'...Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
