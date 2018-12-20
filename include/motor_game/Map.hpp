@@ -17,6 +17,7 @@ namespace motor_game{
             /// \param dimensions of the map
             Map(const unsigned int &x, const unsigned int &y, const unsigned int &z);
             
+            ///\brief destructor
             ~Map();
             
             /// \brief getter of an Element
@@ -50,10 +51,10 @@ namespace motor_game{
             
         
         private :
-            std::vector<Element*> m_elements;
-            unsigned int m_x=0;
-            unsigned int m_y=2;
-            unsigned int m_z=0;
+            std::vector<Element*> m_elements; /*!<  vector of element types */
+            unsigned int m_x=0;  /*!<  map dimension x */
+            unsigned int m_y=3;  /*!< map dimension y : 3 "levels" */
+            unsigned int m_z=0;  /*!< map dimension z*/
     };
     
 }
