@@ -27,9 +27,8 @@ namespace motor_game{
             /// \param dimensions of the map
             inline PPM(unsigned int x, unsigned int y, unsigned int z)
                 : m_map(Map(x, y, z)) {}
-            
-            ///\brief destructor
-            ~PPM();
+                
+            ~PPM() = default;
             
             /// \brief getter : Element vector of the level
             inline const Map map() const{
@@ -37,7 +36,7 @@ namespace motor_game{
             }
             
             /// \brief setter : Element vector of the level
-            inline Map map(){
+            inline Map &map(){
                 return m_map;
             }
             
@@ -86,31 +85,6 @@ namespace motor_game{
             Map m_map;
             Hero m_hero;
             Enemy m_enemy;
-    };
-    
-    class PPMreader{
-        public:
-            /// \brief constructor
-            /// \param string of the file name
-            PPMreader(const std::string &filename);
-            
-            PPMreader() = delete;
-            
-            ///\brief destructor
-            ~PPMreader();
-            
-            /// \brief read the file and set the ppm - can throw an exception
-            const PPM readFile();
-        
-        private :
-            // return the next valid string in the file (ie not a comment)
-            // don't manage end of file
-            const std::string nextString();
-            std::string m_currentStr;
-            std::ifstream m_ppm_1;
-            unsigned int m_x=0;
-            unsigned int m_y=2;
-            unsigned int m_z=0;
     };
     
 }
