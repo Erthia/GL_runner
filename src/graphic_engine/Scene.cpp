@@ -19,7 +19,7 @@ Scene::Scene(
   m_camera(inCamera)
 {}
 
-void Scene::loadScene(motor_game::Map &inMap)
+void Scene::loadScene(motor_game::Map &inMap,float speed)
 {
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
@@ -37,13 +37,12 @@ void Scene::loadScene(motor_game::Map &inMap)
             // Initialize Landmark
 
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
-            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
-          //  std::cout<<glm::vec3(i,j,k)<<std::endl;
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k+speed));
 
             shaderRed.use();
-            shaderRed.setViewMatrix(glm::mat4(1),projection);
-            shaderRed.setUniformMatrix();
+            shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
+            shaderRed.setUniformMatrix2();
 
             (m_dataObject[0])->draw();
 
@@ -52,13 +51,28 @@ void Scene::loadScene(motor_game::Map &inMap)
           {
             //Initialize Landmark
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
 
-            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k+speed));
 
             shader3D.use();
-            shader3D.setViewMatrix(glm::mat4(1),projection);
-            shader3D.setUniformMatrix();
+            shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
+            shader3D.setUniformMatrix2();
+
+            (m_dataObject[0])->draw();
+          }
+
+          if (inMap.element(i,j,k)->getType()=="Obstacle")
+          {
+            //Initialize Landmark
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
+
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k+speed));
+
+            shaderRed.use();
+            shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
+            shaderRed.setUniformMatrix2();
 
             (m_dataObject[0])->draw();
           }

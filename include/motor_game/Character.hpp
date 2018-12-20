@@ -17,12 +17,12 @@ class Character : public PrintableElement
     /// default constructor of class character
     /// our class character is only abstract
     /// contrary to other elements, a character isn't a cube of 1*1*1: it's a pavement with an height of 2
-    Character(); 
+    Character();
 
     /// constructor with parameters
     /// param type : a string which will allow us to know what kind of character we're dealing with
     /// param speed : the speed in which our character will run, can be changed with bonus elements
-    Character(const glm::vec3 &position, const unsigned int &speed, const std::string &type);
+    Character(const glm::vec3 &position, const float &speed, const std::string &type);
 
     /// method allowing the character to move forward on the z axis
     void run();
@@ -38,6 +38,10 @@ class Character : public PrintableElement
 
     /// method allowing the character to move right along the x axis
     void moveRight();
+
+    inline void setSpeed(float const &inSpeed){
+        m_speed = inSpeed;
+     }
 
 
 
@@ -65,10 +69,10 @@ class Character : public PrintableElement
     //////////////////////////// TO ADD : speed changer with bonus !!!! VOIR SI ON PEUT FAIRE UNE SCANLIST SANS PARAMETRE DE MOUVEMENT
 
     /// default destructor of class character
-    ~Character(); 
+    ~Character();
 
 
   protected:
-  unsigned int m_speed;
+   float m_speed;
 
 };

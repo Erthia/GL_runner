@@ -14,7 +14,7 @@ Coin::~Coin()
 {}
 
 void Coin::collide(Hero &hero){
-	hero.setScore(this->getValue());
+//	hero.setScore(this->getValue());
 	std::cout << "\nTEST COLLIDE DE MON SUPER COIIIIIIN HELLO " << std::endl;
 	// delete coin ?????
 }
@@ -25,6 +25,3 @@ void Coin::printElement() const
 	PrintableElement::printElement();
 	std::cout << "Value : " << m_value << std::endl;
 }
-
-
-

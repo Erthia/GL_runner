@@ -5,7 +5,7 @@ Hero::Hero()
 	:Character(glm::vec3(0), 0, "Hero"), m_score(0)
 {}
 
-Hero::Hero(const glm::vec3 &position, const unsigned int &speed, const std::string &type)
+Hero::Hero(const glm::vec3 &position, const float &speed, const std::string &type)
 :Character(position, speed, type), m_score(0)
 {}
 
@@ -19,9 +19,19 @@ void Hero::printElement() const
 	std::cout << "Score :" << getScore() << std::endl;
 }
 
+bool Hero::checkCollision(const PrintableElement &b)
+{
+	if(abs(this->getX()- b.getX()) < 1)
+		if(abs(this->getY()- b.getY()) < 2) /// \our character's heighth is two
+			if(abs((this->getZ())- b.getZ()) < 1)
+				return true;
+	return false;
+
+}
+
 /*bool Hero::scanArray(Element* (*list)[50][50], const char &movement) {
 
-		
+
 			int x=this->getX();
 			int y=this->getY();
 			int z=(this->getZ()+1);
@@ -42,7 +52,7 @@ void Hero::printElement() const
 							{
 								std::cout << "HALLELUJAH LEFT" << std::endl;
 								//list[x][y][z]->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -56,7 +66,7 @@ void Hero::printElement() const
 							{
 								std::cout << "COLLIDE LEFT" << std::endl;
 								list[x][y+1][z]->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -76,7 +86,7 @@ void Hero::printElement() const
 							{
 								std::cout << "HALLELUJAH BELOW" << std::endl;
 								list[x][y][z]->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -90,7 +100,7 @@ void Hero::printElement() const
 							{
 								std::cout << "COLLIDE FROM ABOVE" << std::endl;
 								list[x][y+1][z]->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -139,17 +149,17 @@ void Hero::printElement() const
 
 			case 's' :
 				tmpElt = list[x][y][z];
-				if(tmpElt != NULL)	
+				if(tmpElt != NULL)
 				{
 					//std::cout << " x : " << tmpElt->getX() << std::endl;
 					//std::cout << " y : " << tmpElt->getY() << std::endl;
 					//std::cout << " z : " << tmpElt->getZ() << std::endl;
-					
+
 					//list[x+1][y][z]->collision(tmpChar);
 					//tmpElt->description();
 					/*
 					if(abs((this->getX()) - tmpElt->getX()) < 1) {
-						if(abs(this->getY()- tmpElt->getY()) < 2) 
+						if(abs(this->getY()- tmpElt->getY()) < 2)
 						{
 							if(abs((this->getZ()+1)- tmpElt->getZ()) < 1)
 							{
@@ -160,13 +170,13 @@ void Hero::printElement() const
 							}
 						}
 					}
-						
-							return true;						
+
+							return true;
 				}
 				std::cout << "Can crawl" << std::endl;
 				return false;
 				break;
-			
+
 		}
 		return false;
 	}*/
@@ -194,7 +204,7 @@ bool Hero::scanArray(Map list, const char &movement) {
 							{
 								std::cout << "HALLELUJAH BELOW" << std::endl;
 								list(x, y, z)->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -208,7 +218,7 @@ bool Hero::scanArray(Map list, const char &movement) {
 							{
 								std::cout << "COLLIDE FROM ABOVE" << std::endl;
 								list[x][y+1][z]->collision(tmpChar);
-								return true; 
+								return true;
 							}
 						}
 					}
@@ -216,11 +226,10 @@ bool Hero::scanArray(Map list, const char &movement) {
 				std::cout << "Can move" << std::endl;
 				return false;
 				break;
-			
+
 		}
 		return false;
 	}
 
 
 */
-

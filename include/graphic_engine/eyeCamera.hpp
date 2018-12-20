@@ -6,15 +6,15 @@
 
 using namespace glimac;
 
-class eyeCamera :public Camera
+class EyeCamera :public Camera
 {
 public:
 
-	TrackballCamera():
-		m_fDistance(0),m_fAngleX(0),m_fAngleY(0)
+	EyeCamera():
+		m_fDistance(2),m_fAngleX(0),m_fAngleY(0)
 	{}
 
-	TrackballCamera(const float fDistance,const float fAngleX,const float fAngleY)
+	EyeCamera(const float fDistance,const float fAngleX,const float fAngleY)
 		:m_fDistance(fDistance),m_fAngleX(fAngleX),m_fAngleY(fAngleY)
 	{}
 
@@ -35,22 +35,38 @@ public:
 		if (e.button.button == SDL_BUTTON_WHEELUP)
 		{
 				// Move BACK
-				m_fDistance+=0.1;
+
+					m_fDistance+=0.1;
+
+
+
 		}
 
 		if (e.button.button == SDL_BUTTON_WHEELDOWN)
 		{
 			 // Move FRONT
-				m_fDistance-=0.1;
+			 if (m_fDistance>2)
+			 {
+				 m_fDistance-=0.1;
+			 }
+
 		}
 	}
 
 	void onMouseEvent(const SDL_Event &e)
 	{
 		// Rotate UP
-		m_fAngleY += e.motion.yrel;
+			m_fAngleY += e.motion.yrel;
+			if (m_fAngleY>0)
+				m_fAngleY = 0;
+			if (m_fAngleY<5)
+				m_fAngleY = 5;
 		// Rotate LEFT
-		m_fAngleX += e.motion.xrel;
+			m_fAngleX += e.motion.xrel;
+			if (m_fAngleX>80)
+				m_fAngleX = 80;
+			if (m_fAngleX<-80)
+				m_fAngleX = -80;
 	}
 
 
@@ -58,7 +74,6 @@ public:
 	{
 
 	glm::mat4 viewMatrix(1.0f);
-
 
 	viewMatrix = glm::translate(glm::mat4(1.0),glm::vec3(0,0,m_fDistance));
 	viewMatrix *= glm::rotate(viewMatrix,glm::radians(m_fAngleY),glm::vec3(1.0,0.0,0.0));

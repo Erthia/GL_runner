@@ -42,6 +42,8 @@ namespace motor_game{
                 return m_z;
             }
 
+            void RotateRight();
+
 
 
         private :

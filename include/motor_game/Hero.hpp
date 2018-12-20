@@ -16,7 +16,7 @@ class Hero : public Character
     Hero();
 
     /// constructor with parameters
-    Hero(const glm::vec3 &position, const unsigned int &speed, const std::string &type = "Hero");
+    Hero(const glm::vec3 &position, const float &speed, const std::string &type = "Hero");
 
    	/// brief method to display the value of Hero's attributes
     void printElement() const;
@@ -25,8 +25,9 @@ class Hero : public Character
     ~Hero();
 
 	/// brief method to increment the score of Hero
-	/// takes a parameter to pass the value to add to the score
-	inline void setScore(int const &inScore){
+	/// takes a parameter to pass the vaormMatrix2();
+
+	inline void setScore(float &inScore){
 	    m_score += inScore;
 	 }
 
@@ -41,6 +42,9 @@ class Hero : public Character
     bool scanArray(Element* (*list)[50][50], const char &movement);
 
     //bool checkCollide(Map map, const char &movement);
+
+    bool checkCollision(const PrintableElement &b);
+
 
   	private:
   	unsigned int m_score; /*!< score of Hero */

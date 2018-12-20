@@ -6,7 +6,7 @@ Enemy::Enemy()
 	:Character(glm::vec3(0), 0, "Enemy")
 {}
 
-Enemy::Enemy(const glm::vec3 &position, const unsigned int &speed, const std::string &type)
+Enemy::Enemy(const glm::vec3 &position, const float &speed, const std::string &type)
 :Character(position, speed, type)
 {}
 
@@ -19,8 +19,3 @@ void Enemy::printElement() const {
 }
 
 void Enemy::killHero(){}
-
-
-
-
-

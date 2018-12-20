@@ -24,7 +24,7 @@ public:
   ~Scene();
 
   //Methods
-  void loadScene(motor_game::Map &inMap);
+  void loadScene(motor_game::Map &inMap,float speed);
 
 private:
 

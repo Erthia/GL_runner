@@ -29,7 +29,7 @@
 #include "PrintableElement.hpp"
 #include "Element.hpp"
 #include "Character.hpp"
-#include "Coin.hpp"
+//#include "Coin.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
 #include "Wall.hpp"
@@ -39,6 +39,8 @@
 #include "Map.hpp"
 #include "PPM.hpp"
 #include "PPMreader.hpp"
+#include "eyeCamera.hpp"
+#include "Character.hpp"
 
 #include <memory>
 
@@ -78,6 +80,8 @@ int AppManager::start(char** argv)
   motor_game::PPM ppmCool=theReader.readFile();
 
   Hero hero = ppmCool.hero();
+  hero.setSpeed(0.1);
+
 
 /*** A changer ***/
   std::unique_ptr<Cube> cube(new Cube);
@@ -105,7 +109,8 @@ int AppManager::start(char** argv)
   }
 
   Scene game(std::move(vectorObject),camera);
-
+  float speed = 0.1;
+  float begin = -hero.getZ();
 
   // Application loop:
 
@@ -161,6 +166,36 @@ int AppManager::start(char** argv)
                 GAME = false; //A changer pour faie un mode popUp
                 glUseProgram(0);
               }
+              if (e.key.keysym.sym  == SDLK_q)
+              {
+
+                if (ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ()) != nullptr)
+                {
+                  if ((ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ())->getType()== "Obstacle"))
+                  {
+                    break;
+                  }
+                }
+                else
+                {
+                  hero.moveLeft();
+                }
+
+              }
+              if (e.key.keysym.sym  == SDLK_d)
+              {
+                if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()) != nullptr)
+                {
+                  if ((ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()== "Obstacle"))
+                  {
+                    break;
+                  }
+                }
+                else
+                {
+                  hero.moveRight();
+                }
+              }
             }
 
 
@@ -179,29 +214,44 @@ int AppManager::start(char** argv)
 
           // Render loop:
 
-          glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1) == nullptr)
+          {
 
-          game.loadScene(ppmCool.map());
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            game.loadScene(ppmCool.map(),begin);
+            begin -=speed;
+            hero.run();
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
+            shader3D.use();
+            shader3D.setViewMatrix(camera->getViewMatrix(),projection);
+            shader3D.setUniformMatrix2();
+            player.draw();
 
-          //glm::mat4 projection =
-          glm::mat4 projection =glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
+          }
 
-          shader3D.use();
-          shader3D.setViewMatrix(glm::mat4(1),projection);
-          shader3D.setUniformMatrix();
-          //player.draw();
-          landmark.draw();
-          grid.draw();
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1)!= nullptr)
+          {
+            if ((ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1)->getType()== "Wall"))
+            {
+              begin+=0;
+            }
+            if ((ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1)->getType()== "Obstacle"))
+            {
+              std::cout<<"Collision w/ Obstacle // GAME OVER"<<std::endl;
+            }
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            game.loadScene(ppmCool.map(),begin);
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
+            shader3D.use();
+            shader3D.setViewMatrix(camera->getViewMatrix(),projection);
+            shader3D.setUniformMatrix2();
+            player.draw();
 
-
-          projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-          projection *=glm::translate(glm::mat4(1),glm::vec3(-4,-3,0));
-          projection *=glm::translate(glm::mat4(1),hero.getPosition());
-          shader3D.use();
-          shader3D.setViewMatrix(glm::mat4(1),projection);
-          shader3D.setUniformMatrix();
-          player.draw();
-
+          }
 
         }
         //Update the display
