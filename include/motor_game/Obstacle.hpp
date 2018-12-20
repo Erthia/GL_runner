@@ -21,7 +21,7 @@ class Obstacle : public Element
     void printElement() const;
 
     /// method to determine the behavior of an Obstacle when the player is colliding with it
-    void collide(Hero &hero);
+    void collide(Hero *hero);
 
 
 };

@@ -30,7 +30,7 @@ class Coin : public Element
 
   /// method to check the specific behavior if the player collides with a Coin
   /// takes an Hero instance as parameter and increments their score with the value of the Coin
-	void collide(Hero &hero);
+	void collide(Hero *hero);
 
   private:
   unsigned int m_value; /*!< value of the Coin */

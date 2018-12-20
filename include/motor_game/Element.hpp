@@ -23,10 +23,10 @@ class Element : public PrintableElement
     virtual void printElement() const;
 
     /// method to determine the behavior of an End when the player is colliding with it
-    virtual void collide(Hero &hero);
+    virtual void collide(Hero *hero);
 
     /// brief method to implement the polymorphism of the collide method for different inherited Element classes
-    inline void collision(Hero &hero)
+    inline void collision(Hero *hero)
     {
       this->collide(hero);
     }

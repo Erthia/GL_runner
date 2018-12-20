@@ -9,7 +9,7 @@ namespace motor_game{
             :Element(position, type)
      {}
     
-    void Gap::collide(Hero &hero) {
+    void Gap::collide(Hero *hero) {
         std::cout << "Game over : vous etes tombé dans un TROU :o" << std::endl;
     }
     
