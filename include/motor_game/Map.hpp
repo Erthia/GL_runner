@@ -12,7 +12,12 @@ namespace motor_game{
     class Map{
         public :
             Map() = delete;
+            
+            ///\brief constructor
+            /// \param dimensions of the map
             Map(const unsigned int &x, const unsigned int &y, const unsigned int &z);
+            
+            ~Map();
             
             /// \brief getter of an Element
             /// \param coordinates of this Element
