@@ -5,7 +5,7 @@
 #include "Element.hpp"
 #include "Hero.hpp"
 
-class Wall : public Element
+class Wall final : public Element
 {
   public:
   	/// \default constructor of class Wall

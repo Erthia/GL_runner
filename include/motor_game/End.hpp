@@ -6,7 +6,7 @@
 namespace motor_game{
     /// class End
     /// end of the level
-    class End : public Element
+    class End final : public Element
     {
         public :
             /// default constructor of class End

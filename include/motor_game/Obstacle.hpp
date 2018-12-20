@@ -5,7 +5,7 @@
 #include "Element.hpp"
 #include "Hero.hpp"
 
-class Obstacle : public Element
+class Obstacle final : public Element
 {
   public:
   	/// default constructor of class Obstacle

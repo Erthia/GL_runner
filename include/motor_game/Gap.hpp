@@ -9,7 +9,7 @@ class Hero;
 
 namespace motor_game{
     
-    class Gap : public Element
+    class Gap final : public Element
     {
       public:
         Gap(); 

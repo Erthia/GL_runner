@@ -8,7 +8,7 @@
  #include "Character.hpp"
 #include "Hero.hpp"
 
-class Enemy : public Character
+class Enemy final : public Character
 {
   public:
  	/// default constructor of class Enemy

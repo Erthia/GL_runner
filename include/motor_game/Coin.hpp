@@ -7,7 +7,7 @@
 #include "Element.hpp"
 #include "Hero.hpp"
 
-class Coin : public Element
+class Coin final : public Element
 {
   public:
     /// default constructor of class Coin

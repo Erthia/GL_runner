@@ -9,7 +9,7 @@
 #include "Element.hpp"
 #include "Map.hpp"
 
-class Hero : public Character
+class Hero final : public Character
 {
  public:
   	/// default constructor of class Hero
@@ -35,6 +35,14 @@ class Hero : public Character
 		return m_score;
 	}
 
+  inline void isAlive(const bool &status)
+  {
+    m_isAlive = status;
+  }
+  inline bool getStatus() const {
+    return m_isAlive;
+  }
+
   /// method called when the hero tries to move
   /// this method checks if there is an element where the Hero wants to move
   /// then uses the collide methods to do something according to what type of element we're dealing with
@@ -47,6 +55,7 @@ class Hero : public Character
 
   	private:
   	unsigned int m_score; /*!< score of Hero */
+    bool m_isAlive=true; /*!< status of Hero, true by default*/
 
 };
 
