@@ -4,6 +4,7 @@
 #include <glimac/common.hpp>
 #include <glimac/Sphere.hpp>
 #include <glimac/cube.hpp>
+#include <glimac/Cone.hpp>
 #include <glimac/Object.hpp>
 #include <glimac/Program.hpp>
 #include "TrackballCamera.hpp"
@@ -74,8 +75,10 @@ int AppManager::start(char** argv)
 
   //  Cube
   std::unique_ptr<Cube> cube(new Cube);
+  //std::unique_ptr<Cone> cone = std::unique_ptr<Cone> (new Cone(1,11,1,1));
+
   std::vector<std::unique_ptr<Object>> vectorObject;
-  vectorObject.emplace_back(std::move(cube));
+  vectorObject.emplace_back(std::move(cone));
   // Menu
   Menu menu;
 
@@ -127,9 +130,9 @@ int AppManager::start(char** argv)
 
 
 
-        shaderRed.use();
-        shaderRed.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
-        shaderRed.setUniformMatrix();
+        shader3D.use();
+        shader3D.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3D.setUniformMatrix();
 
         menu.displayMenu();
 
@@ -171,6 +174,13 @@ int AppManager::start(char** argv)
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
           game.loadScene(map);
+
+          shader3D.use();
+          shader3D.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+          shader3D.setUniformMatrix();
+
+
+
 
 
 
