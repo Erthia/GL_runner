@@ -18,6 +18,7 @@ public:
 
   void setUniformMatrix() const;
   void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
+  void setUniformMatrix2() const;
 
   void use();
 

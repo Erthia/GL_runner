@@ -4,9 +4,11 @@
 #include <vector>
 #include "common.hpp"
 #include "Object.hpp"
+#include "perspectiveShader.hpp"
 
 
 namespace glimac{
+
 
 class Cube :public Object
 {
@@ -48,6 +50,8 @@ public:
 	{
 		std::cout<<"Je suis un Cube"<<std::endl;
 	}
+
+
 
 
 private:

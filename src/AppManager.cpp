@@ -21,6 +21,20 @@
 #include "Grid.hpp"
 #include "Scene.hpp"
 #include "TrackballCamera.hpp"
+#include "Map.hpp"
+#include "Element.hpp"
+#include "User.hpp"
+#include "PrintableElement.hpp"
+#include "Element.hpp"
+#include "Character.hpp"
+#include "Coin.hpp"
+#include "Hero.hpp"
+#include "Enemy.hpp"
+#include "Wall.hpp"
+#include "Floor.hpp"
+#include "Obstacle.hpp"
+#include "Gap.hpp"
+#include "Map.hpp"
 
 #include <memory>
 
@@ -52,7 +66,7 @@ int AppManager::start(char** argv)
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
 
 // CAMERA
-  //TrackballCamera camera(0,0,0);
+
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
 
 // MOTOR GAME
@@ -60,16 +74,25 @@ int AppManager::start(char** argv)
 
   //  Cube
   std::unique_ptr<Cube> cube(new Cube);
-  cube->x = 5;
-  cube->y = 0;
+  std::vector<std::unique_ptr<Object>> vectorObject;
+  vectorObject.emplace_back(std::move(cube));
   // Menu
   Menu menu;
 
-  std::vector<std::unique_ptr<Object>> vectorObject;
 
-  vectorObject.emplace_back(std::move(cube));
-  vectorObject.emplace_back(new Grid);
-  vectorObject.emplace_back(new Landmark);
+  motor_game::Map map(5,4,4);
+  // Function PPM
+  map.element(0,1,0,new Wall(glm::vec3(0,1,0)));
+  for (unsigned int i= 0; i<map.x();i++)
+  {
+    for (unsigned int j=0;j<map.y();j++)
+    {
+      for (unsigned int k=0;k<map.z();k++)
+      {
+        map.element(i,0,k,new Floor(glm::vec3(i,j,k)));
+      }
+    }
+  }
 
   Scene game(std::move(vectorObject),camera);
 
@@ -147,21 +170,7 @@ int AppManager::start(char** argv)
 
           glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-
-          game.loadScene();
-
-
-
-/***** UTILITAIRE **********************************************************/
-/*
-          shader3D.setViewMatrix(camera.getViewMatrix(),glm::mat4(1.0));
-          shader3D.setUniformMatrix();
-
-          landmark.draw();
-          grid.draw();
-*/
-/**************************************************************************/
+          game.loadScene(map);
 
 
 

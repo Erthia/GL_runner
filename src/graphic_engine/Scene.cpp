@@ -1,7 +1,8 @@
 #include <glimac/Object.hpp>
 #include <glimac/cube.hpp>
 #include <glimac/Landmark.hpp>
-
+#include <glimac/common.hpp>
+#include <cmath>
 #include <memory>
 
 #include "Scene.hpp"
@@ -11,28 +12,59 @@
 Scene::Scene()
 {}
 
-Scene::Scene(std::vector<std::unique_ptr<glimac::Object>> inDataObject,
+Scene::Scene(
+            std::vector<std::unique_ptr<glimac::Object>> inDataObject,
             std::shared_ptr<Camera> inCamera):
   m_dataObject(std::move(inDataObject)),
   m_camera(inCamera)
 {}
 
-void Scene::loadScene()
+void Scene::loadScene(motor_game::Map &inMap)
 {
-  for (unsigned int i = 0; i<m_dataObject.size();i++)
+  PerspectiveShader shader3D;
+  for (unsigned int i= 0; i<inMap.x();i++)
   {
-    PerspectiveShader shader3D;
-    glm::mat4 projection = glm::translate(glm::mat4(1),
-                                          glm::vec3(m_dataObject[i]->x,
-                                          m_dataObject[i]->y,
-                                          0)
-                                         );
+    for (unsigned int j=0;j<inMap.y();j++)
+    {
+      for (unsigned int k=0;k<inMap.z();k++)
+      {
+        if (inMap.element(i,j,k)!=nullptr)
+        {
+          if (inMap.element(i,j,k)->getType() == "Wall")
+          {
+            // Initialize Landmark
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(-2.5,-3,-2));
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
 
-    shader3D.use();
-    shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
-    shader3D.setUniformMatrix();
+            shader3D.use();
+            shader3D.setViewMatrix(glm::mat4(1.0f),projection);
+            shader3D.setUniformMatrix();
 
-    (m_dataObject[i])->draw();
+            (m_dataObject[0])->draw();
+          }
+          if (inMap.element(i,j,k)->getType()=="Floor")
+          {
+            //Initialize Landmark
+            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+            projection *= glm::translate(glm::mat4(1),glm::vec3(-2.5,-3,-2));
+
+            projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k));
+
+            shader3D.use();
+            shader3D.setViewMatrix(glm::mat4(1.0f),projection);
+            shader3D.setUniformMatrix();
+
+            (m_dataObject[0])->draw();
+          }
+        }
+      }
+    }
+
+
+
+
+
   }
 };
 

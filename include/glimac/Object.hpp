@@ -36,19 +36,22 @@ namespace glimac{
         return m_vao;
       }
 
-    virtual void draw()
-    {}
+      virtual void draw()
+      {}
+
+
+
 
 /********************************************TEST********/
     int x = 0;
     int y = 0;
-
 /********************************************************/
   private:
 
     GLuint m_vbo,m_vao;
     std::vector<ShapeVertex> m_Vertices;
     GLsizei m_nVertexCount; // Nombre de sommets
+
 
 
   };

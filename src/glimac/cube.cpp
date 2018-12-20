@@ -6,6 +6,7 @@
 
 namespace glimac {
 
+	
 	void Cube::draw()
 	{
 		glBindVertexArray(m_vao);
