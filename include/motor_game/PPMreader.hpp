@@ -8,7 +8,7 @@
 namespace motor_game{
    class PPMreader{
         public:
-            /// \brief constructor
+            /// \brief constructor : open the setting file
             /// \param string of the file name
             PPMreader(const std::string &filename);
             
@@ -19,11 +19,17 @@ namespace motor_game{
             
             /// \brief read the file and set the ppm
             const PPM readFile();
+            
+            /// \brief read the file and add coins to the ppm
+            /// \param ppm : the ppm to add coins to
+            void readFile(PPM &ppm);
         
         private :
             // return the next valid string in the file (ie not a comment)
             // don't manage end of file
             const std::string nextString();
+            // verify the validity of the file, and set m_x and m_y
+            const bool validPPM();
             std::string m_currentStr;
             std::string m_r;
             std::string m_g;
