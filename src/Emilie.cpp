@@ -41,6 +41,8 @@
     
     motor_game::PPMreader theReader("level_01_ASCII.ppm");
     motor_game::PPM ppmCool=theReader.readFile();
+    motor_game::PPMreader theCoinReader("level_01_coin_ASCII.ppm");
+    theCoinReader.readFile(ppmCool);
 
     
     for(unsigned int i=0; i<ppmCool.x(); i++){
