@@ -2,7 +2,7 @@
 #include <iostream>
 #include <glimac/common.hpp>
 #include <glimac/SDLWindowManager.hpp>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <string>
 
 class AppManager
