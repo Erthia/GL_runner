@@ -15,11 +15,12 @@
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
+#include <SDL2/SDL.h>
+#include <SDL/SDL_image.h>
 //#include <GLFW/glfw3.h>
 #include <fstream>
 
 #include "AppManager.hpp"
-
 #include "ExceptIMAC.hpp"
 #include "Hero.hpp"
 #include "PrintableElement.hpp"
@@ -32,7 +33,7 @@
 #include "Wall.hpp"
 #include "Coin.hpp"
 #include "Element.hpp"
-
+#include "Texture.hpp"
 
 //#include <utils.cpp>
 

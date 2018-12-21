@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "Scene.hpp"
+#include "Texture.hpp"
 #include "camera.hpp"
 #include "perspectiveShader.hpp"
 
@@ -23,6 +24,11 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
 {
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+
+  // Textures
+  Texture test("elt/texture/brick.jpg");
+  test.loadTexture();
+
 
   for (unsigned int i= 0; i<inMap.x();i++)
   {
