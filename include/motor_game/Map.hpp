@@ -18,6 +18,7 @@ namespace motor_game{
             /// \param coordinates of this Element
             Element *element(const unsigned int &x, const unsigned int &y, const unsigned int &z) const;
 
+
             /// \brief setter of an Element
             /// \param coordinates of this Element, and the Element
            void element(
@@ -26,7 +27,7 @@ namespace motor_game{
             );
 
 
-            /// \brief getter of x-coordinate
+            /// \brief getter of x-coordiconst unsigned int &x, const unsigned int &y, const unsigned int &znate
             inline const unsigned int &x() const{
                 return m_x;
             }
@@ -42,7 +43,10 @@ namespace motor_game{
                 return m_z;
             }
 
-            void RotateRight();
+            void printElement();
+            void translateMap(const float &x, const float &z);
+            void rotateRight();
+            void rotateLeft();
 
 
 
