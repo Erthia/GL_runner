@@ -80,7 +80,7 @@ int AppManager::start(char** argv)
   motor_game::PPM ppmCool=theReader.readFile();
 
   Hero hero = ppmCool.hero();
-  hero.setSpeed(0.1);
+  hero.setSpeed(0.05);
 
 
 /*** A changer ***/
@@ -95,8 +95,8 @@ int AppManager::start(char** argv)
   Grid grid;
 
   Scene game(std::move(vectorObject),camera);
-  float speed = 0.1;
-  float begin = 0;
+  float speed = 0.05;
+  float begin = -hero.getZ()+1;
 
   int startTicksRight=0;
   int startTicksLeft=0;
@@ -167,15 +167,20 @@ int AppManager::start(char** argv)
                 {
 
                   ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                  ppmCool.map().rotateLeft();
                   hero.translate(hero.getX(),hero.getZ());
+                  ppmCool.map().rotateLeft();
+
                   startTicksLeft = 0;
+                  begin = -hero.getZ();
+
                 }
                 else
                 {
                   startTicksLeft = SDL_GetTicks();
-                  std::cout<<startTicksLeft<<std::endl;
-                  hero.moveLeft();
+                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())==nullptr)
+                  {
+                    hero.moveLeft();
+                  }
                 }
 
 
@@ -190,19 +195,20 @@ int AppManager::start(char** argv)
                 {
 
                   ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                  ppmCool.map().rotateRight();
                   hero.translate(hero.getX(),hero.getZ());
+                  ppmCool.map().rotateRight();
+
                   startTicksRight = 0;
+                  begin = -hero.getZ();
                 }
                 else
                 {
                   startTicksRight = SDL_GetTicks();
-                  std::cout<<startTicksRight<<std::endl;
-                  hero.moveRight();
+                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())==nullptr)
+                  {
+                    hero.moveRight();
+                  }
                 }
-
-
-
               }
             }
 
@@ -221,13 +227,12 @@ int AppManager::start(char** argv)
           }
 
           // Render loop:
-
-
-
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())==nullptr)
+          {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             game.loadScene(ppmCool.map(),begin);
             begin -=speed;
-            //hero.run();
+            hero.run();
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
             projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
             projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
@@ -235,6 +240,19 @@ int AppManager::start(char** argv)
             shader3D.setViewMatrix(camera->getViewMatrix(),projection);
             shader3D.setUniformMatrix2();
             player.draw();
+          }
+
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())!=nullptr)
+          {
+            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())->getType() == "Wall")
+            {
+            }
+            else
+            {
+              
+            }
+
+          }
 
 
 
