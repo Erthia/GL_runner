@@ -12,9 +12,19 @@ public:
   AppManager();
   int start(char** argv);
 
+  inline int getAppWidth() const {
+  	return m_width;
+  }
+
+  inline int getAppHeight() const {
+  	return m_height;
+  }
+  inline std::string getWindowName() const {
+  	return m_window_name;
+  }
 
 
-public:
+private:
 
   int m_width = 800;
   int m_height = 600;

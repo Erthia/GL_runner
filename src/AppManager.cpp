@@ -34,6 +34,7 @@
 #include "Enemy.hpp"
 #include "Wall.hpp"
 #include "Floor.hpp"
+#include "Font.hpp"
 #include "Obstacle.hpp"
 #include "Gap.hpp"
 #include "Map.hpp"
