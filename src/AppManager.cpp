@@ -89,6 +89,7 @@ int AppManager::start(char** argv)
   vectorObject.emplace_back(std::move(cube));
   // Menu
   Menu menu;
+  menu.setVisibility(false);
   Cube player;
   Landmark landmark;
   Grid grid;
@@ -111,6 +112,9 @@ int AppManager::start(char** argv)
   Scene game(std::move(vectorObject),camera);
   float speed = 0.1;
   float begin = -hero.getZ();
+  bool RightView = false;
+  float startZ =  hero.getZ();
+  float startX =  hero.getX();
 
   // Application loop:
 
@@ -152,8 +156,9 @@ int AppManager::start(char** argv)
       }
 
 
-      if (GAME)
+      if (RightView == false)
       {
+        std::cout<<"YOU ARE IN THE NORMAL VIEW"<<std::endl;
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
@@ -190,6 +195,8 @@ int AppManager::start(char** argv)
                   {
                     break;
                   }
+                  //if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType() == "Wall")
+
                 }
                 else
                 {
@@ -216,7 +223,7 @@ int AppManager::start(char** argv)
 
           if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1) == nullptr)
           {
-
+            std::cout<< "VIDE"<<std::endl;
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             game.loadScene(ppmCool.map(),begin);
             begin -=speed;
@@ -235,28 +242,132 @@ int AppManager::start(char** argv)
           {
             if ((ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1)->getType()== "Wall"))
             {
-              begin+=0;
-            }
+              begin=0;
+              startZ = -hero.getZ();
+              startX = -hero.getX();
+              std::cout<<hero.getPosition()<<std::endl;
+              RightView = true;
+            }            {
+
             if ((ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+1)->getType()== "Obstacle"))
             {
               std::cout<<"Collision w/ Obstacle // GAME OVER"<<std::endl;
             }
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            game.loadScene(ppmCool.map(),begin);
-            glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
-            shader3D.use();
-            shader3D.setViewMatrix(camera->getViewMatrix(),projection);
-            shader3D.setUniformMatrix2();
-            player.draw();
-
           }
 
         }
+      }
+
+        if (RightView)
+        {
+          std::cout<< "YOU ARE IN THE RIGHT VIEW"<<std::endl;
+          // Event loop:
+          SDL_Event e;
+          while(windowManager.pollEvent(e)) {
+
+              if (e.type == SDL_KEYDOWN){
+                camera->onKeyboardEvent(e);
+                if (e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                //  menu.setVisibility(true);
+                  GAME = false; //A changer pour faie un mode popUp
+                  glUseProgram(0);
+                }
+                if (e.key.keysym.sym  == SDLK_q)
+                {
+
+                  if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()) != nullptr)
+                  {
+                    std::cout<<"obstacles"<<std::endl;
+                    if ((ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()== "Obstacle"))
+                    {
+                      break;
+                    }
+                  }
+                  else
+                  {
+                    hero.moveLeft(2);
+                  }
+
+                }
+                if (e.key.keysym.sym  == SDLK_d)
+                {
+                  if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()) != nullptr)
+                  {
+                    if ((ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()== "Obstacle"))
+                    {
+                      break;
+                    }
+                    //if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType() == "Wall")
+
+                  }
+                  else
+                  {
+                    hero.moveRight(2);
+                  }
+                }
+              }
+
+
+              if (e.button.button == SDL_BUTTON_WHEELUP || e.button.button == SDL_BUTTON_WHEELDOWN )
+                camera->onMouseWheelEvent(e);
+
+              if (windowManager.isMouseButtonPressed(SDL_BUTTON_LEFT))
+              {
+                camera->onMouseEvent(e);
+              }
+
+              if(e.type == SDL_QUIT) {
+                  done = true; // Leave the loop after this iteration
+              }
+            }
+
+            // Render loop:
+
+            if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()) == nullptr)
+            {
+              begin -=speed;
+              hero.run(0);
+              glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+              game.loadSceneRight(ppmCool.map(),startZ,begin,hero);
+              glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
+              projection *=glm::translate(glm::mat4(1),glm::vec3(0,-3,-2));
+              projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getZ()+startZ,hero.getY(),-startX));
+              shader3D.use();
+              shader3D.setViewMatrix(camera->getViewMatrix(),projection);
+              shader3D.setUniformMatrix2();
+              player.draw();
+
+            }
+
+            if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())!= nullptr)
+            {
+              if ((ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()== "Wall"))
+              {
+                std::cout<< "TU T'ES PRIS UN MUR" <<hero.getPosition()<<std::endl;
+                begin+=0;
+                startZ = -hero.getZ();
+                startX = -hero.getX();
+                std::cout<<hero.getPosition()<<std::endl;
+                RightView = false;
+
+              }
+              if ((ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()== "Obstacle"))
+              {
+                std::cout<<"Collision w/ Obstacle // GAME OVER"<<std::endl;
+                break;
+              }
+
+
+
+            }
+
+          }
         //Update the display
         windowManager.swapBuffers();
 
-      }
+
+    }
+
   return EXIT_SUCCESS;
 }

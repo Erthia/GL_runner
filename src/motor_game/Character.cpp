@@ -26,16 +26,50 @@ void Character::run()
 	m_position.z += m_speed;
 }
 
+void Character::run(const int &axe)
+{
+
+		if (axe == 0)
+		{
+			m_position.x += m_speed;
+		}
+		if (axe == 1)
+		{
+			std::cout<<"ON NE PEUT PAS COURIR AU PLAFOND"<<std::endl;
+		}
+}
+
 void Character::moveLeft()
 {
 //	std::cout << m_type << " moved to the left." << std::endl;
 	m_position.x -= 1;
 }
 
+void Character::moveLeft(const int &axe)
+{
+//	std::cout << m_type << " moved to the left." << std::endl;
+	switch ((axe)) {
+		case 2:
+			m_position.z -= 1;
+		default:
+			moveLeft();
+	}
+}
+
 void Character::moveRight()
 {
 //	std::cout << m_type << " moved to the right." << std::endl;
 	m_position.x += 1;
+}
+void Character::moveRight(const int &axe)
+{
+//	std::cout << m_type << " moved to the left." << std::endl;
+	switch ((axe)) {
+		case 2:
+			m_position.z += 1;
+		default:
+			moveRight();
+	}
 }
 
 void Character::up()

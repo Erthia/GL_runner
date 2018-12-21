@@ -10,6 +10,7 @@
 #include "camera.hpp"
 #include "Element.hpp"
 #include "Map.hpp"
+#include "Hero.hpp"
 
 class Scene
 {
@@ -25,6 +26,7 @@ public:
 
   //Methods
   void loadScene(motor_game::Map &inMap,float speed);
+  void loadSceneRight(motor_game::Map &inMap,float start,float speed,Hero &hero);
 
 private:
 

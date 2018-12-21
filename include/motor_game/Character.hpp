@@ -26,6 +26,7 @@ class Character : public PrintableElement
 
     /// method allowing the character to move forward on the z axis
     void run();
+    void run(const int &axe);
 
   /// method allowing the character to jump up the y axis
     void up();
@@ -35,9 +36,11 @@ class Character : public PrintableElement
 
     /// method allowing the character to move left along the x axis
     void moveLeft();
+    void moveLeft(const int &axe);
 
     /// method allowing the character to move right along the x axis
     void moveRight();
+    void moveRight(const int &axe);
 
     inline void setSpeed(float const &inSpeed){
         m_speed = inSpeed;
