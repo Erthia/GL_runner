@@ -15,11 +15,11 @@
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
-#include <SDL2/SDL.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 //#include <GLFW/glfw3.h>
 #include <fstream>
-
+#include <SDL/SDL_ttf.h>
 #include "AppManager.hpp"
 #include "ExceptIMAC.hpp"
 #include "Hero.hpp"
@@ -124,8 +124,95 @@ END - IF YOU'RE USING GLSL VERSION 130
 
 int main(int argc, char** argv) {
 
-  AppManager App;
-  App.start(argv);
+ // AppManager App;
+ // App.start(argv);
+    SDL_Surface *ecran = NULL, *texte = NULL;
+
+    SDL_Rect position;
+
+    SDL_Event event;
+
+    TTF_Font *police = NULL;
+
+    SDL_Color couleurNoire = {0, 0, 0};
+
+    int continuer = 1;
+
+
+    SDL_Init(SDL_INIT_VIDEO);
+
+    TTF_Init();
+
+
+    ecran = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+
+    SDL_WM_SetCaption("Gestion du texte avec SDL_ttf", NULL);
+
+
+    /* Chargement de la police */
+
+    police = TTF_OpenFont("elt/ttf/starjedi.ttf", 65);
+
+    /* Écriture du texte dans la SDL_Surface texte en mode Blended (optimal) */
+
+    texte = TTF_RenderText_Blended(police, "Salut Emilie !", couleurNoire);
+
+
+    while (continuer)
+
+    {
+
+        SDL_WaitEvent(&event);
+
+        switch(event.type)
+
+        {
+
+            case SDL_QUIT:
+
+                continuer = 0;
+
+                break;
+
+        }
+
+
+        SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
+
+
+
+        position.x = 60;
+
+        position.y = 370;
+
+        SDL_BlitSurface(texte, NULL, ecran, &position); /* Blit du texte */
+
+        SDL_Flip(ecran);
+
+    }
+
+
+    TTF_CloseFont(police);
+
+    TTF_Quit();
+
+
+    SDL_FreeSurface(texte);
+
+    SDL_Quit();
+
+ /* TTF_Init();
+
+  if(TTF_Init() == -1)
+{
+    fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+    exit(EXIT_FAILURE);
+}
+  font = TTF_OpenFont("elt/ttf/starjedi.ttf", 65);
+  SDL_Color white = {1, 1, 0};
+  text = TTF_RenderText_Blended(font, "Salut les Zér0s !", white);
+  TTF_CloseFont(font);
+  TTF_Quit();*/
 
   return EXIT_SUCCESS;
 }
