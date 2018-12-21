@@ -1,3 +1,6 @@
+#ifndef RUNNER_PPM_HPP
+#define RUNNER_PPM_HPP
+
 #pragma once
 
 #include <fstream>
@@ -5,16 +8,9 @@
 #include <vector>
 #include <iostream>
 
-#include "Element.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
 #include "Map.hpp"
-#include "End.hpp"
-#include "Floor.hpp"
-#include "Coin.hpp"
-#include "Wall.hpp"
-#include "Gap.hpp"
-#include "Obstacle.hpp"
 
 namespace motor_game{
     
@@ -89,3 +85,4 @@ namespace motor_game{
     
 }
 
+#endif

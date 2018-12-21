@@ -1,9 +1,23 @@
-#ifndef PPM_READER_HPP
-#define PPM_READER_HPP
+#ifndef RUNNER_PPM_READER_HPP
+#define RUNNER_PPM_READER_HPP
 
 #pragma once
 
+#include <string>
+#include <cassert>
+#include <fstream>
+#include <string>
+#include <iostream>
+
 #include "PPM.hpp"
+#include "Element.hpp"
+#include "End.hpp"
+#include "Floor.hpp"
+#include "Coin.hpp"
+#include "Wall.hpp"
+#include "Gap.hpp"
+#include "Obstacle.hpp"
+#include "Turn.hpp"
 
 namespace motor_game{
    class PPMreader{

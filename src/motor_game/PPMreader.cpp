@@ -1,14 +1,5 @@
-#include "motor_game/PPM.hpp"
-#include "exception/ExceptIMAC.hpp"
-#include "motor_game/Floor.hpp"
-#include "PPM.hpp"
 #include "PPMreader.hpp"
 
-#include <string>
-#include <cassert>
-#include <fstream>
-#include <string>
-#include <iostream>
 
 namespace motor_game{
     
@@ -79,15 +70,27 @@ namespace motor_game{
                     (m_r=="255") &&
                     (m_g=="255") &&
                     (m_b=="255")
-                ){
+                )
                     ppm.map().element(x, 0, z, new Gap(glm::vec3(x,1,z)));
-                }
+                
                 else if( // floor
                     (m_r=="235") &&
                     (m_g=="150") &&
                     (m_b=="235")
                 )
                     ppm.map().element(x, 0, z, new Floor(glm::vec3(x,0,z)));
+                else if( // right-turn
+                    (m_r=="213") &&
+                    (m_g=="129") &&
+                    (m_b=="212")
+                )
+                    ppm.map().element(x, 0, z, new Turn(glm::vec3(x,0,z), "right"));
+                else if( // left-turn
+                    (m_r=="237") &&
+                    (m_g=="169") &&
+                    (m_b=="236")
+                )
+                    ppm.map().element(x, 0, z, new Turn(glm::vec3(x,0,z), "left"));
                 else if( // wall
                     (m_r=="125") &&
                     (m_g=="65") &&
