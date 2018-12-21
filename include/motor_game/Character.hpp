@@ -46,6 +46,8 @@ class Character : public PrintableElement
         m_speed = inSpeed;
      }
 
+    void translate(const float &x, const float &z);
+
 
 
     /// method checking the collision between a character instance and a printableElement instance which is passed as a parameter

@@ -123,6 +123,17 @@ END - IF YOU'RE USING GLSL VERSION 130
 
 int main(int argc, char** argv) {
 
+  //motor_game::PPMreader theReader("level_01_ASCII.ppm");
+  //motor_game::PPM ppmCool=theReader.readFile();
+
+  //ppmCool.map().translateMap(-5,-5);
+//  ppmCool.map().rotateRight();
+
+  //ppmCool.map().rotateLeft();
+//  ppmCool.map().printElement();
+  //std::cout<<ppmCool.map().element(1,1,17)->getType()<<std::endl;
+
+
   AppManager App;
   App.start(argv);
 

@@ -26,7 +26,7 @@ namespace motor_game{
 
     void Map::translateMap(const float &x, const float &z)
     {
-      glm::mat4 translationMatrix = glm::translate(glm::mat4(1),glm::vec3(x,0,z));
+      glm::mat4 translationMatrix = glm::translate(glm::mat4(1),glm::vec3(-x,0,-z));
       for (unsigned int i = 0; i<m_elements.size();i++)
       {
         if (m_elements[i] != nullptr)
@@ -39,7 +39,7 @@ namespace motor_game{
 
     void Map::rotateRight()
     {
-      float m_angle = 90;
+      float m_angle = -90;
       glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1),glm::radians(m_angle),glm::vec3(0,1,0));
       for (unsigned int i = 0; i<m_elements.size();i++)
       {
@@ -53,7 +53,7 @@ namespace motor_game{
 
     void Map::rotateLeft()
     {
-      float m_angle = -90;
+      float m_angle = 90;
       glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1),glm::radians(m_angle),glm::vec3(0,1,0));
       for (unsigned int i = 0; i<m_elements.size();i++)
       {

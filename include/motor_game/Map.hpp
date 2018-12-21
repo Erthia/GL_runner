@@ -18,6 +18,14 @@ namespace motor_game{
             /// \param coordinates of this Element
             Element *element(const unsigned int &x, const unsigned int &y, const unsigned int &z) const;
 
+            inline const unsigned int size(){
+              return m_elements.size();
+            }
+
+            inline const std::vector<Element*> getVector(){
+              return m_elements;
+            }
+
 
             /// \brief setter of an Element
             /// \param coordinates of this Element, and the Element

@@ -85,6 +85,12 @@ void Character::down()
 	m_position.y -= 0.5; // ???????
 }
 
+void Character::translate(const float &x, const float &z)
+{
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1),glm::vec3(-x,0,-z));
+	glm::vec4 newPosition = translationMatrix*glm::vec4(m_position,1);
+	m_position = glm::vec3(newPosition);
+}
 
 bool Character::checkCollision(const PrintableElement &b)
 {
