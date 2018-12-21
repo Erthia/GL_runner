@@ -27,8 +27,6 @@ public:
   void loadScene(motor_game::Map &inMap,float speed);
 
 private:
-
-
     std::vector<std::unique_ptr<glimac::Object>> m_dataObject;
     std::shared_ptr<Camera> m_camera;
 

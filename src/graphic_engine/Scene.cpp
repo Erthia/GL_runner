@@ -8,6 +8,7 @@
 #include "Scene.hpp"
 #include "Texture.hpp"
 #include "camera.hpp"
+#include "Image.hpp"
 #include "perspectiveShader.hpp"
 
 Scene::Scene()
@@ -24,10 +25,27 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
 {
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+  PerspectiveShader shaderTexture("./shaders/texture.fs.glsl");
 
   // Textures
   Texture test("elt/texture/brick.jpg");
   test.loadTexture();
+
+
+  std::unique_ptr<glimac::Image> myText = glimac::loadImage("elt/texture/brick.jpg");
+   if(myText == NULL ){
+      std::cerr << "Error charging texture." << std::endl;
+      exit(0);
+}
+
+  GLuint texture;
+  glGenTextures(1,&texture);
+ // shaderTexture.use();
+  glBindTexture(GL_TEXTURE_2D, texture);
+  glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,myText->getWidth(),myText->getHeight(),0,GL_RGBA,GL_FLOAT,myText->getPixels());
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // filtre
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // filtre
+  glBindTexture(GL_TEXTURE_2D, 0);
 
 
   for (unsigned int i= 0; i<inMap.x();i++)
@@ -56,15 +74,19 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
           if (inMap.element(i,j,k)->getType()=="Floor")
           {
             //Initialize Landmark
+            glBindTexture(GL_TEXTURE_2D, texture);
+            glUniform1i(shaderTexture.getUniformTexture(), 0);
+
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
             projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
-
             projection *= glm::translate(glm::mat4(1),glm::vec3(i,j,k+speed));
-
-            shader3D.use();
+            shaderTexture.use();
+            shaderTexture.setViewMatrix(m_camera->getViewMatrix(),projection);
+            shaderTexture.setUniformMatrix2();
+            /*shader3D.use();
             shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
             shader3D.setUniformMatrix2();
-
+*/
             (m_dataObject[0])->draw();
           }
 

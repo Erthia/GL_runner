@@ -9,17 +9,20 @@ class PerspectiveShader
 {
 public:
 
-  // constructor
+  /// constructor
   PerspectiveShader(
       const char* filepathFragmentShader = "./shaders/normals.fs.glsl");
 
-  // destructor
+  /// destructor
   ~PerspectiveShader() {};
 
   void setUniformMatrix() const;
   void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
   void setUniformMatrix2() const;
-
+  inline GLuint getUniformTexture() const
+  {
+    return m_uniformTexture;
+  }
   void use();
 
 private:
@@ -34,9 +37,10 @@ private:
   const char* uniformMVPName = "uMVPMatrix";
   const char* uniformMVName = "uMVMatrix";
   const char* uniformNormName = "uNormalMatrix";
+  const char* uniformTextureName = "uTexture";
 
   GLuint m_uniformModelViewMatrix;
   GLuint m_uniformNormalMatrix;
   GLuint m_uniformModelViewProjectionMatrix;
-
+  GLuint m_uniformTexture;
 };

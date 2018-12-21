@@ -10,14 +10,16 @@ PerspectiveShader::PerspectiveShader(
 
   m_program(glimac::loadProgram("./shaders/3d.vs.glsl",
                         m_filepathFragmentShader)),
+
   m_filepathFragmentShader(m_filepathFragmentShader),
-  m_modelviewMatrix(glm::mat4(1.0f)),
+  m_modelviewMatrix(glm::mat4(1.0f)) ,
   m_uniformModelViewMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVName)),
   m_uniformNormalMatrix(glGetUniformLocation(m_program.getGLId(),uniformNormName)),
-  m_uniformModelViewProjectionMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVPName))
-
+  m_uniformModelViewProjectionMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVPName)),
+  m_uniformTexture(glGetUniformLocation(m_program.getGLId(),uniformTextureName))
 
 {}
+
 void PerspectiveShader::use()
 {
   m_program.use();
