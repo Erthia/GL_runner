@@ -25,12 +25,15 @@ namespace motor_game{
             Element *element(const unsigned int &x, const unsigned int &y, const unsigned int &z) const;
             
             /// \brief setter of an Element
-            /// \param coordinates of this Element, and the Element
+            /// \param coordinates of this Element, and a pointer to the Element
            void element(
                 const unsigned int &x, const unsigned int &y, const unsigned int &z,
                 Element *element
             );
             
+            /// \brief erase an Element
+            /// \param coordinates of the Element
+            void erase(const unsigned int &x, const unsigned int &y, const unsigned int &z);
             
             /// \brief getter of x-coordinate
             inline const unsigned int &x() const{

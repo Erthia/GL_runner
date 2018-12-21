@@ -27,4 +27,9 @@ namespace motor_game{
     ){
         m_elements[x + m_x*y + (m_x*m_y)*z] = element;
     }
+    
+    void Map::erase(const unsigned int &x, const unsigned int &y, const unsigned int &z){
+        delete m_elements[x + m_x*y + (m_x*m_y)*z];
+        m_elements[x + m_x*y + (m_x*m_y)*z]=nullptr;
+    }
 }
