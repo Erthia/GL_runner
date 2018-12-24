@@ -31,13 +31,37 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
     projection *= glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
     if (vector[i]!=nullptr)
     {
-        projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
+        if (vector[i]->getType() == "Wall")
+        {
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
 
-        shader3D.use();
-        shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
-        shader3D.setUniformMatrix2();
+          shader3D.use();
+          shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
+          shader3D.setUniformMatrix2();
 
-        m_dataObject[0]->draw();
+          m_dataObject[0]->draw();
+        }
+        if (vector[i]->getType()=="Floor")
+        {
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
+
+          shader3D.use();
+          shader3D.setViewMatrix(m_camera->getViewMatrix(),projection);
+          shader3D.setUniformMatrix2();
+
+          m_dataObject[0]->draw();
+        }
+        if (vector[i]->getType()=="Obstacle")
+        {
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
+
+          shaderRed.use();
+          shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
+          shaderRed.setUniformMatrix2();
+
+          m_dataObject[0]->draw();
+        }
+
     }
 
   }
