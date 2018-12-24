@@ -24,6 +24,11 @@ namespace motor_game{
       }
     }
 
+    Element* Map::getElementi(const int i) const
+    {
+      return m_elements[i];
+    }
+
     void Map::translateMap(const float &x, const float &z)
     {
       glm::mat4 translationMatrix = glm::translate(glm::mat4(1),glm::vec3(-x,0,-z));

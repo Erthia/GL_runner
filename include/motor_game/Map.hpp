@@ -26,7 +26,7 @@ namespace motor_game{
               return m_elements;
             }
 
-
+            Element* getElementi(const int i) const;
             /// \brief setter of an Element
             /// \param coordinates of this Element, and the Element
            void element(
