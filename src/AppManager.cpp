@@ -177,7 +177,7 @@ int AppManager::start(char** argv)
                 else
                 {
                   startTicksLeft = SDL_GetTicks();
-                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())==nullptr)
+                  if(ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ())==nullptr)
                   {
                     hero.moveLeft();
                   }
@@ -249,7 +249,7 @@ int AppManager::start(char** argv)
             }
             else
             {
-              
+
             }
 
           }
