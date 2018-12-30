@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Element.hpp"
+#include "negative_vector.hpp"
 
 namespace motor_game{
     /// \class Map
@@ -22,7 +23,7 @@ namespace motor_game{
               return m_elements.size();
             }
 
-            inline const std::vector<Element*> getVector(){
+            inline const negative_vector<Element*> getVector(){
               return m_elements;
             }
 
@@ -59,7 +60,7 @@ namespace motor_game{
 
 
         private :
-            std::vector<Element*> m_elements;
+            negative_vector<Element*> m_elements;
             unsigned int m_x=0;
             unsigned int m_y=2;
             unsigned int m_z=0;

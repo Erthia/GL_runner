@@ -10,6 +10,7 @@
 #include "perspectiveShader.hpp"
 #include "Hero.hpp"
 
+
 Scene::Scene()
 {}
 
@@ -24,8 +25,8 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
 {
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
-  std::vector<Element*> vector = inMap.getVector();
-  for (unsigned int i = 0; i< inMap.size(); i++)
+  negative_vector<Element*> vector = inMap.getVector();
+  for (int i = vector.lower_limit(); i< vector.upper_limit(); i++)
   {
     glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
     projection *= glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
@@ -51,6 +52,18 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
 
           m_dataObject[0]->draw();
         }
+
+        if (vector[i]->getType()=="right" || vector[i]->getType()=="left")
+        {
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
+
+          shaderRed.use();
+          shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
+          shaderRed.setUniformMatrix2();
+
+          m_dataObject[0]->draw();
+        }
+
         if (vector[i]->getType()=="Obstacle")
         {
           projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));

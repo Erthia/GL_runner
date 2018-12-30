@@ -1,6 +1,7 @@
 #include <glimac/SDLWindowManager.hpp>
 #include <GL/glew.h>
 #include <iostream>
+#include <cmath>
 #include <glimac/common.hpp>
 #include <glimac/Sphere.hpp>
 #include <glimac/cube.hpp>
@@ -42,6 +43,7 @@
 #include "eyeCamera.hpp"
 #include "Character.hpp"
 
+
 #include <memory>
 
 AppManager::AppManager()
@@ -76,7 +78,7 @@ int AppManager::start(char** argv)
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
-  motor_game::PPMreader theReader("level_01_ASCII.ppm");
+  motor_game::PPMreader theReader("level_01_Turns_ASCII.ppm");
   motor_game::PPM ppmCool=theReader.readFile();
 
   Hero hero = ppmCool.hero();
@@ -96,7 +98,7 @@ int AppManager::start(char** argv)
 
   Scene game(std::move(vectorObject),camera);
   float speed = 0.05;
-  float begin = -hero.getZ()+1;
+  float begin = 0;
 
   int startTicksRight=0;
   int startTicksLeft=0;
@@ -163,15 +165,56 @@ int AppManager::start(char** argv)
               if (e.key.keysym.sym  == SDLK_q)
               {
 
-                if (startTicksLeft != 0 && (SDL_GetTicks()-startTicksLeft)<500)
+                if (startTicksLeft != 0 && (SDL_GetTicks()-startTicksLeft)<300)
                 {
 
-                  ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                  hero.translate(hero.getX(),hero.getZ());
-                  ppmCool.map().rotateLeft();
+                  if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
+                  {
+                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right" || ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
+                    {
 
-                  startTicksLeft = 0;
-                  begin = -hero.getZ();
+                      std::cout<<ppmCool.map().getElementi(5)->getPosition()<<std::endl;
+                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      hero.translate(hero.getX(),hero.getZ());
+                      ppmCool.map().rotateLeft();
+                      std::cout<<ppmCool.map().getElementi(5)->getPosition()<<std::endl;
+
+
+
+                      std::cout<< "AJUSTEMENT DES COORD" <<std::endl;
+                      if (fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))<0)
+                      {
+                        if (ppmCool.map().getElementi(5)->getPosition().x > 0)
+                        {
+
+                        ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
+                        }
+                        else
+                        {
+
+                          ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round(ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
+                        }
+                      }
+                      if (fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))>0)
+                      {
+                        if (ppmCool.map().getElementi(5)->getPosition().x > 0)
+                        {
+
+                        ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
+                        }
+                        else
+                        {
+
+                          ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
+                        }
+                      }
+
+                      startTicksRight = 0;
+                      begin = 0;
+                      std::cout<<"FIN DE LA ROTATION"<<std::endl;
+
+                    }
+                  }
 
                 }
                 else
@@ -181,6 +224,7 @@ int AppManager::start(char** argv)
                   {
                     hero.moveLeft();
                   }
+
                 }
 
 
@@ -191,23 +235,74 @@ int AppManager::start(char** argv)
               if (e.key.keysym.sym  == SDLK_d)
               {
 
-                if (startTicksRight != 0 && (SDL_GetTicks()-startTicksRight)<500)
+                if (startTicksRight != 0 && (SDL_GetTicks()-startTicksRight)<300)
                 {
 
-                  ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                  hero.translate(hero.getX(),hero.getZ());
-                  ppmCool.map().rotateRight();
+                  if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
+                  {
+                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right" || ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
+                    {
 
-                  startTicksRight = 0;
-                  begin = -hero.getZ();
+                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      std::cout<<"translation map"<<std::endl;
+                      hero.translate(hero.getX(),hero.getZ());
+                      std::cout<<"translation hero"<<std::endl;
+                      ppmCool.map().rotateRight();
+                      std::cout<<"rotation right"<<std::endl;
+                      if (ppmCool.map().getElementi(8) != nullptr)
+                      {
+                        std::cout<<ppmCool.map().getElementi(8)->getPosition()<<std::endl;
+
+
+                        std::cout<< "AJUSTEMENT DES COORD" <<std::endl;
+                        if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))<0)
+                        {
+                          if (ppmCool.map().getElementi(8)->getPosition().x > 0)
+                          {
+
+                          ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
+                          }
+                          else
+                          {
+
+                            ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round(ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
+                          }
+                        }
+                        if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))>0)
+                        {
+                          if (ppmCool.map().getElementi(8)->getPosition().x > 0)
+                          {
+
+                          ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
+                          }
+                          else
+                          {
+
+                            ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
+                          }
+                        }
+                      }
+
+
+                      startTicksRight = 0;
+                      begin = 0;
+                      std::cout<<"FIN DE LA ROTATION"<<std::endl;
+
+                    }
+                  }
+
+
+
+
                 }
                 else
                 {
                   startTicksRight = SDL_GetTicks();
-                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())==nullptr)
+                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()+0.05)==nullptr)
                   {
                     hero.moveRight();
                   }
+
                 }
               }
             }
@@ -227,30 +322,34 @@ int AppManager::start(char** argv)
           }
 
           // Render loop:
-          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())==nullptr)
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)==nullptr)
           {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            game.loadScene(ppmCool.map(),begin);
             begin -=speed;
             hero.run();
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            game.loadScene(ppmCool.map(),begin);
+
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
             projection *=glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
             projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
+
             shader3D.use();
             shader3D.setViewMatrix(camera->getViewMatrix(),projection);
             shader3D.setUniformMatrix2();
+
             player.draw();
+
+
           }
-
-          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())!=nullptr)
+          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)
           {
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ())->getType() == "Wall")
-            {
-            }
-            else
-            {
 
-            }
+              std::cout<<"  COLLISION W/ "<<ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType()<<std::endl;
+              std::cout<<"  POSITION ELEMENT: "<< ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getPosition()<<std::endl;
+              std::cout<<"  POSITION HERO: "<<hero.getPosition()<<std::endl;
+              return 1;
+            
 
           }
 
