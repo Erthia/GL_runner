@@ -2,14 +2,14 @@
 
 namespace motor_game{
 
-    Map::Map(const unsigned int &x, const unsigned int &y, const unsigned int &z)
+    Map::Map(const int &x, const int &y, const int &z)
         : m_elements(negative_vector<Element*>(-(x*y*z),x*y*z)), m_x(x), m_y(y), m_z(z)
     {}
 
 
 
 
-    Element *Map::element(const unsigned int &x, const unsigned int &y, const unsigned int &z) const{
+    Element *Map::element(const int &x, const int &y, const int &z) const{
         return m_elements[x + m_x*y + (m_x*m_y)*z];
     }
 
@@ -51,12 +51,12 @@ namespace motor_game{
       {
         m_elements[i] = vectorTemp[i];
       }
-
+      std::cout<<"TRANSLATION"<<std::endl;
     }
 
     void Map::rotateRight()
     {
-
+      std::cout<<"ROTATION DROITE"<<std::endl;
       float m_angle = -90;
       glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1),glm::radians(m_angle),glm::vec3(0,1,0));
       for (int i = m_elements.lower_limit(); i<m_elements.upper_limit();i++)
@@ -71,7 +71,7 @@ namespace motor_game{
 
     void Map::rotateLeft()
     {
-
+      std::cout<<"ROTATION GAUCHE"<<std::endl;
       float m_angle = 90;
       glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1),glm::radians(m_angle),glm::vec3(0,1,0));
       for (int i = m_elements.lower_limit(); i<m_elements.upper_limit();i++)
@@ -86,7 +86,7 @@ namespace motor_game{
     }
 
     void Map::element(
-        const unsigned int &x, const unsigned int &y, const unsigned int &z,
+        const int &x, const int &y, const int &z,
         Element *element
     ){
         m_elements[x + m_x*y + (m_x*m_y)*z] = element;

@@ -44,8 +44,8 @@ namespace motor_game{
         PPM ppm(m_x, m_y, m_z);
 
         // read colors, and create elements
-        for(unsigned int x=0; x<ppm.x(); x++){
-            for(unsigned int z=0; z<ppm.z(); z++){
+        for( int x=0; x<ppm.x(); x++){
+            for( int z=0; z<ppm.z(); z++){
                 m_r=nextString();
                 m_g=nextString();
                 m_b=nextString();
@@ -125,8 +125,8 @@ namespace motor_game{
         );
 
         // read colors, and create coins
-        for(unsigned int x=0; x<ppm.x(); x++){
-            for(unsigned int z=0; z<ppm.z(); z++){
+        for(int x=0; x<ppm.x(); x++){
+            for(int z=0; z<ppm.z(); z++){
                 m_r=nextString();
                 m_g=nextString();
                 m_b=nextString();

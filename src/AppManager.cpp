@@ -42,6 +42,7 @@
 #include "PPMreader.hpp"
 #include "eyeCamera.hpp"
 #include "Character.hpp"
+#include "checkRotation.hpp"
 
 
 #include <memory>
@@ -152,7 +153,7 @@ int AppManager::start(char** argv)
 
         // Event loop:
         SDL_Event e;
-        int z;
+        float z;
         while(windowManager.pollEvent(e)) {
 
             if (e.type == SDL_KEYDOWN){
@@ -173,34 +174,17 @@ int AppManager::start(char** argv)
                   {
                     if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
                     {
-                /*      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 1)->getType() == "left")
-                      {
-                        if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 1)->getType() == "left")
-                        {
-                          z = hero.getZ();
-                        }
-                        else
-                        {
-                          z = hero.getZ() - 1;
-                        }
-                      }
-                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 2)->getType() == "left")
-                      {
-                         z = hero.getZ() + 1;
-                      }
-                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 2)->getType() == "left")
-                      {
-                         z = hero.getZ() - 1;
-                      }*/
 
 
+                      z = setRotationZ(ppmCool.map(),hero.getX(),hero.getZ());
+                      std::cout << " z = " << z << " Hero Z = " << hero.getZ() <<std::endl;
                       if (hero.getX() == 1)
                       {
 
                         ppmCool.map().translateMap(hero.getX()+1,hero.getZ());
                         hero.translate(hero.getX()+1,hero.getZ());
                         ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()+1),-hero.getZ());
+                        ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()));
 
                       }
                       if (hero.getX() == 2)
@@ -209,16 +193,16 @@ int AppManager::start(char** argv)
                         ppmCool.map().translateMap(hero.getX()-1,hero.getZ());
                         hero.translate(hero.getX()+1,hero.getZ());
                         ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()-1),-hero.getZ());
+                        ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()));
 
                       }
                       else
                       {
 
-                        ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                        ppmCool.map().translateMap(hero.getX(),hero.getZ()+z);
                         hero.translate(hero.getX()+1,hero.getZ());
                         ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()),-hero.getZ());
+                        ppmCool.map().translateMap(-(hero.getX()),-(hero.getZ()));
 
                       }
 
@@ -286,52 +270,34 @@ int AppManager::start(char** argv)
                   {
                     if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right")
                     {
-/*
-                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 1)->getType() == "right")
-                      {
-                        if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 1)->getType() == "right")
-                        {
-                          z = hero.getZ();
-                        }
-                        else
-                        {
-                          z = hero.getZ() - 1;
-                        }
-                      }
-                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 2)->getType() == "right")
-                      {
-                         z = hero.getZ() + 1;
-                      }
-                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 2)->getType() == "right")
-                      {
-                         z = hero.getZ() - 1;
-                      }*/
+
+                      z = setRotationZ(ppmCool.map(),hero.getX(),hero.getZ());
+                      std::cout << " z = " << z << " Hero Z = " << hero.getZ() <<std::endl;
 
                       if (hero.getX() == 1)
                       {
 
-                        ppmCool.map().translateMap(hero.getX()+1,hero.getZ());
-                        hero.translate(hero.getX()+1,hero.getZ());
-                        ppmCool.map().rotateRight();
-                        ppmCool.map().translateMap(-(hero.getX()+1),-hero.getZ());
+                        ppmCool.map().translateMap(hero.getX()+1,hero.getZ()+z);
+                        hero.translate(hero.getX()+1,hero.getZ()+z);
+                        ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()+z));
 
                       }
                       if (hero.getX() == 2)
                       {
 
-                        ppmCool.map().translateMap(hero.getX()-1,hero.getZ());
-                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().translateMap(hero.getX()-1,hero.getZ()+z);
+                        hero.translate(hero.getX()+1,hero.getZ()+z);
                         ppmCool.map().rotateRight();
-                        ppmCool.map().translateMap(-(hero.getX()-1),-hero.getZ());
+                        ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()+z));
 
                       }
                       else
                       {
 
-                        ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().translateMap(hero.getX(),hero.getZ()+z);
+                        hero.translate(hero.getX()+1,hero.getZ()+z);
                         ppmCool.map().rotateRight();
-                        ppmCool.map().translateMap(-(hero.getX()),-hero.getZ());
+                        ppmCool.map().translateMap(-(hero.getX()),-(hero.getZ()+z));
 
                       }
 
