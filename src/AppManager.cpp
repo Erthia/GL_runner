@@ -78,7 +78,7 @@ int AppManager::start(char** argv)
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
-  motor_game::PPMreader theReader("level_01_Turns_ASCII.ppm");
+  motor_game::PPMreader theReader("test_01.ppm");
   motor_game::PPM ppmCool=theReader.readFile();
 
   Hero hero = ppmCool.hero();
@@ -152,6 +152,7 @@ int AppManager::start(char** argv)
 
         // Event loop:
         SDL_Event e;
+        int z;
         while(windowManager.pollEvent(e)) {
 
             if (e.type == SDL_KEYDOWN){
@@ -170,14 +171,57 @@ int AppManager::start(char** argv)
 
                   if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right" || ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
+                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
                     {
+                /*      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 1)->getType() == "left")
+                      {
+                        if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 1)->getType() == "left")
+                        {
+                          z = hero.getZ();
+                        }
+                        else
+                        {
+                          z = hero.getZ() - 1;
+                        }
+                      }
+                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 2)->getType() == "left")
+                      {
+                         z = hero.getZ() + 1;
+                      }
+                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 2)->getType() == "left")
+                      {
+                         z = hero.getZ() - 1;
+                      }*/
 
-                      std::cout<<ppmCool.map().getElementi(5)->getPosition()<<std::endl;
-                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                      hero.translate(hero.getX(),hero.getZ());
-                      ppmCool.map().rotateLeft();
-                      std::cout<<ppmCool.map().getElementi(5)->getPosition()<<std::endl;
+
+                      if (hero.getX() == 1)
+                      {
+
+                        ppmCool.map().translateMap(hero.getX()+1,hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateLeft();
+                        ppmCool.map().translateMap(-(hero.getX()+1),-hero.getZ());
+
+                      }
+                      if (hero.getX() == 2)
+                      {
+
+                        ppmCool.map().translateMap(hero.getX()-1,hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateLeft();
+                        ppmCool.map().translateMap(-(hero.getX()-1),-hero.getZ());
+
+                      }
+                      else
+                      {
+
+                        ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateLeft();
+                        ppmCool.map().translateMap(-(hero.getX()),-hero.getZ());
+
+                      }
+
 
 
 
@@ -240,15 +284,58 @@ int AppManager::start(char** argv)
 
                   if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right" || ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
+                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right")
                     {
+/*
+                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 1)->getType() == "right")
+                      {
+                        if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 1)->getType() == "right")
+                        {
+                          z = hero.getZ();
+                        }
+                        else
+                        {
+                          z = hero.getZ() - 1;
+                        }
+                      }
+                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()+ 2)->getType() == "right")
+                      {
+                         z = hero.getZ() + 1;
+                      }
+                      if (ppmCool.map().element(hero.getX(),0,hero.getZ()- 2)->getType() == "right")
+                      {
+                         z = hero.getZ() - 1;
+                      }*/
 
-                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
-                      std::cout<<"translation map"<<std::endl;
-                      hero.translate(hero.getX(),hero.getZ());
-                      std::cout<<"translation hero"<<std::endl;
-                      ppmCool.map().rotateRight();
-                      std::cout<<"rotation right"<<std::endl;
+                      if (hero.getX() == 1)
+                      {
+
+                        ppmCool.map().translateMap(hero.getX()+1,hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateRight();
+                        ppmCool.map().translateMap(-(hero.getX()+1),-hero.getZ());
+
+                      }
+                      if (hero.getX() == 2)
+                      {
+
+                        ppmCool.map().translateMap(hero.getX()-1,hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateRight();
+                        ppmCool.map().translateMap(-(hero.getX()-1),-hero.getZ());
+
+                      }
+                      else
+                      {
+
+                        ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                        hero.translate(hero.getX()+1,hero.getZ());
+                        ppmCool.map().rotateRight();
+                        ppmCool.map().translateMap(-(hero.getX()),-hero.getZ());
+
+                      }
+
+
                       if (ppmCool.map().getElementi(8) != nullptr)
                       {
                         std::cout<<ppmCool.map().getElementi(8)->getPosition()<<std::endl;
@@ -348,8 +435,6 @@ int AppManager::start(char** argv)
               std::cout<<"  COLLISION W/ "<<ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType()<<std::endl;
               std::cout<<"  POSITION ELEMENT: "<< ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getPosition()<<std::endl;
               std::cout<<"  POSITION HERO: "<<hero.getPosition()<<std::endl;
-              return 1;
-            
 
           }
 
