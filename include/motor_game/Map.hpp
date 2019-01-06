@@ -52,6 +52,36 @@ namespace motor_game{
                 return m_z;
             }
 
+            /// \brief getter of projection on X
+            inline int projectionX() const{
+              return m_projectionX;
+            }
+
+            /// \brief getter of projection on Y
+            inline int projectionY() const{
+              return m_projectionY;
+            }
+
+            /// \brief getter of projection on Z
+            inline int projectionZ() const{
+              return m_projectionZ;
+            }
+
+            /// \brief setter of projection on X
+            inline void projectionX(const int x){
+              m_projectionX = x;
+            }
+
+            /// \brief getter of projection on Y
+            inline void projectionY(const int y){
+              m_projectionY = y;
+            }
+
+            /// \brief getter of projection on Z
+            inline void projectionZ(const int z){
+              m_projectionZ = z;
+            }
+
             void printElement();
             void translateMap(const float &x, const float &z);
             void rotateRight();
@@ -61,9 +91,16 @@ namespace motor_game{
 
         private :
             negative_vector<Element*> m_elements;
+
             int m_x=0;
             int m_y=2;
             int m_z=0;
+
+            int m_projectionX = -2;
+            int m_projectionY = -3;
+            int m_projectionZ = -3;
+
+
     };
 
 }
