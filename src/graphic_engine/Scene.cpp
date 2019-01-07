@@ -75,6 +75,17 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
           m_dataObject[0]->draw();
         }
 
+        if (vector[i]->getType()=="End")
+        {
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
+
+          shaderRed.use();
+          shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
+          shaderRed.setUniformMatrix2();
+
+          m_dataObject[0]->draw();
+        }
+
     }
 
   }

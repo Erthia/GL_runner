@@ -82,7 +82,7 @@ void Character::up()
 void Character::down()
 {
 	std::cout << m_type << " crawled." << std::endl;
-	m_position.y -= 0.5; // ???????
+	m_position.y -= 1; // ???????
 }
 
 void Character::translate(const float &x, const float &z)

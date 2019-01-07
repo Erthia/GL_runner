@@ -64,14 +64,14 @@ namespace motor_game{
                     (m_g=="0") &&
                     (m_b=="0")
                 )
-                    ppm.map().element(x, 0, z, new End(glm::vec3(x,1,z)));
+                    ppm.map().element(x, 1, z, new End(glm::vec3(x,1,z)));
 
                 else if( // gap
                     (m_r=="255") &&
                     (m_g=="255") &&
                     (m_b=="255")
                 )
-                    ppm.map().element(x, 0, z, new Gap(glm::vec3(x,1,z)));
+                    ppm.map().element(x, 1, z, new Gap(glm::vec3(x,1,z)));
 
                 else if( // floor
                     (m_r=="235") &&
@@ -108,7 +108,7 @@ namespace motor_game{
                     (m_g=="185") &&
                     (m_b=="70")
                 )
-                    ppm.map().element(x, 0, z, new Obstacle(glm::vec3(x,1,z)));
+                    ppm.map().element(x, 1, z, new Obstacle(glm::vec3(x,1,z)));
                 else assert(false);
             }
         }
