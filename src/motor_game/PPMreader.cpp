@@ -102,7 +102,11 @@ namespace motor_game{
                     (m_g=="95") &&
                     (m_b=="225")
                 )
-                    ppm.map().element(x, 1, z, new Obstacle(glm::vec3(x,2,z)));
+                {
+                  ppm.map().element(x, 2, z, new Obstacle(glm::vec3(x,2,z)));
+                  ppm.map().element(x, 0, z, new Floor(glm::vec3(x,0,z)));
+                }
+
                 else if( // low obstacle
                     (m_r=="35") &&
                     (m_g=="185") &&
