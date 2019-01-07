@@ -104,13 +104,6 @@ int AppManager::start(char** argv)
   int startTicksRight=0;
   int startTicksLeft=0;
 
-  // PROJECTION INTEGER
-
-
-
-
-
-
 
   // Application loop:
 
@@ -287,7 +280,7 @@ int AppManager::start(char** argv)
                         if (z == 0)
                         {
                           ppmCool.map().translateMap(hero.getX()+1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()-1));
 
@@ -297,7 +290,7 @@ int AppManager::start(char** argv)
                         else
                         {
                           ppmCool.map().translateMap(hero.getX()+1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()+z));
                           std::cout<< "APRES TRANSLATION ("<<hero.getX()<<","<<hero.getY()<<","<<hero.getZ()<<") "<<std::endl;
@@ -314,7 +307,7 @@ int AppManager::start(char** argv)
                         if (z == 0)
                         {
                           ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
 
@@ -325,7 +318,7 @@ int AppManager::start(char** argv)
                         if ( z == -1)
                         {
                           ppmCool.map().translateMap(hero.getX()-1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()+z));
 
@@ -336,7 +329,7 @@ int AppManager::start(char** argv)
                         if (z == 1)
                         {
                           ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
 
@@ -356,7 +349,7 @@ int AppManager::start(char** argv)
                         if ( z == -1 )
                         {
                           ppmCool.map().translateMap(hero.getX()-1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()+z));
 
@@ -367,7 +360,7 @@ int AppManager::start(char** argv)
                         if ( z == 0 )
                         {
                           ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
 
@@ -379,7 +372,7 @@ int AppManager::start(char** argv)
                         {
 
                           ppmCool.map().translateMap(hero.getX(),hero.getZ()-1);
-                          hero.translate(0,hero.getZ());
+                          hero.translate(0,hero.getZ()-1);
                           ppmCool.map().rotateRight();
                           ppmCool.map().translateMap(-(hero.getX()),-(hero.getZ()-1));
 
