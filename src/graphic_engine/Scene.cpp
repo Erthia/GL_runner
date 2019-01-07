@@ -29,7 +29,7 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
   for (int i = vector.lower_limit(); i< vector.upper_limit(); i++)
   {
     glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
-    projection *= glm::translate(glm::mat4(1),glm::vec3(-2,-3,-3));
+    projection *= glm::translate(glm::mat4(1),glm::vec3(inMap.projectionX(),inMap.projectionY(),inMap.projectionZ()));
     if (vector[i]!=nullptr)
     {
         if (vector[i]->getType() == "Wall")
