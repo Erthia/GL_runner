@@ -88,8 +88,10 @@ int AppManager::start(char** argv)
 
 /*** A changer ***/
   std::unique_ptr<Cube> cube(new Cube);
+  std::unique_ptr<Cone> cone(new Cone);
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
+  vectorObject.emplace_back(std::move(cone));
   // Menu
   Menu menu;
   menu.setVisibility(false);
@@ -116,7 +118,7 @@ int AppManager::start(char** argv)
       if ( has_jump == true )
       {
         jump ++;
-        if (jump == 25)
+        if (jump == 40)
         {
           has_jump = false;
           jump = 0;
