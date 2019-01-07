@@ -309,6 +309,8 @@ int AppManager::start(char** argv)
 
                       if (hero.getX() == 1)
                       {
+                        std::cout<<"CAS 1"<<std::endl;
+
 
                         if (z == 0)
                         {
@@ -329,6 +331,7 @@ int AppManager::start(char** argv)
 
                       if (hero.getX() == 2)
                       {
+                        std::cout<<"CAS 2 "<<hero.getX()<<std::endl;
 
                         if (z == 0)
                         {
@@ -362,6 +365,7 @@ int AppManager::start(char** argv)
 
                       if (hero.getX() == 3)
                       {
+                        std::cout<<"CAS DUC "<<hero.getX()<<std::endl;
 
                         if ( z == -1 )
                         {
