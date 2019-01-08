@@ -55,7 +55,7 @@ int AppManager::start(char** argv)
 
 /** PLUS PROPRE A TROUVER **/
 
-  bool GAME = true;
+  bool GAME = false;
 
 /********************************/
 
@@ -73,9 +73,11 @@ int AppManager::start(char** argv)
 // SHADER
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+  PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
+
 // MOTOR GAME
   glEnable(GL_DEPTH_TEST);
 
@@ -92,12 +94,12 @@ int AppManager::start(char** argv)
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
   vectorObject.emplace_back(std::move(cone));
+
+
   // Menu
   Menu menu;
-  menu.setVisibility(false);
+  menu.setVisibility(true);
   Cube player;
-  Landmark landmark;
-  Grid grid;
 
   Scene game(std::move(vectorObject),camera);
   float speed = 0.05;
@@ -109,6 +111,23 @@ int AppManager::start(char** argv)
   bool has_jump = false;
   int jump = 0;
 
+
+  std::unique_ptr<Image> pImage,pImage2,pImage3;
+  pImage = loadImage("./elt/texture/ecran_debut_RUNNER_2.png");
+  if(pImage==NULL){
+ 	  std::cout<<"oups !"<<std::endl;
+  }
+
+/**** CREER UN VECTOR DE TEXTURE QUE JE PASSERAI EN ARG A SCENE ****/
+  GLuint texture;
+  glGenTextures(1,&texture);
+  glBindTexture(GL_TEXTURE_2D,texture);
+	glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,pImage->getWidth(),
+	             pImage->getHeight(),0,GL_RGBA,GL_FLOAT,pImage->getPixels());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glBindTexture(GL_TEXTURE_2D,0);
 
   // Application loop:
 
@@ -151,14 +170,13 @@ int AppManager::start(char** argv)
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-
-        shaderRed.use();
-        shaderRed.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
-        shaderRed.setUniformMatrix();
-
+        shader3DTex.use();
+        glActiveTexture(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,texture);
+        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setUniformMatrix();
         menu.displayMenu();
-
+        glBindTexture(GL_TEXTURE_2D,0);
 
       }
 
@@ -489,12 +507,13 @@ int AppManager::start(char** argv)
             projection *=glm::translate(glm::mat4(1),glm::vec3(ppmCool.map().projectionX(),ppmCool.map().projectionY(),ppmCool.map().projectionZ()));
             projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
 
-            shader3D.use();
-            shader3D.setViewMatrix(camera->getViewMatrix(),projection);
-            shader3D.setUniformMatrix2();
-
+            shader3DTex.use();
+            glActiveTexture(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D,texture);
+            shader3DTex.setViewMatrix(camera->getViewMatrix(),projection);
+            shader3DTex.setUniformMatrix2();
             player.draw();
-
+            glBindTexture(GL_TEXTURE_2D,0);
 
           }
           if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)
@@ -529,6 +548,7 @@ int AppManager::start(char** argv)
           }
 
         //Update the display
+        glBindTexture(GL_TEXTURE_2D,0);
         windowManager.swapBuffers();
 
 

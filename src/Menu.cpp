@@ -11,67 +11,36 @@ void Menu::build()
 {
 
   ShapeVertex vertex;
-/*
-// BACKGROUND
+
+// BUTTON
+
   vertex.texCoords = glm::vec2(0,0);
   vertex.normal = glm::vec3(-4,3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(-4,-3,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-
-  vertex.texCoords = glm::vec2(0,0);
+  vertex.texCoords = glm::vec2(1,0);
   vertex.normal = glm::vec3(4,3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(-4,-3,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-
-  vertex.texCoords = glm::vec2(0,0);
+  vertex.texCoords = glm::vec2(1,1);
   vertex.normal = glm::vec3(4,-3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 
   vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(4,3,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-*/
-// BUTTON
-
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(-2,1,1);
+  vertex.normal = glm::vec3(-4,3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(2,1,1);
+  vertex.texCoords = glm::vec2(0,1);
+  vertex.normal = glm::vec3(-4,-3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(2,-1,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(-2,1,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(-2,-1,1);
-  vertex.position = vertex.normal;
-  m_Vertices.push_back(vertex);
-
-  vertex.texCoords = glm::vec2(0,0);
-  vertex.normal = glm::vec3(2,-1,1);
+  vertex.texCoords = glm::vec2(1,1);
+  vertex.normal = glm::vec3(4,-3,1);
   vertex.position = vertex.normal;
   m_Vertices.push_back(vertex);
 

@@ -14,8 +14,8 @@ PerspectiveShader::PerspectiveShader(
   m_modelviewMatrix(glm::mat4(1.0f)),
   m_uniformModelViewMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVName)),
   m_uniformNormalMatrix(glGetUniformLocation(m_program.getGLId(),uniformNormName)),
-  m_uniformModelViewProjectionMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVPName))
-
+  m_uniformModelViewProjectionMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVPName)),
+  m_uniformModelTexture(glGetUniformLocation(m_program.getGLId(),"uTexture"))
 
 {}
 void PerspectiveShader::use()
@@ -39,10 +39,15 @@ void PerspectiveShader::setUniformMatrix() const
   NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
 
   glm::mat4 modelViewProjection = projMatrix * MVMatrix* m_modelviewMatrix;
+  glUniform1i(m_uniformModelTexture,0);
   glUniformMatrix4fv(m_uniformModelViewProjectionMatrix,1,GL_FALSE,glm::value_ptr(modelViewProjection));
   glUniformMatrix4fv(m_uniformModelViewMatrix,1,GL_FALSE,glm::value_ptr(MVMatrix));
   glUniformMatrix4fv(m_uniformNormalMatrix,1,GL_FALSE,glm::value_ptr(NormalMatrix));
+
+
 }
+
+
 
 void PerspectiveShader::setUniformMatrix2() const
 {

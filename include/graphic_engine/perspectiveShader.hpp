@@ -38,5 +38,6 @@ private:
   GLuint m_uniformModelViewMatrix;
   GLuint m_uniformNormalMatrix;
   GLuint m_uniformModelViewProjectionMatrix;
+  GLuint m_uniformModelTexture;
 
 };
