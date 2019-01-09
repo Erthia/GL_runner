@@ -137,13 +137,6 @@ int main(int argc, char** argv) {
 
   AppManager App;
   App.start(argv);
-  SDL_Color color = {255, 0, 0, 0}; // Red 
-  Font font("elt/ttf/starjedi.ttf");
-  font.loadFont(App);
-  /*
-RenderText("Hello World", color, 5, 10, 12); */
-    //loadString("bojnjour", color, 1, 20);
- // drawText("bonjour");
 
   return EXIT_SUCCESS;
 }

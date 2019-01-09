@@ -45,6 +45,7 @@
 #include "checkRotation.hpp"
 #include "TextureLoader.hpp"
 #include "Skybox.hpp"
+#include "Font.hpp"
 
 #include <memory>
 
@@ -118,6 +119,10 @@ int AppManager::start(char** argv)
   GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   Skybox skybox;
 
+  // font
+  SDL_Color color = {255, 0, 0, 0}; // Red 
+  Font font("elt/ttf/starjedi.ttf");
+
 
   // Application loop:
 
@@ -180,6 +185,7 @@ int AppManager::start(char** argv)
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
+        font.loadFont();
 
       }
 

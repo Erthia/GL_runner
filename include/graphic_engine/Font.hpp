@@ -4,7 +4,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
-#include "AppManager.hpp"
+//#include "AppManager.hpp"
 
 class Font
 {
@@ -17,6 +17,8 @@ public:
   /// param filePath to know which font and where to load it
   Font(const std::string &fontPath);
 
+  int puissance2sup(const int i);
+
 
   /// setter for filePath
   void setFontPath(const std::string &fontPath);
@@ -28,10 +30,10 @@ public:
   /// \brief default destructor
   ~Font();
 
-  //Methods
-  /// \ method to load the texture
-  /// \handles filePath errors
-  bool loadFont(AppManager &app); 
+
+ // bool loadFont(AppManager *app); 
+  void loadFont(); 
+
   
 private:
 
