@@ -9,9 +9,14 @@ class PerspectiveShader
 {
 public:
 
-  // constructor
+  /// constructor
   PerspectiveShader(
       const char* filepathFragmentShader = "./shaders/normals.fs.glsl");
+
+  PerspectiveShader(
+          const char* filepathVertexShader,
+          const char* filepathFragmentShader
+  );
 
   // destructor
   ~PerspectiveShader() {};
@@ -27,6 +32,7 @@ private:
   glimac::Program m_program;
 
   const char* m_filepathFragmentShader;
+  const char* m_filepathVertexShader;
 
   glm::mat4 m_modelviewMatrix;
   glm::mat4 m_modelprojMatrix;

@@ -43,7 +43,8 @@
 #include "eyeCamera.hpp"
 #include "Character.hpp"
 #include "checkRotation.hpp"
-
+#include "TextureLoader.hpp"
+#include "Skybox.hpp"
 
 #include <memory>
 
@@ -55,7 +56,9 @@ int AppManager::start(char** argv)
 
 /** PLUS PROPRE A TROUVER **/
 
+  bool MENU = true;
   bool GAME = false;
+  bool TEST = false;
 
 /********************************/
 
@@ -74,6 +77,7 @@ int AppManager::start(char** argv)
   PerspectiveShader shader3D;
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
   PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
+  PerspectiveShader shaderSkybox("./shaders/skybox.vs.glsl","./shaders/skybox.fs.glsl");
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
@@ -98,7 +102,7 @@ int AppManager::start(char** argv)
 
   // Menu
   Menu menu;
-  menu.setVisibility(true);
+  menu.setVisibility(MENU);
   Cube player;
 
   Scene game(std::move(vectorObject),camera);
@@ -111,28 +115,27 @@ int AppManager::start(char** argv)
   bool has_jump = false;
   int jump = 0;
 
+  GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+  Skybox skybox;
 
-  std::unique_ptr<Image> pImage,pImage2,pImage3;
-  pImage = loadImage("./elt/texture/ecran_debut_RUNNER_2.png");
-  if(pImage==NULL){
- 	  std::cout<<"oups !"<<std::endl;
-  }
-
-/**** CREER UN VECTOR DE TEXTURE QUE JE PASSERAI EN ARG A SCENE ****/
-  GLuint texture;
-  glGenTextures(1,&texture);
-  glBindTexture(GL_TEXTURE_2D,texture);
-	glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,pImage->getWidth(),
-	             pImage->getHeight(),0,GL_RGBA,GL_FLOAT,pImage->getPixels());
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glBindTexture(GL_TEXTURE_2D,0);
 
   // Application loop:
 
   bool done = false;
   while(!done) {
+
+
+      if (TEST)
+      {
+        SDL_Event e;
+        while(windowManager.pollEvent(e)) {
+            if(e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
+            }
+        }
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      }
 
       if ( has_jump == true )
       {
@@ -421,7 +424,6 @@ int AppManager::start(char** argv)
                       {
                         std::cout<<ppmCool.map().getElementi(8)->getPosition()<<std::endl;
 
-
                         if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))<0)
                         {
                           if (ppmCool.map().getElementi(8)->getPosition().x > 0)
@@ -435,7 +437,8 @@ int AppManager::start(char** argv)
                             ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round(ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
                           }
                         }
-                        if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))>0)
+
+                        else if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))>0)
                         {
                           if (ppmCool.map().getElementi(8)->getPosition().x > 0)
                           {
@@ -514,6 +517,16 @@ int AppManager::start(char** argv)
             shader3DTex.setUniformMatrix2();
             player.draw();
             glBindTexture(GL_TEXTURE_2D,0);
+
+            // Draw skybox as last
+            projection = glm::perspective( (float) - 50, ( float )800/( float )600, 0.1f, 1000.0f );
+            glDepthFunc( GL_LEQUAL );  // Change depth function so depth test passes when values are equal to depth buffer's content
+            shaderSkybox.use( );
+            shaderSkybox.setViewMatrix(camera->getViewMatrix(),projection);
+            shaderSkybox.setUniformMatrix2();
+
+            skybox.displaySkybox();
+
 
           }
           if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)

@@ -5,12 +5,12 @@
 #include "perspectiveShader.hpp"
 
 PerspectiveShader::PerspectiveShader(
-  const char* m_filepathFragmentShader):
+  const char* filepathFragmentShader):
 
 
   m_program(glimac::loadProgram("./shaders/3d.vs.glsl",
-                        m_filepathFragmentShader)),
-  m_filepathFragmentShader(m_filepathFragmentShader),
+                        filepathFragmentShader)),
+  m_filepathFragmentShader(filepathFragmentShader),
   m_modelviewMatrix(glm::mat4(1.0f)),
   m_uniformModelViewMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVName)),
   m_uniformNormalMatrix(glGetUniformLocation(m_program.getGLId(),uniformNormName)),
@@ -18,6 +18,26 @@ PerspectiveShader::PerspectiveShader(
   m_uniformModelTexture(glGetUniformLocation(m_program.getGLId(),"uTexture"))
 
 {}
+
+PerspectiveShader::PerspectiveShader(
+  const char* filepathVertexShader,
+  const char* filepathFragmentShader):
+
+
+  m_program(glimac::loadProgram(filepathVertexShader,
+                        filepathFragmentShader)),
+  m_filepathVertexShader(filepathVertexShader),
+  m_filepathFragmentShader(filepathFragmentShader),
+  m_modelviewMatrix(glm::mat4(1.0f)),
+  m_uniformModelViewMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVName)),
+  m_uniformNormalMatrix(glGetUniformLocation(m_program.getGLId(),uniformNormName)),
+  m_uniformModelViewProjectionMatrix(glGetUniformLocation(m_program.getGLId(),uniformMVPName)),
+  m_uniformModelTexture(glGetUniformLocation(m_program.getGLId(),"uTexture"))
+
+{}
+
+
+
 void PerspectiveShader::use()
 {
   m_program.use();
