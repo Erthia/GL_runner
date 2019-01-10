@@ -13,11 +13,11 @@ class Element : public PrintableElement
   public:
   	/// default constructor of class Element
   	/// our class Element is only abstract
-    Element(); 
+    Element();
 
     /// constructor with parameters
     /// param type : a string which will allow us to know what kind of Element we're dealing with
-    Element(const glm::vec3 &position, const std::string &type); 
+    Element(const glm::vec3 &position, const std::string &type);
 
     /// brief method to display the value of Element's attributes
     virtual void printElement() const;
@@ -32,6 +32,6 @@ class Element : public PrintableElement
     }
 
     /// default destructor of our Element
-    ~Element(); 
+    ~Element();
 
 };

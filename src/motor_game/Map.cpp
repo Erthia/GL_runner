@@ -13,6 +13,11 @@ namespace motor_game{
         return m_elements[x + m_x*y + (m_x*m_y)*z];
     }
 
+    void Map::eraseElement(const int &x, const int &y, const int &z)
+    {
+      m_elements[x + m_x*y + (m_x*m_y)*z] = nullptr;
+    }
+
     void Map::printElement()
     {
       for (int i = m_elements.lower_limit(); i<m_elements.upper_limit();i++)

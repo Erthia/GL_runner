@@ -104,7 +104,7 @@ namespace motor_game{
                     (m_b=="70")
                 )
                 {
-                  //ppm.map().element(x, 1, z, new Coin(glm::vec3(x, 1, z), 1));
+                  ppm.map().element(x, 1, z, new Coin(glm::vec3(x, 1, z), 1));
                   ppm.map().element(x, 0, z, new Floor(glm::vec3(x,0,z)));
                 }
                 else if( // high obstacle

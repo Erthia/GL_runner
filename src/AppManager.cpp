@@ -94,10 +94,10 @@ int AppManager::start(char** argv)
 
 /*** A changer ***/
   std::unique_ptr<Cube> cube(new Cube);
-  std::unique_ptr<Cone> cone(new Cone);
+  std::unique_ptr<Sphere> sphere(new Sphere);
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
-  vectorObject.emplace_back(std::move(cone));
+  vectorObject.emplace_back(std::move(sphere));
 
 
   // Menu
@@ -370,23 +370,32 @@ int AppManager::start(char** argv)
           }
           if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)
           {
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Obstacle")
+
+            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Coin")
+            {
+              std::cout<< " COIN !  "<<std::endl;
+              ppmCool.map().eraseElement(hero.getX(),hero.getY(),hero.getZ()+0.05);
+              m_score ++;
+            }
+
+            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Obstacle")
             {
               std::cout<< " GAME OVER "<<std::endl;
+              std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
               return 0;
             }
 
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
+            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
             {
               std::cout<< " GAP ! "<<std::endl;
             }
 
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
+            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
             {
               std::cout<< " Wall ! "<<std::endl;
             }
 
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
+            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
             {
               std::cout<< " YOU WIN ! "<<std::endl;
               return 1;

@@ -88,8 +88,8 @@ void Scene::loadScene(motor_game::Map &inMap,float speed)
 
         if (vector[i]->getType()=="Coin")
         {
-          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX(),vector[i]->getY(),vector[i]->getZ()+speed));
-
+          projection *=glm::translate(glm::mat4(1),glm::vec3(vector[i]->getX()+0.5,vector[i]->getY()+0.5,vector[i]->getZ()+speed));
+          projection *=glm::scale(glm::mat4(1),glm::vec3(0.5,0.5,0.5));
           shaderRed.use();
           shaderRed.setViewMatrix(m_camera->getViewMatrix(),projection);
           shaderRed.setUniformMatrix2();

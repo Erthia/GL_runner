@@ -86,6 +86,7 @@ namespace motor_game{
             void translateMap(const float &x, const float &z);
             void rotateRight();
             void rotateLeft();
+            void eraseElement(const int &x, const int &y, const int &z);
 
 
 
