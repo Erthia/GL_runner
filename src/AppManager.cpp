@@ -48,7 +48,11 @@
 #include "Skybox.hpp"
 #include "Coin.hpp"
 #include "Font.hpp"
+<<<<<<< HEAD
 #include "SDL/SDL_mixer.h"
+=======
+#include "lightShader.hpp"
+>>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
 
 #include <memory>
 
@@ -94,10 +98,15 @@ if (flags != (result = Mix_Init(flags))) {
 
 // SHADER
   PerspectiveShader shader3D;
-  PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+  PerspectiveShader shaderBlue("./shaders/blue.fs.glsl");
   PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
   PerspectiveShader shaderSkybox("./shaders/skybox.vs.glsl","./shaders/skybox.fs.glsl");
-  ShaderL lightingShader("./shaders/skybox.vs.glsl", "./shaders/skybox.fs.glsl");
+
+  std::vector<PerspectiveShader*> shaderVector;
+  shaderVector.push_back(&shader3D);
+  shaderVector.push_back(&shaderBlue);
+  shaderVector.push_back(&shader3DTex);
+
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
@@ -135,12 +144,16 @@ if (flags != (result = Mix_Init(flags))) {
   vectorObject.emplace_back(std::move(sphere));
     // Menu
   GLuint textureMenu;
-  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_score_RUNNER.png");
   GLuint textureMenu1 = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   GLuint textureMenu2 = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+  GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/spaceplayer.jpg");
+  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
   GLuint textureGameOver = TextureLoader::LoadTexture("./elt/texture/ecran_GAME_OVER.png");
 
-  GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+
+  std::vector<GLuint*> textureVector;
+  textureVector.push_back(&texturePlayer);
+
   Skybox skybox;
 
   Menu menu;
@@ -148,7 +161,11 @@ if (flags != (result = Mix_Init(flags))) {
   Menu score;
   score.setVisibility(SCORE);
   Cube player;
+<<<<<<< HEAD
   Scene game(std::move(vectorObject),camera);
+=======
+  Scene game(std::move(vectorObject),camera,textureVector,shaderVector);
+>>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
 
 
   // font
@@ -271,7 +288,7 @@ if (flags != (result = Mix_Init(flags))) {
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,textureMenu);
-        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
@@ -293,7 +310,10 @@ if (flags != (result = Mix_Init(flags))) {
 
               if (score.onMouseEvent(windowManager.getMousePosition()) == 1)
               {
-                               GAME = 1;
+                SCORE = 0;
+                menu.setVisibility(true);
+                std::cout << "test menu " << std::endl;
+                GAME = 1;
                 glUseProgram(0);
               }
               if (score.onMouseEvent(windowManager.getMousePosition()) == 2)
@@ -317,7 +337,7 @@ if (flags != (result = Mix_Init(flags))) {
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,textureScore);
-        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         score.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
@@ -423,10 +443,19 @@ if (flags != (result = Mix_Init(flags))) {
                   {
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
+<<<<<<< HEAD
                       std::cout<<"GAP !"<<std::endl;
                       menu.type(3);
                     GAME = 0;
                       //return 0;
+=======
+                      std::cout<< " GAME OVER "<<std::endl;
+                      std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+                      GAME = false;
+                      menu.type(2);
+                      menu.setVisibility(true);
+>>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
                     }
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -486,10 +515,19 @@ if (flags != (result = Mix_Init(flags))) {
                   {
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
+<<<<<<< HEAD
                       std::cout<<"GAP !"<<std::endl;
                       menu.type(3);
                       GAME = 0;
                       //return 0;
+=======
+                      std::cout<< " GAME OVER "<<std::endl;
+                      std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+                      GAME = false;
+                      menu.type(2);
+                      menu.setVisibility(true);
+>>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
                     }
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -562,7 +600,6 @@ if (flags != (result = Mix_Init(flags))) {
             shaderSkybox.use( );
             shaderSkybox.setViewMatrix(camera->getViewMatrix(),projection);
             shaderSkybox.setUniformMatrix2();
-
             skybox.displaySkybox();
 
 
@@ -580,22 +617,22 @@ if (flags != (result = Mix_Init(flags))) {
             {
               std::cout<< " GAME OVER "<<std::endl;
               std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
-              menu.type(3);
-              GAME = 0;
-             // done = true;
 
-           // return 0;
+              GAME = false;
+              menu.type(2);
+              menu.setVisibility(true);
             }
 
             else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
             {
-              std::cout<< " GAP ! "<<std::endl;
+              std::cout<< " GAME OVER "<<std::endl;
+              std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+              GAME = false;
+              menu.type(2);
+              menu.setVisibility(true);
             }
 
-            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
-            {
-              std::cout<< " Wall ! "<<std::endl;
-            }
 
             else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
             {

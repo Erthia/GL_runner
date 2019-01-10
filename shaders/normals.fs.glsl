@@ -14,7 +14,7 @@ out vec3 fFragColor;
 void main() {
 
 
-	fFragColor  = normalize(vNormal);
+	fFragColor  = normalize(vNormal)-vec3(0.8,0.7,0.1);
 
 
 	//fFragColor = vec3(1.0,0.0,0.0);
