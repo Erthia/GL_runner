@@ -43,12 +43,16 @@
 #include "PPMreader.hpp"
 #include "eyeCamera.hpp"
 #include "Character.hpp"
+#include "Scores.hpp"
 #include "TextureLoader.hpp"
 #include "Skybox.hpp"
 #include "Coin.hpp"
 #include "Font.hpp"
+#include "SDL/SDL_mixer.h"
 
 #include <memory>
+
+static const char *NYAN = "elt/sound/nyancat.wav";
 
 AppManager::AppManager()
 {}
@@ -67,6 +71,18 @@ int AppManager::start(char** argv)
 
 // Initialize and Open Window
   SDLWindowManager windowManager(m_width,m_height,"SpacIMAC RUN");
+  Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+    Mix_Music *nyancat = Mix_LoadMUS(NYAN);
+  Mix_PlayMusic(nyancat, 1);
+
+// test debug audio
+int flags = MIX_INIT_OGG;
+int result = 0;
+if (flags != (result = Mix_Init(flags))) {
+        printf("Could not initialize mixer (result: %d).\n", result);
+        printf("Mix_Init: %s\n", Mix_GetError());
+        exit(1);
+}
 
 
 // Initialize glew for OpenGL3+ support
@@ -94,6 +110,7 @@ int AppManager::start(char** argv)
 
 
   motor_game::Map map = ppmCool.map();
+  motor_game::Scores scoreTable;
   Hero hero = ppmCool.hero();
   hero.setSpeed(0.05);
 
@@ -134,8 +151,6 @@ int AppManager::start(char** argv)
   Scene game(std::move(vectorObject),camera);
 
 
-
-
   // font
   Font font("elt/ttf/starjedi.ttf");
 
@@ -166,10 +181,12 @@ int AppManager::start(char** argv)
         if (menu.type() == 2)
         {
           textureMenu = textureMenu2;
+
         }
         else if(menu.type() == 3)
         {
           textureMenu = textureGameOver;
+         
         }
 
         else
@@ -266,6 +283,10 @@ int AppManager::start(char** argv)
       {
         // Event loop:
         SDL_Event e;
+        // test score 
+       std::multimap<long,std::string>::const_iterator it;
+          for(it=scoreTable.multimap().begin(); it!=scoreTable.multimap().end(); it++)
+            std::cout << it->second << " : " << it->first << std::endl;
         while(windowManager.pollEvent(e)) {
 
             if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
@@ -305,12 +326,19 @@ int AppManager::start(char** argv)
       }
       if (menu.type() == 3)
       {
+        //save score
+        //print the scores
+         scoreTable.add(std::pair<long,std::string>(m_score, "Anonyme"));
+         scoreTable.save("Score.ttf");
         // Event loop:
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
 
             if(e.type == SDL_QUIT) {
                 done = true; // Leave the loop after this iteration
+                 Mix_FreeMusic(nyancat);
+                 Mix_Quit();
+
                 return 0;
             }
         }
@@ -396,7 +424,9 @@ int AppManager::start(char** argv)
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
                       std::cout<<"GAP !"<<std::endl;
-                      return 0;
+                      menu.type(3);
+                    GAME = 0;
+                      //return 0;
                     }
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -457,7 +487,9 @@ int AppManager::start(char** argv)
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
                       std::cout<<"GAP !"<<std::endl;
-                      return 0;
+                      menu.type(3);
+                      GAME = 0;
+                      //return 0;
                     }
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {

@@ -17,9 +17,9 @@ namespace motor_game{
             /// \param maxSize : max number of scores stored
             Scores(const size_t &maxSize=7);
             
-            /// \brief constructor - can throw an exception
+            
             /// \param filename : constructor reads scores from this file
-            Scores(const std::string &filename);
+            void read(const std::string &filename);
             
             /// \brief getter : returns the multimap which contains the scores
             const std::multimap<long,std::string,std::greater<long>> &multimap() const;

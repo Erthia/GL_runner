@@ -2,7 +2,7 @@
 
 namespace motor_game{
     
-    Scores::Scores(const std::string &filename)
+    void Scores::read(const std::string &filename)
     {
         //open the file
         std::ifstream inStream = std::ifstream("elt/" + filename, std::ios::in);
