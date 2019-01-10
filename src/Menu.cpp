@@ -82,7 +82,7 @@ int Menu::onMouseEvent(glm::ivec2 position)
       isVisible = false;
       return 1;
   }*/
-  std::cout << "x : " << position.x << " y : " <<position.y << std::endl;
+  //std::cout << "x : " << position.x << " y : " <<position.y << std::endl;
   // bouton play
    if ((position.x>338 && position.x<455) && (position.y>269 && position.y<328))
   {
@@ -93,7 +93,7 @@ int Menu::onMouseEvent(glm::ivec2 position)
   // bouton score
  if ((position.x>275 && position.x<530) && (position.y>370 && position.y<415))
   {
-     // isVisible = true;
+     isVisible = false;
 
       return 2;
   }
