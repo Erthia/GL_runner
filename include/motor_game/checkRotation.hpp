@@ -2,4 +2,4 @@
 #include "Map.hpp"
 
 
-float setRotationZ(motor_game::Map map, float inX, float inZ);
+int setRotationZ(motor_game::Map map, int inX, int inZ);

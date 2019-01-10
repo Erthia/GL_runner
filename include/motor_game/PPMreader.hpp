@@ -25,19 +25,19 @@ namespace motor_game{
             /// \brief constructor : open the setting file
             /// \param string of the file name
             PPMreader(const std::string &filename);
-            
+
             PPMreader() = delete;
-            
+
             ///\brief destructor
             ~PPMreader();
-            
+
             /// \brief read the file and set the ppm
             const PPM readFile();
-            
+
             /// \brief read the file and add coins to the ppm
             /// \param ppm : the ppm to add coins to
             void readFile(PPM &ppm);
-        
+
         private :
             // return the next valid string in the file (ie not a comment)
             // don't manage end of file
@@ -49,11 +49,11 @@ namespace motor_game{
             std::string m_g;
             std::string m_b;
             std::ifstream m_ppm_1;
-            unsigned int m_x=0;
-            unsigned int m_y=3;
-            unsigned int m_z=0;
+            int m_x=0;
+            int m_y=3;
+            int m_z=0;
     };
-    
+
 }
 
 #endif

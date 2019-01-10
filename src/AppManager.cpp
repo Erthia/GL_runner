@@ -118,6 +118,11 @@ int AppManager::start(char** argv)
   GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   Skybox skybox;
 
+  int z = 0;
+  int zTranslation = 0;
+  int has_turned = 0;
+
+
 
   // Application loop:
 
@@ -189,7 +194,7 @@ int AppManager::start(char** argv)
 
         // Event loop:
         SDL_Event e;
-        float z;
+
         while(windowManager.pollEvent(e)) {
 
             if (e.type == SDL_KEYDOWN){
@@ -221,71 +226,19 @@ int AppManager::start(char** argv)
                     if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
                     {
 
-                      z = 0;
-                      z = setRotationZ(ppmCool.map(),hero.getX(),hero.getZ());
-                      std::cout << " z = " << z << " Hero Z = " << hero.getZ() <<std::endl;
-                      if (hero.getX() == 1)
+                      if (zTranslation == 1)
                       {
-
-                        ppmCool.map().translateMap(hero.getX()+1,hero.getZ());
-                        hero.translate(hero.getX()+1,hero.getZ());
-                        ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()));
-
-                      }
-                      if (hero.getX() == 2)
-                      {
-
-                        ppmCool.map().translateMap(hero.getX()-1,hero.getZ());
-                        hero.translate(hero.getX()+1,hero.getZ());
-                        ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()));
-
-                      }
-                      else
-                      {
-
-                        ppmCool.map().translateMap(hero.getX(),hero.getZ()+z);
-                        hero.translate(hero.getX()+1,hero.getZ());
-                        ppmCool.map().rotateLeft();
-                        ppmCool.map().translateMap(-(hero.getX()),-(hero.getZ()));
-
+                        zTranslation = 0;
                       }
 
-
-
-
-                      std::cout<< "AJUSTEMENT DES COORD" <<std::endl;
-                      if (fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))<0)
-                      {
-                        if (ppmCool.map().getElementi(5)->getPosition().x > 0)
-                        {
-
-                        ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
-                        }
-                        else
-                        {
-
-                          ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round(ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
-                        }
-                      }
-                      if (fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))>0)
-                      {
-                        if (ppmCool.map().getElementi(5)->getPosition().x > 0)
-                        {
-
-                        ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
-                        }
-                        else
-                        {
-
-                          ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(5)->getPosition().x) - fabs((round( ppmCool.map().getElementi(5)->getPosition().x)))),hero.getZ());
-                        }
-                      }
+                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      hero.translate(hero.getX(),hero.getZ());
+                      ppmCool.map().rotateLeft();
+                      ppmCool.map().translateMap(-3,-1);
+                      hero.translate(-3,-1);
 
                       startTicksRight = 0;
                       begin = 0;
-                      std::cout<<"FIN DE LA ROTATION"<<std::endl;
 
                     }
                   }
@@ -325,134 +278,19 @@ int AppManager::start(char** argv)
                   {
                     if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right")
                     {
-
-                      z = 0;
-                      z = setRotationZ(ppmCool.map(),hero.getX(),hero.getZ());
-
-
-                      if (hero.getX() == 1)
+                      has_turned ++;
+                      if (has_turned > 1)
                       {
-                        std::cout<<"CAS 1"<<std::endl;
-
-
-                        if (z == 0)
-                        {
-                          ppmCool.map().translateMap(hero.getX()+1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()-1));
-                        }
-
-                        else
-                        {
-                          ppmCool.map().translateMap(hero.getX()+1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()+1),-(hero.getZ()+z));
-                        }
+                        zTranslation = 1;
                       }
 
-                      if (hero.getX() == 2)
-                      {
-                        std::cout<<"CAS 2 "<<hero.getX()<<std::endl;
-
-                        if (z == 0)
-                        {
-                          ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
-                        }
-
-                        if ( z == -1)
-                        {
-                          ppmCool.map().translateMap(hero.getX()-1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()+z));
-                        }
-
-                        if (z == 1)
-                        {
-                          ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
-
-                        }
-
-
-
-
-                      }
-
-                      if (hero.getX() == 3)
-                      {
-                        std::cout<<"CAS DUC "<<hero.getX()<<std::endl;
-
-                        if ( z == -1 )
-                        {
-                          ppmCool.map().translateMap(hero.getX()-1,hero.getZ()+z);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()+z));
-                        }
-
-                        if ( z == 0 )
-                        {
-                          ppmCool.map().translateMap(hero.getX()-1,hero.getZ()-1);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()-1),-(hero.getZ()-1));
-                        }
-
-                        if ( z == 1)
-                        {
-
-                          ppmCool.map().translateMap(hero.getX(),hero.getZ()-1);
-                          hero.translate(0,hero.getZ()-1);
-                          ppmCool.map().rotateRight();
-                          ppmCool.map().translateMap(-(hero.getX()),-(hero.getZ()-1));
-                        }
-
-
-
-                      }
-
-
-                      if (ppmCool.map().getElementi(8) != nullptr)
-                      {
-                        std::cout<<ppmCool.map().getElementi(8)->getPosition()<<std::endl;
-
-                        if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))<0)
-                        {
-                          if (ppmCool.map().getElementi(8)->getPosition().x > 0)
-                          {
-
-                          ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
-                          }
-                          else
-                          {
-
-                            ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round(ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
-                          }
-                        }
-
-                        else if (fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))>0)
-                        {
-                          if (ppmCool.map().getElementi(8)->getPosition().x > 0)
-                          {
-
-                          ppmCool.map().translateMap((fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
-                          }
-                          else
-                          {
-
-                            ppmCool.map().translateMap(-(fabs(ppmCool.map().getElementi(8)->getPosition().x) - fabs((round( ppmCool.map().getElementi(8)->getPosition().x)))),hero.getZ());
-                          }
-                        }
-                      }
-
+                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      hero.translate(hero.getX(),hero.getZ());
+                      std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
+                      ppmCool.map().rotateRight();
+                      ppmCool.map().translateMap(-1,-1);
+                      hero.translate(-1,-1);
+                      std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
 
                       startTicksRight = 0;
                       begin = 0;
@@ -508,13 +346,14 @@ int AppManager::start(char** argv)
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
 
             projection *=glm::translate(glm::mat4(1),glm::vec3(ppmCool.map().projectionX(),ppmCool.map().projectionY(),ppmCool.map().projectionZ()));
-            projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX(),hero.getY(),0));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX()+zTranslation,hero.getY(),0));
 
             shader3DTex.use();
             glActiveTexture(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D,texture);
             shader3DTex.setViewMatrix(camera->getViewMatrix(),projection);
             shader3DTex.setUniformMatrix2();
+            std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
             player.draw();
             glBindTexture(GL_TEXTURE_2D,0);
 
@@ -542,17 +381,17 @@ int AppManager::start(char** argv)
               std::cout<< " GAP ! "<<std::endl;
             }
 
+            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
+            {
+              std::cout<< " Wall ! "<<std::endl;
+            }
+
             if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
             {
               std::cout<< " YOU WIN ! "<<std::endl;
               return 1;
             }
 
-/*
-             std::cout<<"  COLLISION W/ "<<ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType()<<std::endl;
-              std::cout<<"  POSITION ELEMENT: "<< ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getPosition()<<std::endl;
-              std::cout<<"  POSITION HERO: "<<hero.getPosition()<<std::endl;
-*/
           }
 
 
