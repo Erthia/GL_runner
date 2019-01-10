@@ -122,11 +122,14 @@ int AppManager::start(char** argv)
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
   vectorObject.emplace_back(std::move(sphere));
+    // Menu
   GLuint textureMenu;
   GLuint textureMenu1 = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   GLuint textureMenu2 = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
   GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/spaceplayer.jpg");
   GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+  GLuint textureGameOver = TextureLoader::LoadTexture("./elt/texture/ecran_GAME_OVER.png");
+
 
   std::vector<GLuint*> textureVector;
   textureVector.push_back(&texturePlayer);
@@ -163,8 +166,6 @@ int AppManager::start(char** argv)
       }
 
 
-
-
       if (menu.visibility() == true)
       {
         // Event loop:
@@ -173,6 +174,10 @@ int AppManager::start(char** argv)
         if (menu.type() == 2)
         {
           textureMenu = textureMenu2;
+        }
+        else if(menu.type() == 3)
+        {
+          textureMenu = textureGameOver;
         }
 
         else
@@ -230,6 +235,7 @@ int AppManager::start(char** argv)
 
             }
 
+
             if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
               if (menu.onMouseEvent(windowManager.getMousePosition()) == 1)
@@ -277,11 +283,14 @@ int AppManager::start(char** argv)
                 SCORE = 0;
                 menu.setVisibility(true);
                 std::cout << "test menu " << std::endl;
+                GAME = 1;
                 glUseProgram(0);
               }
               if (score.onMouseEvent(windowManager.getMousePosition()) == 2)
               {
-                GAME = 1;
+
+                SCORE = 0;
+                menu.setVisibility(true);
                 glUseProgram(0);
               }
             }
@@ -305,11 +314,37 @@ int AppManager::start(char** argv)
 
 
       }
+      if (menu.type() == 3)
+      {
+        // Event loop:
+        SDL_Event e;
+        while(windowManager.pollEvent(e)) {
+
+            if(e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
+                return 0;
+            }
+        }
+
+        //Render loop:
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        shader3DTex.use();
+        glActiveTexture(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,textureGameOver);
+        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setUniformMatrix();
+        menu.displayMenu();
+        glBindTexture(GL_TEXTURE_2D,0);
+
+
+      }
 
 
       if (GAME)
       {
-        font.loadFont();
+        //font.loadFont();
         // Event loop:
         SDL_Event e;
 
