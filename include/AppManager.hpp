@@ -26,6 +26,8 @@ public:
 
 public:
 
+  std::string m_window_name = "SpacIMAC RUN";
+
   int m_width = 800;
   int m_height = 600;
 

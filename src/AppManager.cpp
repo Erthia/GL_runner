@@ -47,6 +47,7 @@
 #include "Skybox.hpp"
 #include "Coin.hpp"
 #include "Font.hpp"
+#include "lightShader.hpp"
 
 #include <memory>
 
@@ -78,10 +79,15 @@ int AppManager::start(char** argv)
 
 // SHADER
   PerspectiveShader shader3D;
-  PerspectiveShader shaderRed("./shaders/red.fs.glsl");
+  PerspectiveShader shaderBlue("./shaders/blue.fs.glsl");
   PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
   PerspectiveShader shaderSkybox("./shaders/skybox.vs.glsl","./shaders/skybox.fs.glsl");
-  ShaderL lightingShader("./shaders/skybox.vs.glsl", "./shaders/skybox.fs.glsl");
+
+  std::vector<PerspectiveShader*> shaderVector;
+  shaderVector.push_back(&shader3D);
+  shaderVector.push_back(&shaderBlue);
+  shaderVector.push_back(&shader3DTex);
+
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
@@ -119,7 +125,12 @@ int AppManager::start(char** argv)
   GLuint textureMenu;
   GLuint textureMenu1 = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   GLuint textureMenu2 = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
-  GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+  GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/spaceplayer.jpg");
+  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+
+  std::vector<GLuint*> textureVector;
+  textureVector.push_back(&texturePlayer);
+
   Skybox skybox;
 
   Menu menu;
@@ -127,17 +138,7 @@ int AppManager::start(char** argv)
   Menu score;
   score.setVisibility(SCORE);
   Cube player;
-  Scene game(std::move(vectorObject),camera);
-
-  // Menu
-
-
-
-
-
-
-  GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
-  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+  Scene game(std::move(vectorObject),camera,textureVector,shaderVector);
 
 
   // font
@@ -255,7 +256,7 @@ int AppManager::start(char** argv)
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,textureMenu);
-        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
@@ -274,7 +275,7 @@ int AppManager::start(char** argv)
               if (score.onMouseEvent(windowManager.getMousePosition()) == 1)
               {
                 SCORE = 0;
-               menu.setVisibility(true);
+                menu.setVisibility(true);
                 std::cout << "test menu " << std::endl;
                 glUseProgram(0);
               }
@@ -297,7 +298,7 @@ int AppManager::start(char** argv)
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,textureScore);
-        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         score.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
@@ -370,8 +371,12 @@ int AppManager::start(char** argv)
                   {
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
-                      std::cout<<"GAP !"<<std::endl;
-                      return 0;
+                      std::cout<< " GAME OVER "<<std::endl;
+                      std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+                      GAME = false;
+                      menu.type(2);
+                      menu.setVisibility(true);
                     }
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -431,8 +436,12 @@ int AppManager::start(char** argv)
                   {
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
-                      std::cout<<"GAP !"<<std::endl;
-                      return 0;
+                      std::cout<< " GAME OVER "<<std::endl;
+                      std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+                      GAME = false;
+                      menu.type(2);
+                      menu.setVisibility(true);
                     }
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -505,7 +514,6 @@ int AppManager::start(char** argv)
             shaderSkybox.use( );
             shaderSkybox.setViewMatrix(camera->getViewMatrix(),projection);
             shaderSkybox.setUniformMatrix2();
-
             skybox.displaySkybox();
 
 
@@ -523,18 +531,22 @@ int AppManager::start(char** argv)
             {
               std::cout<< " GAME OVER "<<std::endl;
               std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
-              return 0;
+
+              GAME = false;
+              menu.type(2);
+              menu.setVisibility(true);
             }
 
             else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
             {
-              std::cout<< " GAP ! "<<std::endl;
+              std::cout<< " GAME OVER "<<std::endl;
+              std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
+
+              GAME = false;
+              menu.type(2);
+              menu.setVisibility(true);
             }
 
-            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
-            {
-              std::cout<< " Wall ! "<<std::endl;
-            }
 
             else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
             {

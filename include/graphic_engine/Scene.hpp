@@ -3,6 +3,7 @@
 #include <glimac/Object.hpp>
 #include <glimac/cube.hpp>
 #include <glimac/Landmark.hpp>
+#include <glimac/common.hpp>
 
 #include <vector>
 #include <memory>
@@ -11,6 +12,7 @@
 #include "Element.hpp"
 #include "Map.hpp"
 #include "Hero.hpp"
+#include "perspectiveShader.hpp"
 
 class Scene
 {
@@ -21,6 +23,12 @@ public:
   Scene(
          std::vector<std::unique_ptr<glimac::Object>> inDataObject,
          std::shared_ptr<Camera> inCamera);
+
+   Scene(
+          std::vector<std::unique_ptr<glimac::Object>> inDataObject,
+          std::shared_ptr<Camera> inCamera,
+          std::vector<GLuint*> inTexture,
+          std::vector<PerspectiveShader*> inShader);
   //Destructor
   ~Scene();
 
@@ -32,5 +40,7 @@ private:
 
     std::vector<std::unique_ptr<glimac::Object>> m_dataObject;
     std::shared_ptr<Camera> m_camera;
+    std::vector<GLuint*> m_texture;
+    std::vector<PerspectiveShader*> m_shader;
 
 };
