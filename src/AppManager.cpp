@@ -17,7 +17,7 @@
 #include <glimac/ShaderL.hpp>
 #include <vector>
 #include <cstdlib>
-//#include <GLFW/glfw3.h>
+
 #include <fstream>
 #include "AppManager.hpp"
 #include "Menu.hpp"
@@ -31,7 +31,6 @@
 #include "PrintableElement.hpp"
 #include "Element.hpp"
 #include "Character.hpp"
-//#include "Coin.hpp"
 #include "Hero.hpp"
 #include "Enemy.hpp"
 #include "Wall.hpp"
@@ -52,6 +51,7 @@
 #include "lightShader.hpp"
 
 
+
 #include <memory>
 
 static const char *NYAN = "elt/sound/nyancat.wav";
@@ -62,14 +62,10 @@ AppManager::AppManager()
 int AppManager::start(char** argv)
 {
 
-/** PLUS PROPRE A TROUVER **/
-
   bool MENU = true;
   bool SCORE = false;
   bool GAME = false;
   bool TEST = false;
-
-/********************************/
 
 // Initialize and Open Window
   SDLWindowManager windowManager(m_width,m_height,"SpacIMAC RUN");
@@ -132,35 +128,30 @@ if (flags != (result = Mix_Init(flags))) {
   int has_turned = 0;
 
 
-
-
-/*** A changer ***/
   std::unique_ptr<Cube> cube(new Cube);
   std::unique_ptr<Sphere> sphere(new Sphere);
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
   vectorObject.emplace_back(std::move(sphere));
-    // Menu
+
+// TEXTURE
+
   GLuint textureMenu;
   GLuint textureMenu1 = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
   GLuint textureMenu2 = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
   GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/spaceplayer.jpg");
-  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_score_RUNNER.png");
   GLuint textureGameOver = TextureLoader::LoadTexture("./elt/texture/ecran_GAME_OVER.png");
-
-
   std::vector<GLuint*> textureVector;
   textureVector.push_back(&texturePlayer);
 
-  Skybox skybox;
 
+  Skybox skybox;
   Menu menu;
   menu.setVisibility(MENU);
   Menu score;
   score.setVisibility(SCORE);
   Cube player;
- // Scene game(std::move(vectorObject),camera);
-
   Scene game(std::move(vectorObject),camera,textureVector,shaderVector);
 
 
@@ -199,7 +190,7 @@ if (flags != (result = Mix_Init(flags))) {
         else if(menu.type() == 3)
         {
           textureMenu = textureGameOver;
-         
+
         }
 
         else
@@ -296,7 +287,7 @@ if (flags != (result = Mix_Init(flags))) {
       {
         // Event loop:
         SDL_Event e;
-        // test score 
+        // test score
        std::multimap<long,std::string>::const_iterator it;
           for(it=scoreTable.multimap().begin(); it!=scoreTable.multimap().end(); it++)
             std::cout << it->second << " : " << it->first << std::endl;

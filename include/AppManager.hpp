@@ -33,6 +33,8 @@ public:
 
 public:
 
+  std::string m_window_name;
+  
   int m_width = 800;
   int m_height = 600;
   int m_score = 0;

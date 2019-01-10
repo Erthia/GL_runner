@@ -15,7 +15,6 @@
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
-//#include <GLFW/glfw3.h>
 #include <fstream>
 
 #pragma once
@@ -24,7 +23,7 @@
 class Menu
 {
 
-  /// mrthod wich fill the vertices vector , and set the vao and the vbo
+  /// mrthod wich fill the vertices vector
   void build();
 
 public:
@@ -61,22 +60,28 @@ public:
      m_type = inType;
   }
 
+
+/// method which set vao and vbo parameters
   void initMenu(GLuint &vbo,GLuint &vao);
+  /// method which draw the menu
   void displayMenu() const;
 
-  // Renvoit le pointeur vers les données
+  /// method which give a pointer on the data
   const ShapeVertex* getDataPointer() const {
       return &m_Vertices[0];
   }
 
-  // Renvoit le nombre de vertex
+  /// Getter vertex number
   GLsizei getVertexCount() const {
       return m_nVertexCount;
   }
 
+/// method who create vbo
 	void vboManager(GLuint &vbo);
+/// method which create the vao from the vbo
 	void vaoManager(GLuint &vao,GLuint &vbo);
 
+/// method which handle sdl mouse cllick event
   int onMouseEvent(glm::ivec2 position);
 
 private:
