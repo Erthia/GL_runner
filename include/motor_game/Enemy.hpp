@@ -6,7 +6,8 @@
 #include <glm/glm.hpp>
 
  #include "Character.hpp"
-#include "Hero.hpp"
+
+class Hero;
 
 class Enemy final : public Character
 {
@@ -28,7 +29,8 @@ class Enemy final : public Character
     void printElement() const;
 
 	/// default destructor of our Enemy
-    ~Enemy(); 
+    ~Enemy();
+    
 
 
   protected:

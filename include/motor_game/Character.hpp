@@ -25,19 +25,19 @@ class Character : public PrintableElement
     Character(const glm::vec3 &position, const unsigned int &speed, const std::string &type);
 
     /// method allowing the character to move forward on the z axis
-    void run();
+    virtual void run();
 
   /// method allowing the character to jump up the y axis
-    void up();
+    virtual void up();
 
   /// method allowing the character to crawl under obstacles: their height is then 1 instead of 2
-    void down();
+    virtual void down();
 
     /// method allowing the character to move left along the x axis
-    void moveLeft();
+    virtual void moveLeft();
 
     /// method allowing the character to move right along the x axis
-    void moveRight();
+    virtual void moveRight();
 
     /// method checking the collision between a character instance and a printableElement instance which is passed as a parameter
     /// this method is activated when the player wants to move and checks if the position is available. the direction of the movement (determined by the pressed touch) is passed as a second parameter.

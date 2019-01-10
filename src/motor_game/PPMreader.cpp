@@ -58,6 +58,7 @@ namespace motor_game{
                     ppm.map().element(x, 0, z, new Floor(glm::vec3(x,0,z)));
                     ppm.hero().setPosition(glm::vec3(x+2, 1, z));
                     ppm.enemy().setPosition(glm::vec3(x, 1, z));
+                    ppm.hero().setEnemy(&ppm.enemy());
                 }
                 else if( // end
                     (m_r=="0") &&

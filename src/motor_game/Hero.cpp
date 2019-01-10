@@ -122,7 +122,7 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 				break;
 
 			case 'z' :
-				// jump
+				// jvoid setEnemy(const Enemy *enemy);ump
 				if(map.element(x, y+1, z) != nullptr || map.element(x, y+2, z) != nullptr){
 					// check collision from 'below'
 					if(map.element(x, y+1, z) != nullptr)	{
@@ -189,6 +189,54 @@ bool Hero::checkCollide(motor_game::Map &map, const char &movement) {
 	return false;
 }
 	
+void Hero::run(){
+    
+    if(m_timeNextMov.size() !=0){
+        if(m_timeNextMov.front()<=0){
+            switch(m_nextMov.front()){
+                case 'u' : m_enemy->up(); break;
+                case 'd' : m_enemy->down(); break;
+                case 'l' : m_enemy->moveLeft(); break;
+                case 'r' : m_enemy->moveRight(); break;
+                default : assert(false); break;
+            }
+            m_timeNextMov.pop_back();
+            m_nextMov.pop();
+        }
+        for(std::list<int>::iterator it = m_timeNextMov.begin() ; it != m_timeNextMov.end(); it++)
+            *it-=m_speed;
+    }
+    
+    Character::run();
+    m_enemy->run();
+}
 
+  
+void Hero::up(){
+    Character::up();
+    m_timeNextMov.push_back(this->getZ() - m_enemy->getZ());
+    m_nextMov.push('u');
+}
+
+ 
+void Hero::down(){
+    Character::down();
+    m_timeNextMov.push_back(this->getZ() - m_enemy->getZ());
+    m_nextMov.push('d');
+}
+
+
+void Hero::moveLeft(){
+    Character::moveLeft();
+    m_timeNextMov.push_back(this->getZ() - m_enemy->getZ());
+    m_nextMov.push('l');
+}
+
+
+void Hero::moveRight(){
+    Character::moveRight();
+    m_timeNextMov.push_back(this->getZ() - m_enemy->getZ());
+    m_nextMov.push('r');
+}
 
 
