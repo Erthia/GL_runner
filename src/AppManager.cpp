@@ -48,11 +48,9 @@
 #include "Skybox.hpp"
 #include "Coin.hpp"
 #include "Font.hpp"
-<<<<<<< HEAD
 #include "SDL/SDL_mixer.h"
-=======
 #include "lightShader.hpp"
->>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
+
 
 #include <memory>
 
@@ -161,11 +159,9 @@ if (flags != (result = Mix_Init(flags))) {
   Menu score;
   score.setVisibility(SCORE);
   Cube player;
-<<<<<<< HEAD
-  Scene game(std::move(vectorObject),camera);
-=======
+ // Scene game(std::move(vectorObject),camera);
+
   Scene game(std::move(vectorObject),camera,textureVector,shaderVector);
->>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
 
 
   // font
@@ -443,19 +439,17 @@ if (flags != (result = Mix_Init(flags))) {
                   {
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
-<<<<<<< HEAD
                       std::cout<<"GAP !"<<std::endl;
                       menu.type(3);
                     GAME = 0;
                       //return 0;
-=======
                       std::cout<< " GAME OVER "<<std::endl;
                       std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
 
-                      GAME = false;
+                     /* GAME = false;
                       menu.type(2);
-                      menu.setVisibility(true);
->>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
+                      menu.setVisibility(true);*/
+
                     }
                     if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -515,19 +509,17 @@ if (flags != (result = Mix_Init(flags))) {
                   {
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
-<<<<<<< HEAD
                       std::cout<<"GAP !"<<std::endl;
                       menu.type(3);
                       GAME = 0;
                       //return 0;
-=======
                       std::cout<< " GAME OVER "<<std::endl;
                       std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
-
+/*
                       GAME = false;
                       menu.type(2);
-                      menu.setVisibility(true);
->>>>>>> 57fcdaee8a04a1edf0d4871a539ce17e740e0d43
+                      menu.setVisibility(true);*/
+
                     }
                     if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Coin")
                     {
@@ -619,8 +611,9 @@ if (flags != (result = Mix_Init(flags))) {
               std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
 
               GAME = false;
-              menu.type(2);
-              menu.setVisibility(true);
+              menu.type(3);
+              GAME = 0;
+             // menu.setVisibility(true);
             }
 
             else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
@@ -629,8 +622,8 @@ if (flags != (result = Mix_Init(flags))) {
               std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
 
               GAME = false;
-              menu.type(2);
-              menu.setVisibility(true);
+              menu.type(3);
+              GAME = 0;
             }
 
 
