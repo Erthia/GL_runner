@@ -2,7 +2,7 @@
 #include <iostream>
 #include <glimac/common.hpp>
 #include <glimac/SDLWindowManager.hpp>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <string>
 
 class AppManager
@@ -12,6 +12,16 @@ public:
   AppManager();
   int start(char** argv);
 
+  inline const std::string getWindowName() const {
+  	return m_window_name;
+  }
+    inline const int getAppWidth() const {
+  	return m_width;
+  }
+
+      inline const int getAppHeight() const {
+  	return m_height;
+  }
 
 
 public:

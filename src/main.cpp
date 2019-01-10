@@ -15,7 +15,7 @@
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <fstream>
 
 #include "AppManager.hpp"
@@ -32,8 +32,9 @@
 #include "Wall.hpp"
 #include "Coin.hpp"
 #include "Element.hpp"
+#include "Font.hpp"
 
-
+#include <SDL/SDL_ttf.h>
 //#include <utils.cpp>
 
 

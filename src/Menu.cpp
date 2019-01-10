@@ -76,16 +76,26 @@ void Menu::vaoManager(GLuint &vao,GLuint &vbo)
 
 int Menu::onMouseEvent(glm::ivec2 position)
 {
-  std::cout<<position<<std::endl;
-  if ((position.x>185 && position.x<610) && (position.y>290 && position.y<310))
+  /*ancien carré rouge
+  if ((position.x>185 && position.x<610) && (position.y>200 && position.y<400))
+  {
+      isVisible = false;
+      return 1;
+  }*/
+  //std::cout << "x : " << position.x << " y : " <<position.y << std::endl;
+  // bouton play
+   if ((position.x>338 && position.x<455) && (position.y>269 && position.y<328))
   {
       isVisible = false;
       return 1;
   }
 
-  if ((position.x>185 && position.x<610) && (position.y>390 && position.y<410))
+  // bouton score
+ if ((position.x>275 && position.x<530) && (position.y>370 && position.y<415))
   {
-      m_type = 2;
+     isVisible = false;
+
+      return 2;
   }
 
   return 0;

@@ -14,6 +14,7 @@
 #include <glimac/Image.hpp>
 #include <glimac/Landmark.hpp>
 #include <glimac/Grid.hpp>
+#include <glimac/ShaderL.hpp>
 #include <vector>
 #include <cstdlib>
 //#include <GLFW/glfw3.h>
@@ -45,6 +46,7 @@
 #include "TextureLoader.hpp"
 #include "Skybox.hpp"
 #include "Coin.hpp"
+#include "Font.hpp"
 
 #include <memory>
 
@@ -57,6 +59,7 @@ int AppManager::start(char** argv)
 /** PLUS PROPRE A TROUVER **/
 
   bool MENU = true;
+  bool SCORE = false;
   bool GAME = false;
   bool TEST = false;
 
@@ -78,6 +81,7 @@ int AppManager::start(char** argv)
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
   PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
   PerspectiveShader shaderSkybox("./shaders/skybox.vs.glsl","./shaders/skybox.fs.glsl");
+  ShaderL lightingShader("./shaders/skybox.vs.glsl", "./shaders/skybox.fs.glsl");
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
@@ -120,6 +124,8 @@ int AppManager::start(char** argv)
 
   Menu menu;
   menu.setVisibility(MENU);
+  Menu score;
+  score.setVisibility(SCORE);
   Cube player;
   Scene game(std::move(vectorObject),camera);
 
@@ -130,13 +136,18 @@ int AppManager::start(char** argv)
 
 
 
+  GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+  GLuint textureScore = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+
+
+  // font
+  Font font("elt/ttf/starjedi.ttf");
 
 
   // Application loop:
 
   bool done = false;
   while(!done) {
-
 
       if (TEST)
       {
@@ -225,7 +236,11 @@ int AppManager::start(char** argv)
                 GAME = 1;
                 glUseProgram(0);
               }
-
+              if (menu.onMouseEvent(windowManager.getMousePosition()) == 2)
+              {
+                SCORE = 1;
+                glUseProgram(0);
+              }
             }
 
             if(e.type == SDL_QUIT) {
@@ -245,14 +260,55 @@ int AppManager::start(char** argv)
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
 
+
+      }
+
+      if (SCORE)
+      {
+        // Event loop:
+        SDL_Event e;
+        while(windowManager.pollEvent(e)) {
+
+            if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
+
+              if (score.onMouseEvent(windowManager.getMousePosition()) == 1)
+              {
+                SCORE = 0;
+               menu.setVisibility(true);
+                std::cout << "test menu " << std::endl;
+                glUseProgram(0);
+              }
+              if (score.onMouseEvent(windowManager.getMousePosition()) == 2)
+              {
+                GAME = 1;
+                glUseProgram(0);
+              }
+            }
+
+            if(e.type == SDL_QUIT) {
+                done = true; // Leave the loop after this iteration
+            }
+        }
+
+        //Render loop:
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        shader3DTex.use();
+        glActiveTexture(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,textureScore);
+        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setUniformMatrix();
+        score.displayMenu();
+        glBindTexture(GL_TEXTURE_2D,0);
+
+
       }
 
 
       if (GAME)
       {
-
-
-
+        font.loadFont();
         // Event loop:
         SDL_Event e;
 

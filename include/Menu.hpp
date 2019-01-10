@@ -15,7 +15,7 @@
 #include <glm/gtc/random.hpp>
 #include <vector>
 #include <cstdlib>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <fstream>
 
 #pragma once
