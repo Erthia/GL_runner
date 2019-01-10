@@ -2,10 +2,9 @@
 
 OpenGL project - IMAC-2
 
-PLEASE COMPILE FROM THE MARION BRANCH /!\
+CHANGE MARION TO DEFAULT MASTER BRANCH @EMILIE PLEASE /!\
 
 clone projet
-git -checkout Marion
 make
 ./bin/glrunner
 
