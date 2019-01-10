@@ -76,10 +76,17 @@ void Menu::vaoManager(GLuint &vao,GLuint &vbo)
 
 int Menu::onMouseEvent(glm::ivec2 position)
 {
-  if ((position.x>185 && position.x<610) && (position.y>200 && position.y<400))
+  std::cout<<position<<std::endl;
+  if ((position.x>185 && position.x<610) && (position.y>290 && position.y<310))
   {
       isVisible = false;
       return 1;
   }
+
+  if ((position.x>185 && position.x<610) && (position.y>390 && position.y<410))
+  {
+      m_type = 2;
+  }
+
   return 0;
 }

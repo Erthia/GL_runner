@@ -44,6 +44,18 @@ public:
     isVisible = inBool;
   }
 
+  inline
+  int type() const
+  {
+    return m_type;
+  }
+
+  inline
+  void type(const int inType)
+  {
+     m_type = inType;
+  }
+
   void initMenu(GLuint &vbo,GLuint &vao);
   void displayMenu() const;
 

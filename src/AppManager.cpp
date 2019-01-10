@@ -42,9 +42,9 @@
 #include "PPMreader.hpp"
 #include "eyeCamera.hpp"
 #include "Character.hpp"
-#include "checkRotation.hpp"
 #include "TextureLoader.hpp"
 #include "Skybox.hpp"
+#include "Coin.hpp"
 
 #include <memory>
 
@@ -63,7 +63,7 @@ int AppManager::start(char** argv)
 /********************************/
 
 // Initialize and Open Window
-  SDLWindowManager windowManager(m_width,m_height, "GLImac");
+  SDLWindowManager windowManager(m_width,m_height,"SpacIMAC RUN");
 
 
 // Initialize glew for OpenGL3+ support
@@ -88,8 +88,22 @@ int AppManager::start(char** argv)
   motor_game::PPMreader theReader("test_01.ppm");
   motor_game::PPM ppmCool=theReader.readFile();
 
+
+  motor_game::Map map = ppmCool.map();
   Hero hero = ppmCool.hero();
   hero.setSpeed(0.05);
+
+  float begin = 0;
+
+  int startTicksRight=0;
+  int startTicksLeft=0;
+
+  bool has_jump = false;
+  int jump = 0;
+  int zTranslation = 0;
+  int has_turned = 0;
+
+
 
 
 /*** A changer ***/
@@ -98,29 +112,23 @@ int AppManager::start(char** argv)
   std::vector<std::unique_ptr<Object>> vectorObject;
   vectorObject.emplace_back(std::move(cube));
   vectorObject.emplace_back(std::move(sphere));
+  GLuint textureMenu;
+  GLuint textureMenu1 = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+  GLuint textureMenu2 = TextureLoader::LoadTexture("./elt/texture/ecran_pause_RUNNER_2.png");
+  GLuint texturePlayer = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
+  Skybox skybox;
 
-
-  // Menu
   Menu menu;
   menu.setVisibility(MENU);
   Cube player;
-
   Scene game(std::move(vectorObject),camera);
-  float speed = 0.05;
-  float begin = 0;
 
-  int startTicksRight=0;
-  int startTicksLeft=0;
+  // Menu
 
-  bool has_jump = false;
-  int jump = 0;
 
-  GLuint texture = TextureLoader::LoadTexture("./elt/texture/ecran_debut_RUNNER_2.png");
-  Skybox skybox;
 
-  int z = 0;
-  int zTranslation = 0;
-  int has_turned = 0;
+
+
 
 
 
@@ -142,23 +150,73 @@ int AppManager::start(char** argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
       }
 
-      if ( has_jump == true )
-      {
-        jump ++;
-        if (jump == 40)
-        {
-          has_jump = false;
-          jump = 0;
-          hero.down();
-        }
-      }
+
 
 
       if (menu.visibility() == true)
       {
         // Event loop:
+
+
+        if (menu.type() == 2)
+        {
+          textureMenu = textureMenu2;
+        }
+
+        else
+        {
+          textureMenu = textureMenu1;
+        }
+
         SDL_Event e;
         while(windowManager.pollEvent(e)) {
+            if (menu.type() == 2)
+            {
+              if (e.type == SDL_KEYDOWN){
+
+                if (e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+
+                    menu.setVisibility(false);
+                    GAME = true;
+                    glUseProgram(0);
+
+                }
+              }
+
+              if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+              {
+                if (menu.onMouseEvent(windowManager.getMousePosition()) == 1)
+                {
+                  motor_game::PPMreader theReader2("test_01.ppm");
+                  motor_game::PPM ppm = theReader2.readFile();
+                  map = ppm.map();
+                  hero = ppm.hero();
+                  hero.setSpeed(0.05);
+
+                  begin = 0;
+
+                  startTicksRight=0;
+                  startTicksLeft=0;
+
+                  has_jump = false;
+                  jump = 0;
+                  zTranslation = 0;
+                  has_turned = 0;
+                  GAME = 1;
+                  glUseProgram(0);
+
+                }
+
+              }
+
+
+              if(e.type == SDL_QUIT) {
+                  done = true; // Leave the loop after this iteration
+              }
+
+
+            }
 
             if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
@@ -167,6 +225,7 @@ int AppManager::start(char** argv)
                 GAME = 1;
                 glUseProgram(0);
               }
+
             }
 
             if(e.type == SDL_QUIT) {
@@ -180,7 +239,7 @@ int AppManager::start(char** argv)
 
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D,texture);
+        glBindTexture(GL_TEXTURE_2D,textureMenu);
         shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
@@ -192,6 +251,8 @@ int AppManager::start(char** argv)
       if (GAME)
       {
 
+
+
         // Event loop:
         SDL_Event e;
 
@@ -201,8 +262,10 @@ int AppManager::start(char** argv)
               camera->onKeyboardEvent(e);
               if (e.key.keysym.sym  == SDLK_ESCAPE)
               {
+
                 menu.setVisibility(true);
-                GAME = false; //A changer pour faie un mode popUp
+                menu.type(2);
+                GAME = false;
                 glUseProgram(0);
               }
 
@@ -221,9 +284,9 @@ int AppManager::start(char** argv)
                 if (startTicksLeft != 0 && (SDL_GetTicks()-startTicksLeft)<300)
                 {
 
-                  if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
+                  if (map.element(hero.getX(),0,hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "left")
+                    if (map.element(hero.getX(),0,hero.getZ())->getType() == "left")
                     {
 
                       if (zTranslation == 1)
@@ -231,10 +294,10 @@ int AppManager::start(char** argv)
                         zTranslation = 0;
                       }
 
-                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      map.translateMap(hero.getX(),hero.getZ());
                       hero.translate(hero.getX(),hero.getZ());
-                      ppmCool.map().rotateLeft();
-                      ppmCool.map().translateMap(-3,-1);
+                      map.rotateLeft();
+                      map.translateMap(-3,-1);
                       hero.translate(-3,-1);
 
                       startTicksRight = 0;
@@ -247,15 +310,22 @@ int AppManager::start(char** argv)
                 else
                 {
                   startTicksLeft = SDL_GetTicks();
-                  if(ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ())!=nullptr)
+                  if(map.element(hero.getX()-1,hero.getY(),hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
+                    if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
                       std::cout<<"GAP !"<<std::endl;
                       return 0;
                     }
+                    if (map.element(hero.getX()-1,hero.getY(),hero.getZ())->getType()=="Coin")
+                    {
+                      hero.moveLeft();
+                      map.eraseElement(hero.getX(),hero.getY(),hero.getZ()+0.05);
+                      m_score ++;
+                    }
+
                   }
-                  if(ppmCool.map().element(hero.getX()-1,hero.getY(),hero.getZ())==nullptr)
+                  if(map.element(hero.getX()-1,hero.getY(),hero.getZ())==nullptr)
                   {
                     hero.moveLeft();
                   }
@@ -274,9 +344,9 @@ int AppManager::start(char** argv)
                 if (startTicksRight != 0 && (SDL_GetTicks()-startTicksRight)<300)
                 {
 
-                  if (ppmCool.map().element(hero.getX(),0,hero.getZ())!=nullptr)
+                  if (map.element(hero.getX(),0,hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX(),0,hero.getZ())->getType() == "right")
+                    if (map.element(hero.getX(),0,hero.getZ())->getType() == "right")
                     {
                       has_turned ++;
                       if (has_turned > 1)
@@ -284,13 +354,11 @@ int AppManager::start(char** argv)
                         zTranslation = 1;
                       }
 
-                      ppmCool.map().translateMap(hero.getX(),hero.getZ());
+                      map.translateMap(hero.getX(),hero.getZ());
                       hero.translate(hero.getX(),hero.getZ());
-                      std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
-                      ppmCool.map().rotateRight();
-                      ppmCool.map().translateMap(-1,-1);
+                      map.rotateRight();
+                      map.translateMap(-1,-1);
                       hero.translate(-1,-1);
-                      std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
 
                       startTicksRight = 0;
                       begin = 0;
@@ -303,15 +371,22 @@ int AppManager::start(char** argv)
                 else
                 {
                   startTicksRight = SDL_GetTicks();
-                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())!=nullptr)
+                  if(map.element(hero.getX()+1,hero.getY(),hero.getZ())!=nullptr)
                   {
-                    if (ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
+                    if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Gap")
                     {
                       std::cout<<"GAP !"<<std::endl;
                       return 0;
                     }
+                    if (map.element(hero.getX()+1,hero.getY(),hero.getZ())->getType()=="Coin")
+                    {
+                      hero.moveRight();
+                      m_score += 1;
+                      map.eraseElement(hero.getX(),hero.getY(),hero.getZ()+0.05);
+
+                    }
                   }
-                  if(ppmCool.map().element(hero.getX()+1,hero.getY(),hero.getZ()+0.05)==nullptr)
+                  if(map.element(hero.getX()+1,hero.getY(),hero.getZ()+0.05)==nullptr)
                   {
                     hero.moveRight();
                   }
@@ -334,26 +409,37 @@ int AppManager::start(char** argv)
             }
           }
 
-          // Render loop:
-          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)==nullptr)
+
+          if ( has_jump == true )
           {
-            begin -=speed;
+            jump ++;
+            if (jump == 40)
+            {
+              has_jump = false;
+              jump = 0;
+              hero.down();
+            }
+          }
+
+          // Render loop:
+          if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)==nullptr)
+          {
+            begin -=hero.getSpeed();
             hero.run();
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            game.loadScene(ppmCool.map(),begin);
+            game.loadScene(map,begin);
 
             glm::mat4 projection = glm::scale(glm::mat4(1),glm::vec3(1,1,-1));
 
-            projection *=glm::translate(glm::mat4(1),glm::vec3(ppmCool.map().projectionX(),ppmCool.map().projectionY(),ppmCool.map().projectionZ()));
+            projection *=glm::translate(glm::mat4(1),glm::vec3(map.projectionX(),map.projectionY(),map.projectionZ()));
             projection *=glm::translate(glm::mat4(1),glm::vec3(hero.getX()+zTranslation,hero.getY(),0));
 
             shader3DTex.use();
             glActiveTexture(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D,texture);
+            glBindTexture(GL_TEXTURE_2D,texturePlayer);
             shader3DTex.setViewMatrix(camera->getViewMatrix(),projection);
             shader3DTex.setUniformMatrix2();
-            std::cout<<" ( "<<hero.getX()<<" , "<<hero.getZ()<<" ) "<<std::endl;
             player.draw();
             glBindTexture(GL_TEXTURE_2D,0);
 
@@ -368,34 +454,33 @@ int AppManager::start(char** argv)
 
 
           }
-          if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)
+          if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)!=nullptr)
           {
 
-            if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Coin")
+            if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Coin")
             {
-              std::cout<< " COIN !  "<<std::endl;
-              ppmCool.map().eraseElement(hero.getX(),hero.getY(),hero.getZ()+0.05);
+              map.eraseElement(hero.getX(),hero.getY(),hero.getZ()+0.05);
               m_score ++;
             }
 
-            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Obstacle")
+            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Obstacle")
             {
               std::cout<< " GAME OVER "<<std::endl;
               std::cout<< "VOTRE SCORE EST DE : "<<m_score<<std::endl;
               return 0;
             }
 
-            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
+            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Gap")
             {
               std::cout<< " GAP ! "<<std::endl;
             }
 
-            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
+            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "Wall")
             {
               std::cout<< " Wall ! "<<std::endl;
             }
 
-            else if (ppmCool.map().element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
+            else if (map.element(hero.getX(),hero.getY(),hero.getZ()+0.05)->getType() == "End")
             {
               std::cout<< " YOU WIN ! "<<std::endl;
               return 1;

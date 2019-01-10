@@ -18,12 +18,12 @@ class Coin : public Element
     Coin(const glm::vec3 &position, const unsigned int &value, const std::string &type="Coin");
 
     /// brief method to retrieve the value of the Coin
-    inline const int getValue() const {
+    inline const int value() const {
     	return m_value;
     }
 
     /// default destructor of our Coin
-    ~Coin(); 
+    ~Coin();
 
   /// brief method to display the value of Coin's attributes
 	void printElement() const;
@@ -33,6 +33,6 @@ class Coin : public Element
 	void collide(Hero &hero);
 
   private:
-  unsigned int m_value; /*!< value of the Coin */
+  unsigned int m_value ; /*!< value of the Coin */
 
 };

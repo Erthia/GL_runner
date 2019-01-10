@@ -46,6 +46,10 @@ class Character : public PrintableElement
         m_speed = inSpeed;
      }
 
+    inline float getSpeed() const {
+         return m_speed;
+    }
+
     void translate(const float &x, const float &z);
 
 
