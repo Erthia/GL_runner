@@ -18,21 +18,29 @@ class Scene
 {
 
 public:
-  //Constructor
+
+  ///Constructor by default
+
   Scene();
+
+  /// Constructor with parameters
+  /// param inDataObject : vector of Object (Cube, Cone, Sphere)
+
   Scene(
          std::vector<std::unique_ptr<glimac::Object>> inDataObject,
          std::shared_ptr<Camera> inCamera);
+
 
    Scene(
           std::vector<std::unique_ptr<glimac::Object>> inDataObject,
           std::shared_ptr<Camera> inCamera,
           std::vector<GLuint*> inTexture,
           std::vector<PerspectiveShader*> inShader);
-  //Destructor
+
+  ///Destructor
   ~Scene();
 
-  //Methods
+  ///Methods which draw the scene with a speed translation by reading the map 
   void loadScene(motor_game::Map &inMap,float speed);
 
 private:

@@ -20,10 +20,11 @@
 
 #pragma once
 
-
+/// Class Menu
 class Menu
 {
 
+  /// mrthod wich fill the vertices vector , and set the vao and the vbo
   void build();
 
 public:
@@ -32,24 +33,28 @@ public:
     build();
   }
 
+  /// Brief Getter Menu visibility
   inline
   bool visibility() const
   {
     return isVisible;
   }
 
+  /// Brief Setter Menu visibility
   inline
   void setVisibility(bool inBool)
   {
     isVisible = inBool;
   }
 
+  /// Brief getter menu type
   inline
   int type() const
   {
     return m_type;
   }
 
+  /// Brief setter of menu type
   inline
   void type(const int inType)
   {

@@ -9,22 +9,27 @@ class LightShader
 {
 public:
 
-  /// constructor
+  /// constructor with parameters
+
   LightShader(
-      const char* filepathFragmentShader = "./shaders/normals.fs.glsl");
+      const char* filepathFragmentShader = "./shaders/directionallight.fs.glsl");
 
   LightShader(
           const char* filepathVertexShader,
           const char* filepathFragmentShader
   );
 
-  // destructor
+  /// destructor
   ~LightShader() {};
 
+  /// method which set uniform Matrix for the shaders
   void setUniformMatrix() const;
-  void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
   void setUniformMatrix2() const;
 
+  /// method which set projection and view matrix
+  void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
+
+  /// method which launch the shader programm
   void use();
 
 private:
@@ -33,7 +38,7 @@ private:
 
   const char* m_filepathVertexShader;
   const char* m_filepathFragmentShader;
-  
+
   glm::mat4 m_modelviewMatrix;
   glm::mat4 m_modelprojMatrix;
 

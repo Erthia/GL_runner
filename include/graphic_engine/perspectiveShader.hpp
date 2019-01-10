@@ -5,6 +5,7 @@
 #include <glimac/Program.hpp>
 #include <memory>
 
+/// Shader program class
 class PerspectiveShader
 {
 public:
@@ -13,18 +14,24 @@ public:
   PerspectiveShader(
       const char* filepathFragmentShader = "./shaders/normals.fs.glsl");
 
+/// constructor with parameters
   PerspectiveShader(
           const char* filepathVertexShader,
           const char* filepathFragmentShader
   );
 
-  // destructor
+  /// destructor by default
   ~PerspectiveShader() {};
 
+/// method which set uniform matrix for the shader
   void setUniformMatrix() const;
-  void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
   void setUniformMatrix2() const;
 
+  /// method which set projection and view matrix
+  void setViewMatrix(const glm::mat4 &sceneModel,const glm::mat4 &projection);
+
+
+/// method which launch the shader program
   void use();
 
 private:

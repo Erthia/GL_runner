@@ -2,6 +2,7 @@
 
 #include <glimac/common.hpp>
 
+/// Mother Class Camera
 class Camera
 {
 public:

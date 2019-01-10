@@ -6,21 +6,22 @@
 
 using namespace glimac;
 
+/// Class TrackballCamera derived from camera
 class TrackballCamera :public Camera
 {
 public:
 
+	/// Default constructor TrackballCameracamera
 	TrackballCamera():
 		m_fDistance(0),m_fAngleX(0),m_fAngleY(0)
 	{}
 
+	/// Constructor with parameters
 	TrackballCamera(const float fDistance,const float fAngleX,const float fAngleY)
 		:m_fDistance(fDistance),m_fAngleX(fAngleX),m_fAngleY(fAngleY)
 	{}
 
-
-// EVENT
-
+	/// method which handle sdl keyboard event
 	void onKeyboardEvent(const SDL_Event &event)
 	{
 		if ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_r))
@@ -30,6 +31,7 @@ public:
 		}
 	}
 
+/// method which handle sdl mouse wheel event
 	void onMouseWheelEvent(const SDL_Event &e)
 	{
 		if (e.button.button == SDL_BUTTON_WHEELUP)
@@ -45,6 +47,7 @@ public:
 		}
 	}
 
+/// method which handle sdl mouse position event
 	void onMouseEvent(const SDL_Event &e)
 	{
 		// Rotate UP
@@ -53,7 +56,7 @@ public:
 		m_fAngleX += e.motion.xrel;
 	}
 
-
+/// Method wich return a view Matrix set up with camera parameters
 	glm::mat4 getViewMatrix() const
 	{
 

@@ -6,21 +6,23 @@
 
 using namespace glimac;
 
+/// Class EyeCamera
+/// Camera which allow to see by the eyes of the player
 class EyeCamera :public Camera
 {
 public:
 
+	/// Default constructor
 	EyeCamera():
 		m_fDistance(2),m_fAngleX(0),m_fAngleY(0)
 	{}
 
+	/// constructor with parameters
 	EyeCamera(const float fDistance,const float fAngleX,const float fAngleY)
 		:m_fDistance(fDistance),m_fAngleX(fAngleX),m_fAngleY(fAngleY)
 	{}
 
-
-// EVENT
-
+	/// method handling SDL keyboard event
 	void onKeyboardEvent(const SDL_Event &event)
 	{
 		if ((event.type == SDL_KEYDOWN) && (event.key.keysym.sym == SDLK_r))
@@ -30,6 +32,8 @@ public:
 		}
 	}
 
+
+	/// method handling SDL mouse wheel event
 	void onMouseWheelEvent(const SDL_Event &e)
 	{
 		if (e.button.button == SDL_BUTTON_WHEELUP)
@@ -53,6 +57,7 @@ public:
 		}
 	}
 
+	/// method handling mouse movement event
 	void onMouseEvent(const SDL_Event &e)
 	{
 		// Rotate UP
@@ -69,7 +74,7 @@ public:
 				m_fAngleX = -80;
 	}
 
-
+	/// method which return a viewMatrix create with camera set up
 	glm::mat4 getViewMatrix() const
 	{
 
