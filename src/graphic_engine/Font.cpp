@@ -47,9 +47,9 @@ void Font::loadFont() {
 
     //to add as font attribute
     std::string message = "hello";
-    SDL_Color color = {255, 0, 0, 0}; 
-    int x = 10;
-    int y = 20;
+    SDL_Color color = {255, 0, 0, 1}; 
+    int x = 100;
+    int y = 200;
     TTF_Init();
 
 
@@ -59,7 +59,7 @@ void Font::loadFont() {
     }
 
     TTF_Font * font = nullptr;
-   font = TTF_OpenFont(this->getFontPath().c_str(), 20); 
+   font = TTF_OpenFont(this->getFontPath().c_str(), 200); 
     //font = TTF_OpenFont("elt/ttf/starjedi.ttf", 20); 
     SDL_Surface * sFont = TTF_RenderText_Blended(font, "message.c_str()", color); 
 

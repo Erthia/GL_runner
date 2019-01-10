@@ -36,6 +36,5 @@ public:
 
   
 private:
-
   std::string m_fontPath; /*!< path and name of font to load */
 };

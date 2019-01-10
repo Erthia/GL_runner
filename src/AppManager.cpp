@@ -14,6 +14,7 @@
 #include <glimac/Image.hpp>
 #include <glimac/Landmark.hpp>
 #include <glimac/Grid.hpp>
+#include <glimac/ShaderL.hpp>
 #include <vector>
 #include <cstdlib>
 //#include <GLFW/glfw3.h>
@@ -79,6 +80,7 @@ int AppManager::start(char** argv)
   PerspectiveShader shaderRed("./shaders/red.fs.glsl");
   PerspectiveShader shader3DTex("./shaders/Tex3D.fs.glsl");
   PerspectiveShader shaderSkybox("./shaders/skybox.vs.glsl","./shaders/skybox.fs.glsl");
+  ShaderL lightingShader("./shaders/skybox.vs.glsl", "./shaders/skybox.fs.glsl");
 
 // CAMERA
   std::shared_ptr<TrackballCamera> camera(new TrackballCamera);
@@ -120,7 +122,6 @@ int AppManager::start(char** argv)
   Skybox skybox;
 
   // font
-  SDL_Color color = {255, 0, 0, 0}; // Red 
   Font font("elt/ttf/starjedi.ttf");
 
 
@@ -128,8 +129,7 @@ int AppManager::start(char** argv)
 
   bool done = false;
   while(!done) {
-
-
+     
       if (TEST)
       {
         SDL_Event e;
@@ -185,14 +185,14 @@ int AppManager::start(char** argv)
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
-        font.loadFont();
+       
 
       }
 
 
       if (GAME)
       {
-
+        font.loadFont();
         // Event loop:
         SDL_Event e;
         float z;
@@ -204,6 +204,7 @@ int AppManager::start(char** argv)
               {
                 menu.setVisibility(true);
                 GAME = false; //A changer pour faie un mode popUp
+                
                 glUseProgram(0);
               }
 
