@@ -357,7 +357,7 @@ if (flags != (result = Mix_Init(flags))) {
         shader3DTex.use();
         glActiveTexture(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,textureGameOver);
-        shader3DTex.setViewMatrix(camera->getViewMatrix(),glm::mat4(1.0));
+        shader3DTex.setViewMatrix(glm::mat4(1.0),glm::mat4(1.0));
         shader3DTex.setUniformMatrix();
         menu.displayMenu();
         glBindTexture(GL_TEXTURE_2D,0);
